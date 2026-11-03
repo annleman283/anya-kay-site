@@ -38,14 +38,15 @@
 
   /* ---------- появление, счётчики, видео ---------- */
   function counter(el) {
+    function nf(n) { return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, '\u00a0'); }
     var to = +el.dataset.to, suf = el.dataset.suf || '', t0 = null;
-    if (calm) { el.textContent = to + suf; return; }
-    function f(t) { if (!t0) t0 = t; var p = Math.min(1, (t - t0) / 1600); el.textContent = Math.round(to * (1 - Math.pow(1 - p, 3))) + suf; if (p < 1) requestAnimationFrame(f); }
+    if (calm) { el.textContent = nf(to) + suf; return; }
+    function f(t) { if (!t0) t0 = t; var p = Math.min(1, (t - t0) / 1600); el.textContent = nf(Math.round(to * (1 - Math.pow(1 - p, 3)))) + suf; if (p < 1) requestAnimationFrame(f); }
     requestAnimationFrame(f);
   }
   function watch() {
     var rv = $$('.reveal:not(.in-view)'), cn = $$('[data-to]:not([data-done])');
-    if (!IO || calm) { rv.forEach(function (e) { e.classList.add('in-view'); }); cn.forEach(function (e) { e.textContent = e.dataset.to + (e.dataset.suf || ''); }); return; }
+    if (!IO || calm) { rv.forEach(function (e) { e.classList.add('in-view'); }); cn.forEach(function (e) { e.textContent = String(e.dataset.to).replace(/\B(?=(\d{3})+(?!\d))/g, '\u00a0') + (e.dataset.suf || ''); }); return; }
     var obs = new IntersectionObserver(function (en) {
       en.forEach(function (x) {
         if (!x.isIntersecting) return;
@@ -182,7 +183,7 @@
     var price = showPrice ? '<div class="pr">Индивидуально: ' + zl(d.i) + (d.g ? ' · в группе: ' + zl(d.g) + ' с человека' : '') + '</div>' : '';
     var fmt = d.g ? 'Индивидуально или в группе до 2 человек' : 'Индивидуально';
     return '<article class="dt gd reveal in-view"><div class="when"><b>' + d.a.getDate() + (+d.a !== +d.b ? '–' + d.b.getDate() : '') + '</b><span>' + MSH[d.b.getMonth()] + ' ' + d.b.getFullYear() + '</span></div>' +
-      '<h3>' + esc(CNAME[d.c] || d.c) + (d.n ? ' <span class="tag">' + esc(d.n) + '</span>' : '') + '</h3><div class="meta">' + range(d.a, d.b) + ' · ' + fmt + '</div>' + price +
+      '<h3>' + esc(CNAME[d.c] || d.c) + (d.n ? ' <span class="tag">' + esc(d.n) + '</span>' : '') + '</h3><div class="meta">' + range(d.a, d.b) + (showPrice ? ' · ' + fmt : '') + '</div>' + price +
       '<a class="btn glass go" href="' + url('zapis/?w=' + d.c + '&d=' + iso(d.a)) + '">Записаться на эту дату ↗</a></article>';
   }
   function renderDates() {

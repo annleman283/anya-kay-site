@@ -17,7 +17,7 @@ MAP = 'https://www.google.com/maps/search/?api=1&query=Krucza+16%2F22+Warszawa'
 # ---------- даты курсов (запасной вариант, если таблица недоступна) ----------
 SHEET_CSV = ''
 DATES = [
-    {'c': 'basic', 'a': '2026-11-18', 'b': '2026-11-20', 'i': '2800', 'g': '', 'n': 'скидка'},
+    {'c': 'basic', 'a': '2026-11-18', 'b': '2026-11-20', 'i': '2800', 'g': '', 'n': 'выгодная цена'},
     {'c': 'basic', 'a': '2026-12-07', 'b': '2026-12-09', 'i': '3000', 'g': '2000', 'n': ''},
     {'c': 'vip', 'a': '2027-01-11', 'b': '2027-01-16', 'i': '4500', 'g': '3000', 'n': ''},
 ]
@@ -65,12 +65,11 @@ FAQ_LASH = [
     ('Где проходит процедура?', 'В центре Варшавы, Krucza 16/22. Запись через сайт, Telegram, WhatsApp или Instagram.'),
 ]
 FAQ_EDU = [
-    ('Можно учиться с нуля?', 'Да. BASIC и VIP рассчитаны на старт с нуля: сначала теория в Telegram в своём темпе с тестами после уроков, потом практика на 3D-манекене и живых моделях.'),
+    ('Что будет после курса?', 'Я всегда на связи. Не знаете, что нарастить конкретной клиентке, или что-то не получается в работе? Пишете мне, и я объясню, как сделать правильно. Вы не остаётесь одна: я рядом и поддержу даже в трудную минуту.'),
     ('Чем VIP отличается от BASIC?', 'VIP включает всё из BASIC и в два раза больше практики: 6 дней и 6 моделей вместо 3, отработку L- и M-изгибов, 2 трендовых эффекта на выбор, стартовый набор материалов и кубок VIP-мастера.'),
     ('Индивидуально или в группе: в чём разница?', 'Программа одна и та же. Индивидуально всё время только ваше, и темп подстраивается под вас. В мини-группе максимум 2 человека, поэтому внимания всё равно много, а цена ниже: BASIC 2000 zł вместо 3000 zł, VIP 3000 zł вместо 4500 zł с человека.'),
     ('Нужна ли предоплата?', 'Да, дата бронируется после предоплаты 500 zł. Отменить или перенести запись можно не позже чем за 3 недели до начала, позже предоплата не возвращается. Перенести дату можно один раз, при втором переносе предоплата сгорает.'),
     ('Выдаёте сертификат?', 'Да, после обучения вы получаете именной сертификат с печатью.'),
-    ('Будет поддержка после курса?', 'Да, после BASIC у вас неограниченная поддержка: можно присылать работы и задавать вопросы.'),
     ('Сколько можно зарабатывать после курса?', 'Зависит от вас, но вот пример: ученица Света за первые 2,5 недели после обучения обслужила 9 клиенток и заработала 800 zł, параллельно работая на заводе. Её модели возвращаются и становятся постоянными клиентками.'),
     ('Я уже работаю мастером. Что мне подойдёт?', 'Повышение квалификации: сначала я разбираю ваши работы, потом составляю программу под ваши ошибки и точки роста. Если нужен только разбор, подойдёт онлайн-консультация на 2 часа.'),
 ]
@@ -103,15 +102,14 @@ CHAT = [
     ('lashes', 'Что такое изгибы L / M?', ['изгиб', ' l ', ' m ', 'l/m', 'l / m'], 'Это изгибы с прямым основанием и подъёмом на кончике. Они раскрывают взгляд, особенно при прямых или опущенных ресницах. Стоят +20 zł к наращиванию.', 'lashes'),
     ('obuchenie', 'Ближайшие даты курсов?', ['дата', 'даты', 'когда', 'ближайш', 'поток', 'старт'], '@dates', 'basic'),
     ('obuchenie', 'Сколько стоит обучение?', ['стоит обучение', 'цена курса', 'стоимость курса', 'сколько курс', 'цена обучения'], 'BASIC: 3000 zł индивидуально или 2000 zł с человека в мини-группе. VIP «мастер под ключ»: 4500 zł индивидуально или 3000 zł с человека в группе. Повышение квалификации 1000 zł за день, онлайн-консультация 500 zł.', 'any'),
-    ('obuchenie', FAQ_EDU[0][0], ['с нуля', 'нуля', 'новичок', 'без опыта', 'начинающ'], FAQ_EDU[0][1], 'basic'),
+    ('obuchenie', FAQ_EDU[0][0], ['поддержк', 'после курса', 'после обучения', 'на связи', 'помощь'], FAQ_EDU[0][1], 'basic'),
     ('obuchenie', FAQ_EDU[1][0], ['vip', 'вип', 'отличается', 'разница'], FAQ_EDU[1][1], 'vip'),
     ('obuchenie', FAQ_EDU[2][0], ['групп', 'индивидуально', 'вдвоём', 'вдвоем'], FAQ_EDU[2][1], 'basic'),
     ('obuchenie', FAQ_EDU[3][0], ['предоплат', 'перенос', 'отмен', 'вернуть', 'бронь'], FAQ_EDU[3][1], 'basic'),
     ('obuchenie', FAQ_EDU[4][0], ['сертификат', 'диплом'], FAQ_EDU[4][1], 'basic'),
-    ('obuchenie', FAQ_EDU[5][0], ['поддержк', 'после курса', 'после обучения'], FAQ_EDU[5][1], 'basic'),
-    ('obuchenie', FAQ_EDU[6][0], ['зарабат', 'заработ', 'доход', 'окупит'], FAQ_EDU[6][1], 'basic'),
+    ('obuchenie', FAQ_EDU[5][0], ['зарабат', 'заработ', 'доход', 'окупит'], FAQ_EDU[5][1], 'basic'),
     ('obuchenie', 'Поможете найти первых клиенток?', ['клиентк', 'первых', 'найти клиент', 'продвиж', 'контент'], 'В BASIC входит бонусный курс по обработке контента и ретуши фото: как снимать работы и оформлять их так, чтобы к вам приходили клиентки. А ещё модели с курса часто становятся первыми постоянными клиентками.', 'basic'),
-    ('obuchenie', FAQ_EDU[7][0], ['уже мастер', 'работаю мастером', 'повышени', 'квалификац'], FAQ_EDU[7][1], 'advanced'),
+    ('obuchenie', FAQ_EDU[6][0], ['уже мастер', 'работаю мастером', 'повышени', 'квалификац'], FAQ_EDU[6][1], 'advanced'),
     ('obuchenie', 'Что такое онлайн-консультация?', ['консультац', 'разбор', 'созвон'], 'Это 2 часа онлайн лично со мной, 500 zł. Разбираем ваши работы, ошибки, носку, скорость, клей, программу своего курса или старт преподавания.', 'consultation'),
     ('materialy', FAQ_MAT[0][0], ['пособи', 'страниц'], FAQ_MAT[0][1], 'manual'),
     ('materialy', FAQ_MAT[1][0], ['canva', 'канва', 'редактир', 'печат'], FAQ_MAT[1][1], 'manual'),
@@ -160,7 +158,10 @@ def pcover(img, pos, eyebrow, h1, text, btns):
 
 def band(img, pos, eyebrow, h2, text, href, label):
     return (f'<section class="band"><div class="ph" style="background-image:url(\'/img/{img}\');background-position:{pos}"></div>'
-            f'<div class="in wrap reveal"><div class="eyebrow l">{eyebrow}</div><h2>{h2}</h2><p>{text}</p><a href="{href}" class="btn glass">{label} ↗</a></div></section>')
+            f'<div class="in wrap reveal"><div class="eyebrow l">{eyebrow}</div><h2>{h2}</h2><p>{text}</p>'
+            + (f'<a href="{href}" class="btn glass">{label} ↗</a>' if href else
+               f'<div class="bbtn"><a href="{WA}" class="btn glass" target="_blank" rel="noopener">WhatsApp</a><a href="{TG}" class="btn glass" target="_blank" rel="noopener">Telegram</a><a href="{IG}" class="btn glass" target="_blank" rel="noopener">Instagram</a></div>')
+            + '</div></section>')
 
 
 def vid(name, cap, cls=''):
@@ -190,7 +191,7 @@ IC_USER = '<circle cx="16" cy="11" r="5"/><path d="M6 27c1-6 5-9 10-9s9 3 10 9"/
 IC_BOOK = '<path d="M5 7c4-1 8-1 11 2 3-3 7-3 11-2v17c-4-1-8-1-11 2-3-3-7-3-11-2z"/><path d="M16 9v17"/>'
 IC_CHAT = '<path d="M5 7h22v14H13l-6 5v-5H5z"/>'
 
-CASE = '''<section class="sec dark"><div class="wrap"><div class="case gd reveal">
+CASE = '''<section class="sec soft"><div class="wrap"><div class="case gd reveal">
   <div class="case-copy"><div class="eyebrow l">Результат ученицы</div><div class="case-num">800 zł</div>
   <h3>за 2,5 недели после обучения</h3>
   <p>Света прошла обучение и за первые 2,5 недели обслужила 9 клиенток, работая параллельно на заводе. Её ценник на наращивание уже 100 zł, а модели возвращаются и становятся постоянными клиентками.</p></div>
@@ -252,7 +253,7 @@ def page(path, title, desc, body, ld=None, nav_on='', home=False, noindex=False)
 '''
     foot = f'''</main>
 <footer class="ftr"><div class="wrap">
-  <div class="top"><div class="brand">ANYA<br>KAY<small>lash-мастер и преподаватель · Варшава</small></div></div>
+  <div class="top"><div class="brand">ANYA<br>KAY<small>lash-мастер и тренер · Варшава</small></div></div>
   <div class="cols">
     <div><h4>Наращивание</h4><a href="/naraschivanie/">Наращивание ресниц</a><a href="/naraschivanie/#prajs">Прайс</a><a href="/zapis/?w=lashes">Запись</a></div>
     <div><h4>Обучение</h4><a href="/basic-lash-course/">Курс с нуля BASIC и VIP</a><a href="/povyshenie-kvalifikacii/">Повышение квалификации</a><a href="/konsultaciya/">Онлайн-консультация</a><a href="/materialy/">Пособие и онлайн-теория</a></div>
@@ -284,19 +285,17 @@ def page(path, title, desc, body, ld=None, nav_on='', home=False, noindex=False)
 # ================= ГЛАВНАЯ =================
 home = f'''
 <section class="cover">
-  <div class="ph" role="img" aria-label="Anya Kay, lash-мастер и преподаватель"></div>
-  <div class="mast" aria-hidden="true"><span>ANYA</span><span>KAY</span><small>lash-мастер и преподаватель · Варшава</small></div>
-  <div class="tl"><h1>Наращивание ресниц и обучение <em>в Варшаве.</em></h1></div>
-  <a href="/zapis/" class="btn glass cta">Записаться ↗</a>
+  <div class="ph" role="img" aria-label="Anya Kay, lash-мастер и тренер"></div>
+  <div class="mast" aria-hidden="true"><span>ANYA</span><span>KAY</span><small>lash-мастер и тренер · Варшава</small></div>
+  <div class="tl"><h1>Ресницы, к которым возвращаются. <em>Обучение, после которого становятся топ-мастерами.</em></h1></div>
+  <div class="cta cta2"><a href="/zapis/?w=lashes" class="btn wine">Записаться на ресницы</a><a href="/obuchenie/" class="btn line">Выбрать курс</a></div>
 </section>
-<div class="to-light long"></div>
 
-<section class="sec"><div class="wrap split">
-  <div class="reveal"><div class="eyebrow">Выберите направление</div><h2 class="h2">Чем я могу <em>помочь?</em></h2><p class="lead">Наращивание ресниц в центре Варшавы и обучение наращиванию: с нуля и для мастеров, на месте и онлайн.</p></div>
+<section class="sec dirs"><div class="wrap">
   <div class="rows">
-    <a class="row reveal" href="/naraschivanie/"><span class="n">01</span><span class="t"><small>Krucza 16/22 · 1D–5D</small>Наращивание ресниц</span><span class="arr">↗</span></a>
-    <a class="row reveal" href="/obuchenie/"><span class="n">02</span><span class="t"><small>С нуля и для мастеров</small>Обучение</span><span class="arr">↗</span></a>
-    <a class="row reveal" href="/materialy/"><span class="n">03</span><span class="t"><small>Пособие и теория в Telegram</small>Онлайн-продукты</span><span class="arr">↗</span></a>
+    <a class="row reveal" href="/naraschivanie/"><span class="n">01</span><span class="t">Наращивание ресниц</span><span class="arr">↗</span></a>
+    <a class="row reveal" href="/obuchenie/"><span class="n">02</span><span class="t">Обучение</span><span class="arr">↗</span></a>
+    <a class="row reveal" href="/materialy/"><span class="n">03</span><span class="t">Онлайн-продукты</span><span class="arr">↗</span></a>
   </div>
 </div></section>
 
@@ -304,32 +303,32 @@ home = f'''
   <div class="media" role="img" aria-label="Anya Kay"></div>
   <div class="copy reveal">
     <div class="eyebrow">Обо мне</div>
-    <h2 class="h2">Я работаю мастером. <em>И обучаю тому, что использую сама.</em></h2>
-    <p class="t">В lash-индустрии с 2017 года. Сегодня я совмещаю работу мастера и преподавателя, а в обучении делаю ставку на понимание техники, сильную теорию и много практики.</p>
+    <h2 class="h2">Призёр чемпионата и&nbsp;<em>сертифицированный тренер.</em></h2>
+    <p class="t">За плечами 10 лет работы и сотни пройденных курсов. Специализируюсь на натуральных эффектах: они не утяжеляют и не портят родные ресницы. Наращивание подбираю индивидуально, под ваши глаза и ваши ресницы. С душой подхожу и к клиенткам на кушетке, и к ученицам на курсе.</p>
     <div class="sig">Anya</div>
-    <div class="stats"><div><b data-to="9" data-suf="+">9+</b><span>лет в профессии</span></div><div><b data-to="100" data-suf="+">100+</b><span>обученных учениц</span></div><div><b data-to="2017">2017</b><span>год старта</span></div></div>
+    <div class="stats"><div><b data-to="10">10</b><span>лет в профессии</span></div><div><b data-to="5000" data-suf="+">5&nbsp;000+</b><span>наращиваний</span></div><div><b data-to="100" data-suf="+">100+</b><span>учениц</span></div></div>
+    <a href="/obuchenie/" class="btn line" style="margin-top:26px">Подробнее об обучении ↗</a>
   </div>
 </section>
 
-<section class="sec to-dark"><div class="wrap">
+<section class="sec soft"><div class="wrap">
   <div class="reveal"><div class="eyebrow">Обучение</div><h2 class="h2">Ближайшие <em>курсы</em></h2></div>
   {dates('', price=False, limit=3)}
-  <p class="dates-note reveal">{GROUP} <a href="/obuchenie/" style="text-decoration:underline">Все форматы обучения ↗</a></p>
+  <p class="dates-note reveal"><a href="/obuchenie/" style="text-decoration:underline">Все форматы обучения ↗</a></p>
 </div></section>
 
-<section class="sec dark" style="padding-top:20px"><div class="wrap"><div class="eyebrow">Портфолио</div><h2 class="h2">Мои <em>работы</em></h2></div>
+<section class="sec" style="padding-top:20px"><div class="wrap"><div class="eyebrow">Портфолио</div><h2 class="h2">Мои <em>работы</em></h2></div>
 {slider('lash')}
-<div class="wrap" style="margin-top:26px"><a href="/naraschivanie/" class="btn glass">Наращивание и прайс ↗</a></div>
-<div class="wrap" style="margin-top:60px"><div class="eyebrow">Отзывы</div><h2 class="h2">Что говорят <em>клиентки и ученицы</em></h2></div>
+<div class="wrap" style="margin-top:26px"><a href="/naraschivanie/" class="btn line">Прайс и запись ↗</a></div>
+</section>
+<section class="sec soft"><div class="wrap"><div class="eyebrow">Отзывы</div><h2 class="h2">Что говорят <em>клиентки и ученицы</em></h2></div>
 {ops([OP_CLIENT[0], OP_CLIENT[1], OP_CLIENT[2], OP_STUD[0], OP_STUD[1], OP_STUD[3]])}
 </section>
-{CASE}
-<div class="to-light"></div>
 <section class="sec"><div class="wrap split">
   <div class="reveal"><div class="eyebrow">Вопросы</div><h2 class="h2">Коротко <em>о главном</em></h2></div>
   {faq_html(FAQ_HOME)}
 </div></section>
-{band('anya-kay-vzglyad.jpg', '50% 15%', 'Запись', 'Запишитесь <em>или задайте вопрос</em>', 'Короткая заявка займёт минуту. Отвечу лично в WhatsApp или Telegram.', '/zapis/', 'Записаться')}
+{band('anya-kay-vzglyad.jpg', '50% 15%', 'Запись', 'Максимум <em>для каждой.</em>', 'Не знаете, с чего начать? Напишите, подскажу лично.', '', '')}
 '''
 page('/', 'Anya Kay — Обучение и наращивание ресниц, Варшава',
      'Anya Kay: наращивание ресниц в Варшаве от 200 zł (Krucza 16/22) и обучение наращиванию с нуля и для мастеров. Курсы BASIC и VIP, повышение квалификации, пособие и онлайн-теория.',
@@ -338,7 +337,7 @@ page('/', 'Anya Kay — Обучение и наращивание ресниц,
 # ================= НАРАЩИВАНИЕ =================
 lash = f'''
 {pcover('lash-1.jpg', '50% 40%', 'Наращивание · Варшава', 'Наращивание ресниц <em>в Варшаве</em>', 'Продуманная техника, эффект под вашу форму глаз и комфортная носка. Центр Варшавы, Krucza 16/22.', [('Записаться ↗', '/zapis/?w=lashes', 'glass')])}
-<section class="sec dark" id="prajs" style="padding-top:40px"><div class="wrap split">
+<section class="sec soft" id="prajs" style="padding-top:40px"><div class="wrap split">
   <div class="reveal"><div class="eyebrow l">Прайс</div><h2 class="h2">Стоимость <em>наращивания</em></h2><p class="lead">Коррекции не делаю, только полное перенаращивание. Так результат каждый раз свежий.</p></div>
   <div class="reveal">
     <div class="prc">
@@ -352,12 +351,11 @@ lash = f'''
     <div style="margin-top:26px"><a href="/zapis/?w=lashes" class="btn glass">Выбрать время ↗</a></div>
   </div>
 </div></section>
-<section class="sec dark" style="padding-top:10px"><div class="wrap"><div class="eyebrow l">Портфолио</div><h2 class="h2">Мои <em>работы</em></h2><p class="lead">Адаптивная техника, индивидуальный подбор эффекта, комфортное отрастание. Листайте, фото открываются на весь экран.</p></div>
+<section class="sec soft" style="padding-top:10px"><div class="wrap"><div class="eyebrow l">Портфолио</div><h2 class="h2">Мои <em>работы</em></h2><p class="lead">Адаптивная техника, индивидуальный подбор эффекта, комфортное отрастание. Листайте, фото открываются на весь экран.</p></div>
 {slider('lash')}
 <div class="wrap" style="margin-top:60px"><div class="eyebrow l">Отзывы</div><h2 class="h2">Что говорят <em>клиентки</em></h2></div>
 {ops(OP_CLIENT)}
 </section>
-<div class="to-light"></div>
 <section class="sec"><div class="wrap split">
   <div class="reveal"><div class="eyebrow">Перед записью</div><h2 class="h2">Частые <em>вопросы</em></h2><p class="lead">Не нашли ответ? Нажмите «Есть вопрос?» или напишите мне.</p></div>
   {faq_html(FAQ_LASH)}
@@ -393,29 +391,28 @@ C_KONS = course('Нужен разбор', 'Онлайн-<br>консульта�
 
 edu = f'''
 {pcover('anya-kay-zhaket.jpg', '50% 15%', 'Обучение Anya Kay', 'Обучение <em>наращиванию ресниц</em>', 'Начать с нуля, усилить технику, разобрать ошибки или учиться самостоятельно. Обучаю тому, что использую в работе сама.', [('Ближайшие даты ↓', '#daty', 'glass')])}
-<section class="sec dark" id="daty" style="padding-top:40px"><div class="wrap">
+<section class="sec soft" id="daty" style="padding-top:40px"><div class="wrap">
   <div class="reveal"><div class="eyebrow l">Расписание</div><h2 class="h2">Ближайшие <em>курсы</em></h2><p class="lead">{GROUP}</p></div>
   {dates('', price=True)}
 </div></section>
-<section class="sec dark" id="formaty" style="padding-top:10px"><div class="wrap">
+<section class="sec soft" id="formaty" style="padding-top:10px"><div class="wrap">
   <div class="reveal"><div class="eyebrow l">Форматы</div><h2 class="h2">Выберите <em>под свою задачу</em></h2></div>
   <div class="courses">{C_BASIC}{C_VIP}{C_ADV}{C_KONS}</div>
   <p class="dates-note reveal">Хотите учиться самостоятельно? <a href="/materialy/" style="text-decoration:underline">Пособие и теория BASIC в Telegram ↗</a></p>
 </div></section>
-<section class="sec dark" style="padding-top:20px"><div class="wrap">
+<section class="sec soft" style="padding-top:20px"><div class="wrap">
   <div class="reveal"><div class="eyebrow l">Почему у меня</div><h2 class="h2">Понимание техники, <em>а не повторение</em></h2></div>
   <div class="gets">{get(IC_BOOK, 'Сильная теория', 'уроки в Telegram и тест после каждого')}{get(IC_EYE, 'Много практики', 'на живых моделях под моим контролем')}{get(IC_USER, 'До 2 человек', 'внимание каждой ученице')}{get(IC_CHAT, 'Поддержка', 'после курса: работы и вопросы')}</div>
   <div class="vids">{vid('praktika-ruka', 'Ставлю руку на практике', 'wide')}{vid('kurs', 'Как проходит курс')}{vid('praktika-1', 'Практика на курсе')}</div>
 </div></section>
-<section class="sec dark" style="padding-top:10px"><div class="wrap"><div class="eyebrow l">Выпускницы</div><h2 class="h2">Мои <em>ученицы</em></h2><p class="lead">С сертификатом и кубком в руках, в моей студии на Krucza.</p></div>
+<section class="sec soft" style="padding-top:10px"><div class="wrap"><div class="eyebrow l">Выпускницы</div><h2 class="h2">Мои <em>ученицы</em></h2><p class="lead">С сертификатом и кубком в руках, в моей студии на Krucza.</p></div>
 {slider('cert')}</section>
-<section class="sec dark" style="padding-top:10px"><div class="wrap"><div class="eyebrow l">Ученицы</div><h2 class="h2">Работы <em>моих учениц</em></h2></div>
+<section class="sec soft" style="padding-top:10px"><div class="wrap"><div class="eyebrow l">Ученицы</div><h2 class="h2">Работы <em>моих учениц</em></h2></div>
 {slider('uch')}
 <div class="wrap" style="margin-top:60px"><div class="eyebrow l">Отзывы</div><h2 class="h2">Что говорят <em>ученицы</em></h2></div>
 {ops(OP_STUD)}
 </section>
 {CASE}
-<div class="to-light"></div>
 <section class="sec"><div class="wrap split">
   <div class="reveal"><div class="eyebrow">Вопросы</div><h2 class="h2">Об <em>обучении</em></h2></div>
   {faq_html(FAQ_EDU)}
@@ -431,11 +428,11 @@ STEPS = [('Теория в Telegram', 'В своём темпе, до практ
          ('Итоговая проверка', 'Перед выходом на практику.'), ('Практика', 'Манекен и живые модели: 3 на BASIC, 6 на VIP.'), ('Сертификат', 'Именной, с печатью, после завершения.')]
 basic = f'''
 {pcover('uchenica-basic-1.jpg', '50% 50%', 'Курс с нуля · BASIC и VIP', 'Курс наращивания ресниц <em>с нуля</em>', 'Для тех, кто хочет не просто научиться наращивать, а понимать, что и почему делает в работе.', [('Ближайшие даты ↓', '#daty', 'glass')])}
-<section class="sec dark" id="daty" style="padding-top:40px"><div class="wrap">
+<section class="sec soft" id="daty" style="padding-top:40px"><div class="wrap">
   <div class="reveal"><div class="eyebrow l">Расписание</div><h2 class="h2">Ближайшие <em>даты</em></h2><p class="lead">{GROUP}</p></div>
   {dates('', price=True)}
 </div></section>
-<section class="sec dark" style="padding-top:10px"><div class="wrap">
+<section class="sec soft" style="padding-top:10px"><div class="wrap">
   <div class="reveal"><div class="eyebrow l">Тарифы</div><h2 class="h2">BASIC <em>или VIP</em></h2></div>
   <div class="courses">
     <article class="course gd reveal"><small>3 дня · 21 час практики · 3 модели</small><h3>BASIC</h3>
@@ -449,7 +446,6 @@ basic = f'''
       <div class="btns"><a href="/zapis/?w=vip" class="btn glass">Записаться на VIP ↗</a></div></article>
   </div>
 </div></section>
-<div class="to-light"></div>
 <section class="sec"><div class="wrap">
   <div class="reveal"><div class="eyebrow">Сравнение</div><h2 class="h2">Что входит <em>в каждый курс</em></h2></div>
   <div class="cmpw reveal"><table class="cmp">
@@ -467,41 +463,39 @@ basic = f'''
     </tbody>
   </table></div>
 </div></section>
-<section class="sec to-dark"><div class="wrap">
+<section class="sec soft"><div class="wrap">
   <div class="reveal"><div class="eyebrow">Как проходит</div><h2 class="h2">Обучение <em>шаг за шагом</em></h2></div>
   <div class="prog-in"><div class="tlx">{''.join(f'<div class="day reveal"><div class="d">{i + 1}</div><div><h3>{a}</h3><p>{b}</p></div></div>' for i, (a, b) in enumerate(STEPS))}</div></div>
 </div></section>
-<section class="sec dark" style="padding-top:10px"><div class="wrap">
+<section class="sec soft" style="padding-top:10px"><div class="wrap">
   <div class="reveal"><div class="eyebrow l">Программа теории</div><h2 class="h2">16 уроков <em>до практики</em></h2></div>
   <ol class="lessons">{''.join(f'<li><b>{i:02d}</b>{e(t)}</li>' for i, t in enumerate(LESSONS))}</ol>
   <div class="vids">{vid('praktika-ruka', 'Ставлю руку на практике', 'wide')}{vid('kurs', 'Как проходит курс')}{vid('praktika-1', 'Практика на курсе')}</div>
 </div></section>
-<section class="sec dark" style="padding-top:10px"><div class="wrap"><div class="eyebrow l">Выпускницы</div><h2 class="h2">Мои <em>ученицы</em></h2><p class="lead">С сертификатом и кубком в руках, в моей студии на Krucza.</p></div>
+<section class="sec soft" style="padding-top:10px"><div class="wrap"><div class="eyebrow l">Выпускницы</div><h2 class="h2">Мои <em>ученицы</em></h2><p class="lead">С сертификатом и кубком в руках, в моей студии на Krucza.</p></div>
 {slider('cert')}</section>
-<section class="sec dark" style="padding-top:10px"><div class="wrap"><div class="eyebrow l">Ученицы</div><h2 class="h2">Работы <em>учениц</em></h2></div>
+<section class="sec soft" style="padding-top:10px"><div class="wrap"><div class="eyebrow l">Ученицы</div><h2 class="h2">Работы <em>учениц</em></h2></div>
 {slider('uch')}
 <div class="wrap" style="margin-top:60px"><div class="eyebrow l">Отзывы</div><h2 class="h2">Что говорят <em>ученицы</em></h2>
 <div class="vts">{vt('testimonial_1', 'Настя', 'прилетела на курс из Швеции, 6 дней обучения')}{vt('testimonial_2', 'Арина', 'курс 6 дней')}</div></div>
 {ops(OP_STUD)}
 </section>
 {CASE}
-<div class="to-light"></div>
 <section class="sec"><div class="wrap split">
   <div class="reveal"><div class="eyebrow">Вопросы</div><h2 class="h2">О <em>курсе</em></h2><p class="lead">Условия записи и предоплаты в <a href="/reglament-obucheniya/" style="text-decoration:underline">регламенте обучения</a>.</p></div>
-  {faq_html(FAQ_EDU[:7])}
+  {faq_html(FAQ_EDU[:6])}
 </div></section>
 {band('uchenica-basic-3.jpg', '50% 50%', 'Запись', 'Запишитесь <em>на курс</em>', 'Выберите дату и формат. Если удобной даты нет, напишите, подберём вместе.', '/zapis/?w=basic', 'Записаться')}
 '''
 page('/basic-lash-course/', 'Курс наращивания ресниц с нуля в Варшаве · BASIC и VIP · Anya Kay',
      'Курс наращивания ресниц с нуля в Варшаве: BASIC 3 дня, 3 живые модели, 3000 zł (в группе до 2 человек 2000 zł); VIP «мастер под ключ» 6 дней, 6 моделей, 4500 zł (в группе 3000 zł). Сертификат и поддержка.',
-     basic, [faq_ld(FAQ_EDU[:7]), course_ld('BASIC LASH COURSE', 'Курс наращивания ресниц с нуля: теория в Telegram, 3 дня практики, 3 живые модели, сертификат.', '3000', '/basic-lash-course/'),
+     basic, [faq_ld(FAQ_EDU[:6]), course_ld('BASIC LASH COURSE', 'Курс наращивания ресниц с нуля: теория в Telegram, 3 дня практики, 3 живые модели, сертификат.', '3000', '/basic-lash-course/'),
              course_ld('VIP «мастер под ключ»', 'Курс наращивания ресниц с нуля: 6 дней практики, 6 моделей, L/M-изгибы, 2 трендовых эффекта, стартовый набор.', '4500', '/basic-lash-course/#vip')],
      nav_on='/obuchenie/')
 
 # ================= ПОВЫШЕНИЕ =================
 adv = f'''
 {pcover('povyshenie-1.jpg', '50% 40%', 'Обучение · для мастеров', 'Повышение <em>квалификации</em>', 'Сначала разбираю ваши работы, потом составляю программу обучения. Только то, что нужно именно вам.', [('Записаться ↗', '/zapis/?w=advanced', 'glass'), ('Сначала консультация', '/konsultaciya/', 'line')])}
-<div class="to-light"></div>
 <section class="sec"><div class="wrap split">
   <div class="reveal"><div class="eyebrow">Что прорабатываем</div><h2 class="h2">Ваши <em>точки роста</em></h2><p class="lead">Ошибки в технике, скорость, объёмы до 5D, моделирование взгляда и эффекты.</p></div>
   <div class="reveal forwho"><div class="tlx">
@@ -510,14 +504,13 @@ adv = f'''
     <div class="day"><div class="d">3</div><div><h3>Практика</h3><p>Стандартно 1 день. При необходимости программу можно расширить.</p></div></div>
   </div></div>
 </div></section>
-<section class="sec to-dark"><div class="wrap"><div class="eyebrow">Результаты</div><h2 class="h2">Работы <em>после обучения</em></h2>
+<section class="sec soft"><div class="wrap"><div class="eyebrow">Результаты</div><h2 class="h2">Работы <em>после обучения</em></h2>
   <div class="vids">{vid('povyshenie', 'Работа после повышения квалификации')}</div>
   <div class="pricebox gd reveal" style="margin-top:30px"><div class="eyebrow l">1 день · индивидуально</div><div class="big">1&nbsp;000<span> zł</span></div><p>Разбор работ заранее, программа под вас и практика.</p><a href="/zapis/?w=advanced" class="btn glass">Записаться ↗</a></div>
 </div></section>
-<section class="sec dark" style="padding-top:10px"><div class="wrap"><div class="eyebrow l">Отзывы</div><h2 class="h2">Что говорят <em>ученицы</em></h2></div>
+<section class="sec soft" style="padding-top:10px"><div class="wrap"><div class="eyebrow l">Отзывы</div><h2 class="h2">Что говорят <em>ученицы</em></h2></div>
 {ops([OP_STUD[2], OP_STUD[0]])}
 </section>
-<div class="to-light"></div>
 <section class="sec"><div class="wrap split">
   <div class="reveal"><div class="eyebrow">Вопросы</div><h2 class="h2">Повышение <em>квалификации</em></h2></div>
   {faq_html(FAQ_ADV)}
@@ -533,7 +526,6 @@ page('/povyshenie-kvalifikacii/', 'Повышение квалификации l
 TOP = ['Технику', 'Носку', 'Скорость', 'Клей', 'Пучки', 'Программу своего курса', 'Старт преподавания', 'Поиск учениц']
 kons = f'''
 {pcover('uchenica-basic-4.jpg', '50% 50%', 'Обучение · онлайн', 'Онлайн-консультация <em>для lash-мастеров</em>', 'Разберём ваши работы, найдём ошибки и определим, что именно мешает двигаться дальше.', [('Записаться ↗', '/zapis/?w=consultation', 'glass')])}
-<div class="to-light"></div>
 <section class="sec"><div class="wrap split">
   <div class="reveal"><div class="eyebrow">Что можно разобрать</div><h2 class="h2">2 часа <em>лично со мной</em></h2>
     <div class="tags" style="margin-top:20px">{''.join(f'<span>{t}</span>' for t in TOP)}</div>
@@ -550,7 +542,6 @@ page('/konsultaciya/', 'Онлайн-консультация для lash-мас
 # ================= ОНЛАЙН-ПРОДУКТЫ =================
 mat = f'''
 {pcover('posobie-1.jpg', '50% 30%', 'Онлайн-продукты', 'Пособие и онлайн-теория <em>по наращиванию</em>', 'Для мастеров, которые хотят систематизировать базу, и преподавателей, которым нужна готовая основа для курса.', [('Пособие ↓', '#posobie', 'glass'), ('Теория в Telegram ↓', '#teoriya', 'line')])}
-<div class="to-light"></div>
 <section class="sec"><div class="wrap"><div class="prods">
   <article class="prod reveal" id="posobie">{slider('posobie')}<div class="bd">
     <h2>Базовое пособие</h2><div class="pr">200 zł</div>
