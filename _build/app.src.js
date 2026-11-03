@@ -6,7 +6,7 @@
   var WA = '48788214369';
   var TG = 'https://t.me/AnyaKayClientBot';
   // Адрес бота для передачи заявки (Railway). Пока пусто, Telegram открывает бот по-старому.
-  var LEAD = '';
+  var LEAD = 'https://anya-kay-client-bot-production.up.railway.app/lead';
   var IGM = 'https://ig.me/m/anya.key_';
   var CPAGE = { basic: 'basic-lash-course/', vip: 'vip-lash-course/' };
   // Ссылка на Google Таблицу с датами (Файл → Поделиться → Опубликовать в интернете → CSV).
