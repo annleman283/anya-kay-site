@@ -133,7 +133,7 @@ h1,h2,h3{font-weight:400}
 
 /* o mnie, jak na anyakay.pl: zdjęcie wtopione w tło */
 .about-ed{position:relative;overflow:hidden;background:linear-gradient(180deg,rgba(247,241,234,1) 0.0px,rgba(247,240,234,1) 15.38px,rgba(245,239,232,1) 30.77px,rgba(243,237,230,1) 46.15px,rgba(241,234,227,1) 61.54px,rgba(238,231,224,1) 76.92px,rgba(235,228,221,1) 92.31px,rgba(233,224,218,1) 107.69px,rgba(230,221,215,1) 123.08px,rgba(227,218,212,1) 138.46px,rgba(225,215,209,1) 153.85px,rgba(223,213,207,1) 169.23px,rgba(221,212,205,1) 184.62px,rgba(221,211,205,1) 200.0px,rgba(221,211,205,1) calc(100% - 200.0px),rgba(221,212,205,1) calc(100% - 184.6px),rgba(223,213,207,1) calc(100% - 169.2px),rgba(225,215,209,1) calc(100% - 153.8px),rgba(227,218,212,1) calc(100% - 138.5px),rgba(230,221,215,1) calc(100% - 123.1px),rgba(233,224,218,1) calc(100% - 107.7px),rgba(235,228,221,1) calc(100% - 92.3px),rgba(238,231,224,1) calc(100% - 76.9px),rgba(241,234,227,1) calc(100% - 61.5px),rgba(243,237,230,1) calc(100% - 46.2px),rgba(245,239,232,1) calc(100% - 30.8px),rgba(247,240,234,1) calc(100% - 15.4px),rgba(247,241,234,1) calc(100% - 0.0px))}
-.about-ed .media{height:600px;background:url(/img/anya-kay-burgundy.jpg) 50% 18%/cover no-repeat;-webkit-mask-image:linear-gradient(180deg,transparent 0,#000 14%,#000 58%,transparent 96%);mask-image:linear-gradient(180deg,transparent 0,#000 14%,#000 58%,transparent 96%)}
+.about-ed .media{height:600px;background:url(/img/anya-kay-portret.jpg) 50% 12%/cover no-repeat;-webkit-mask-image:linear-gradient(180deg,transparent 0,#000 14%,#000 58%,transparent 96%);mask-image:linear-gradient(180deg,transparent 0,#000 14%,#000 58%,transparent 96%)}
 .about-ed .copy{position:relative;z-index:1;margin-top:-150px;padding:0 var(--pad) 56px}
 .about-ed p.t{font-size:16.5px;line-height:1.7;max-width:520px}
 .about-ed p.t+p.t{margin-top:14px}
@@ -527,7 +527,7 @@ h1,h2,h3{font-weight:500}
 @media(min-width:1000px){.h2{font-size:70px}.rows .row .t{font-size:48px}}
 
 /* обложка главной: белый фон фото → бордо */
-.cover{background:linear-gradient(180deg,#FAFAFA 0,#FAFAFA 50%,#efe6e3 58%,#c9a6ab 68%,#8f4a5c 80%,#5e1a30 92%,#59132A 100%)}
+.cover{background:linear-gradient(180deg,#E8EEF1 0,#E8EEF1 50%,#efe6e3 58%,#c9a6ab 68%,#8f4a5c 80%,#5e1a30 92%,#59132A 100%)}
 .cover .ph{top:120px;background-size:100% auto;background-position:50% 0}
 .cover .ph::after{background:linear-gradient(180deg,rgba(89,19,42,0) 0,rgba(89,19,42,0) 46%,rgba(89,19,42,.25) 60%,rgba(89,19,42,.7) 76%,rgba(89,19,42,.95) 90%,#59132A 100%)}
 .mast{top:74px;font-size:70px;color:var(--wine)}
@@ -536,7 +536,7 @@ h1,h2,h3{font-weight:500}
 .cover h1 em{color:var(--gold)}
 .hdr.clear{color:var(--wine)}
 @media(min-width:1000px){
-  .cover{background:linear-gradient(180deg,#FAFAFA 0,#FAFAFA 66%,#e9dcdc 76%,#b47f8a 88%,#59132A 100%)}
+  .cover{background:linear-gradient(180deg,#E8EEF1 0,#E8EEF1 66%,#e9dcdc 76%,#b47f8a 88%,#59132A 100%)}
   .cover .ph{background-size:cover;background-position:50% 8%}
   .cover .ph::after{background:linear-gradient(180deg,rgba(89,19,42,0) 55%,rgba(89,19,42,.55) 80%,#59132A 100%)}
   .mast{font-size:clamp(120px,11vw,180px)}
@@ -672,3 +672,5 @@ h1,h2,h3{font-weight:500}
 .vids .vid.wide{grid-column:1/-1;aspect-ratio:16/9!important}
 @media(min-width:1000px){.vids .vid.wide{flex:0 1 100%;max-width:1000px}}
 [data-slider="cert"] .sl-t button img{object-position:50% 35%}
+@media(min-width:1000px){.cover .ph{right:0;width:60%;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 24%);mask-image:linear-gradient(90deg,transparent 0,#000 24%)}}
+@media(max-width:999px){.cover .ph{top:235px}}

@@ -8,7 +8,7 @@ h1,h2,h3{font-weight:500}
 @media(min-width:1000px){.h2{font-size:70px}.rows .row .t{font-size:48px}}
 
 /* обложка главной: белый фон фото → бордо */
-.cover{background:linear-gradient(180deg,#FAFAFA 0,#FAFAFA 50%,#efe6e3 58%,#c9a6ab 68%,#8f4a5c 80%,#5e1a30 92%,#59132A 100%)}
+.cover{background:linear-gradient(180deg,#E8EEF1 0,#E8EEF1 50%,#efe6e3 58%,#c9a6ab 68%,#8f4a5c 80%,#5e1a30 92%,#59132A 100%)}
 .cover .ph{top:120px;background-size:100% auto;background-position:50% 0}
 .cover .ph::after{background:linear-gradient(180deg,rgba(89,19,42,0) 0,rgba(89,19,42,0) 46%,rgba(89,19,42,.25) 60%,rgba(89,19,42,.7) 76%,rgba(89,19,42,.95) 90%,#59132A 100%)}
 .mast{top:74px;font-size:70px;color:var(--wine)}
@@ -17,7 +17,7 @@ h1,h2,h3{font-weight:500}
 .cover h1 em{color:var(--gold)}
 .hdr.clear{color:var(--wine)}
 @media(min-width:1000px){
-  .cover{background:linear-gradient(180deg,#FAFAFA 0,#FAFAFA 66%,#e9dcdc 76%,#b47f8a 88%,#59132A 100%)}
+  .cover{background:linear-gradient(180deg,#E8EEF1 0,#E8EEF1 66%,#e9dcdc 76%,#b47f8a 88%,#59132A 100%)}
   .cover .ph{background-size:cover;background-position:50% 8%}
   .cover .ph::after{background:linear-gradient(180deg,rgba(89,19,42,0) 55%,rgba(89,19,42,.55) 80%,#59132A 100%)}
   .mast{font-size:clamp(120px,11vw,180px)}
@@ -153,3 +153,5 @@ h1,h2,h3{font-weight:500}
 .vids .vid.wide{grid-column:1/-1;aspect-ratio:16/9!important}
 @media(min-width:1000px){.vids .vid.wide{flex:0 1 100%;max-width:1000px}}
 [data-slider="cert"] .sl-t button img{object-position:50% 35%}
+@media(min-width:1000px){.cover .ph{right:0;width:60%;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 24%);mask-image:linear-gradient(90deg,transparent 0,#000 24%)}}
+@media(max-width:999px){.cover .ph{top:235px}}

@@ -329,7 +329,7 @@ home = f'''
   <div class="reveal"><div class="eyebrow">Вопросы</div><h2 class="h2">Коротко <em>о главном</em></h2></div>
   {faq_html(FAQ_HOME)}
 </div></section>
-{band('anya-kay-burgundy.jpg', '50% 20%', 'Запись', 'Запишитесь <em>или задайте вопрос</em>', 'Короткая заявка займёт минуту. Отвечу лично в WhatsApp или Telegram.', '/zapis/', 'Записаться')}
+{band('anya-kay-vzglyad.jpg', '50% 15%', 'Запись', 'Запишитесь <em>или задайте вопрос</em>', 'Короткая заявка займёт минуту. Отвечу лично в WhatsApp или Telegram.', '/zapis/', 'Записаться')}
 '''
 page('/', 'Anya Kay — Обучение и наращивание ресниц, Варшава',
      'Anya Kay: наращивание ресниц в Варшаве от 200 zł (Krucza 16/22) и обучение наращиванию с нуля и для мастеров. Курсы BASIC и VIP, повышение квалификации, пособие и онлайн-теория.',
@@ -392,7 +392,7 @@ C_KONS = course('Нужен разбор', 'Онлайн-<br>консульта�
                 [('Онлайн', f'500{ZL}')], 'Работы, ошибки, носка, клей, программа своего курса или старт преподавания.', '/zapis/?w=consultation', '/konsultaciya/')
 
 edu = f'''
-{pcover('anya-kay-burgundy.jpg', '50% 25%', 'Обучение Anya Kay', 'Обучение <em>наращиванию ресниц</em>', 'Начать с нуля, усилить технику, разобрать ошибки или учиться самостоятельно. Обучаю тому, что использую в работе сама.', [('Ближайшие даты ↓', '#daty', 'glass')])}
+{pcover('anya-kay-zhaket.jpg', '50% 15%', 'Обучение Anya Kay', 'Обучение <em>наращиванию ресниц</em>', 'Начать с нуля, усилить технику, разобрать ошибки или учиться самостоятельно. Обучаю тому, что использую в работе сама.', [('Ближайшие даты ↓', '#daty', 'glass')])}
 <section class="sec dark" id="daty" style="padding-top:40px"><div class="wrap">
   <div class="reveal"><div class="eyebrow l">Расписание</div><h2 class="h2">Ближайшие <em>курсы</em></h2><p class="lead">{GROUP}</p></div>
   {dates('', price=True)}
@@ -540,7 +540,7 @@ kons = f'''
     <p class="lead" style="margin-top:22px">Если станет понятно, что нужна практика, можно продолжить на <a href="/povyshenie-kvalifikacii/" style="text-decoration:underline">повышении квалификации</a>.</p></div>
   <div class="pricebox gd reveal"><div class="eyebrow l">2 часа · онлайн · 1:1</div><div class="big">500<span> zł</span></div><p>Разбор работ, ошибок и ваших вопросов.</p><a href="/zapis/?w=consultation" class="btn glass">Записаться ↗</a></div>
 </div></section>
-{band('anya-kay-burgundy.jpg', '50% 20%', 'Запись', 'Готовы <em>разобрать работы?</em>', 'Оставьте заявку, договоримся о времени созвона.', '/zapis/?w=consultation', 'Записаться')}
+{band('anya-kay-zhaket.jpg', '50% 15%', 'Запись', 'Готовы <em>разобрать работы?</em>', 'Оставьте заявку, договоримся о времени созвона.', '/zapis/?w=consultation', 'Записаться')}
 '''
 page('/konsultaciya/', 'Онлайн-консультация для lash-мастеров · разбор работ · Anya Kay',
      'Онлайн-консультация для мастеров по наращиванию ресниц: 2 часа, 500 zł. Разбор работ, ошибок, носки, скорости, клея, программы курса и старта преподавания.',
