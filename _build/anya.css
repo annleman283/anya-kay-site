@@ -1,0 +1,288 @@
+
+/* ================= Anya Kay: дополнения к системе ================= */
+/* Cormorant крупнее и плотнее, чем Bodoni: подгоняем кегли */
+h1,h2,h3{font-weight:500}
+.h2{font-size:44px;font-weight:500;line-height:1}
+.row .t{font-size:32px;font-weight:500}
+.mast{font-weight:500}
+@media(min-width:1000px){.h2{font-size:70px}.rows .row .t{font-size:48px}}
+
+.cover h1{font-size:25px;max-width:340px}
+.hdr.clear{color:var(--wine)}
+.mast{top:74px;font-size:70px}
+.mast small{font-size:19px}
+@media(min-width:1000px){.mast{font-size:clamp(120px,11vw,180px)}}
+
+/* стрелка назад и монограмма */
+.mono{font-family:var(--bod);font-weight:600;font-size:16px}
+
+/* ближайшие курсы */
+.dates{display:grid;gap:12px;margin-top:26px}
+.dt{display:grid;grid-template-columns:auto 1fr;gap:4px 18px;align-items:center;padding:20px 20px;border-radius:22px;color:var(--ivory)}
+.dt .when{grid-row:1/span 3;text-align:center;min-width:74px;padding-right:18px;border-right:1px solid rgba(201,168,118,.45)}
+.dt .when b{display:block;font-family:var(--bod);font-weight:500;font-size:38px;line-height:1;color:var(--gold)}
+.dt .when span{display:block;font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#E4D6CA;margin-top:4px}
+.dt h3{font-family:var(--bod);font-size:26px;line-height:1.05}
+.dt .meta{font-size:13.5px;color:#D9C6BC;line-height:1.5}
+.dt .pr{font-size:13.5px;color:#F1DDB6;line-height:1.5}
+.dt .pr s{color:#BFA9A0}
+.dt .go{grid-column:1/-1;margin-top:12px;height:46px;font-size:12px}
+.dt .tag{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.14em;padding:3px 9px;border-radius:999px;background:var(--gold);color:var(--wine-x);vertical-align:middle;margin-left:6px;text-transform:uppercase}
+.dates-note{font-size:14px;color:#D9C6BC;margin-top:16px;line-height:1.6}
+.sec:not(.dark):not(.to-dark) .dates-note{color:var(--muted)}
+.dates-empty{padding:22px;border-radius:22px;color:#E4D6CA}
+@media(min-width:1000px){.dates{grid-template-columns:repeat(3,1fr);gap:18px}.dt{grid-template-columns:1fr;padding:28px}.dt .when{grid-row:auto;text-align:left;border-right:0;padding:0 0 14px;border-bottom:1px solid rgba(201,168,118,.45);margin-bottom:10px}.dt .go{margin-top:18px}}
+
+/* прайс */
+.prc{margin-top:24px;border-top:1px solid rgba(243,233,225,.16)}
+.prc div{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:18px 0;border-bottom:1px solid rgba(243,233,225,.16);font-size:16px;color:#EFE4DA}
+.prc b{font-family:var(--bod);font-weight:500;font-size:28px;color:var(--gold);white-space:nowrap}
+.prc small{display:block;font-size:12.5px;color:#BFA9A0;margin-top:2px}
+.notice{margin-top:22px;padding:18px 20px;border-radius:18px;color:var(--ivory);font-size:15px;line-height:1.55}
+.notice b{color:var(--gold);font-weight:700}
+.facts{display:grid;grid-template-columns:repeat(3,1fr);margin-top:30px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.facts div{padding:16px 10px;border-left:1px solid var(--line)}
+.facts div:first-child{border-left:0;padding-left:0}
+.facts b{display:block;font-family:var(--bod);font-weight:500;font-size:28px;color:var(--wine);line-height:1}
+.facts span{font-size:12px;color:var(--muted)}
+.dark .facts,.dark .facts div,.to-dark .facts,.to-dark .facts div{border-color:rgba(243,233,225,.16)}
+.dark .facts b,.to-dark .facts b{color:var(--gold)}.dark .facts span,.to-dark .facts span{color:#CDB9AE}
+
+/* курсы: карточки BASIC / VIP */
+.course .fmt{display:grid;gap:8px;margin:16px 0 18px}
+.course .fmt div{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:12px 0;border-top:1px solid rgba(243,233,225,.14)}
+.course .fmt span{font-size:14.5px;color:#E4D6CA}
+.course .fmt b{font-family:var(--bod);font-weight:500;font-size:30px;color:var(--ivory);white-space:nowrap}
+.course .fmt b small{font-family:var(--sans);font-size:12px;color:#D9C6BC;font-weight:500;margin-left:4px}
+.course ul{list-style:none;margin:6px 0 20px}
+.course li{display:flex;gap:12px;padding:8px 0;font-size:15px;line-height:1.45;color:#EFE4DA;border-top:1px solid rgba(243,233,225,.1)}
+.course li::before{content:"✓";color:var(--gold);font-weight:600}
+.course .bonus{font-size:14px;color:#D9C6BC;margin-bottom:18px}
+.courses{display:grid;gap:22px}
+
+/* сравнение */
+.cmpw{overflow-x:auto;margin-top:26px}
+.cmp{width:100%;border-collapse:collapse;min-width:320px}
+.cmp th,.cmp td{padding:14px 10px;border-bottom:1px solid var(--line);text-align:left;font-size:14.5px;vertical-align:top}
+.cmp th{font-family:var(--bod);font-weight:500;font-size:26px;color:var(--wine)}
+.cmp td:first-child{color:var(--muted);width:44%;padding-left:0}
+.cmp td:not(:first-child){color:var(--choc);font-weight:600}
+.cmp .v{background:rgba(201,168,118,.12)}
+
+/* уроки теории */
+.lessons{columns:1;column-gap:34px;margin-top:22px;list-style:none}
+.lessons li{break-inside:avoid;font-size:15px;color:#E4D6CA;padding:9px 0;border-top:1px solid rgba(243,233,225,.1)}
+.lessons li b{font-family:var(--bod);font-weight:500;color:var(--gold);margin-right:10px;font-size:18px}
+@media(min-width:1000px){.lessons{columns:2}}
+
+/* кейс ученицы */
+.case{display:grid;gap:0;border-radius:26px;overflow:hidden;margin-top:30px}
+.case-copy{padding:30px 24px}
+.case-num{font-family:var(--bod);font-weight:500;font-size:72px;line-height:.9;color:var(--gold)}
+.case-copy h3{font-family:var(--bod);font-size:30px;line-height:1.1;margin:12px 0 14px;color:var(--ivory)}
+.case-copy p{font-size:15px;line-height:1.7;color:#D9C6BC}
+.case-media{display:block;width:100%;min-height:380px;background:#efe7e2 center/contain no-repeat;cursor:zoom-in}
+@media(min-width:1000px){.case{grid-template-columns:1fr 1fr}.case-copy{padding:56px 52px}.case-num{font-size:110px}.case-copy h3{font-size:42px}}
+
+/* слайдер: видео-слайды */
+.sl-t .vs{flex:0 0 78%;aspect-ratio:3/4;scroll-snap-align:start;border-radius:14px;overflow:hidden;background:var(--wine-d);position:relative}
+.sl-t .vs video{width:100%;height:100%;object-fit:cover}
+@media(min-width:1000px){.sl-t .vs{flex:0 0 30%}}
+.lbx video{max-height:86vh;max-width:94vw;border-radius:6px}
+
+/* отзывы: перевод */
+.op figcaption span.k{display:block;font-size:12px;color:var(--muted)}
+
+/* видео-отзывы со звуком */
+.vt{border-radius:18px;overflow:hidden;background:#000}
+.vt video{width:100%;aspect-ratio:9/16;object-fit:cover;background:#000}
+.vts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:26px}
+.vts figcaption{font-size:13px;color:#D9C6BC;margin-top:8px;line-height:1.45}
+.vts figcaption b{font-family:var(--bod);font-weight:500;font-size:19px;color:var(--ivory)}
+@media(min-width:1000px){.vts{grid-template-columns:repeat(2,minmax(0,340px));gap:24px}}
+
+/* онлайн-продукты */
+.prod{border-radius:26px;overflow:hidden;background:#fff;box-shadow:0 20px 50px -30px rgba(46,33,28,.35)}
+.prod .bd{padding:24px 22px 26px}
+.prod h2,.prod h3{font-family:var(--bod);font-size:34px;color:var(--wine);line-height:1.05}
+.prod .pr{font-family:var(--bod);font-weight:500;font-size:30px;color:var(--choc);margin-top:6px}
+.prod p{font-size:15px;color:var(--muted);margin-top:12px;line-height:1.6}
+.prod p b{color:var(--choc)}
+.prod .sl{margin-top:0}
+.prod .sl-t{padding:14px 14px 0;scroll-padding:0 14px}
+.prod .sl-t button{flex:0 0 72%;aspect-ratio:7/10;background:var(--milk)}
+.prod .sl-t button img{object-fit:contain}
+.prod .sl-bar{padding:0 14px}
+.prod details{margin-top:16px}
+.prod summary{cursor:pointer;font-weight:700;color:var(--wine);font-size:14px}
+.prod ol{margin:10px 0 0 20px;font-size:14px;color:var(--muted);line-height:1.8}
+.prods{display:grid;gap:24px;margin-top:30px}
+@media(min-width:1000px){.prods{grid-template-columns:1fr 1fr;gap:30px}.prod .sl-t button{flex:0 0 46%}}
+
+/* «что входит» иконки */
+.get svg{width:30px;height:30px}
+
+/* запись */
+.opt em{font-style:normal}
+.f-err{color:var(--cherry);font-size:13.5px;margin-top:10px;min-height:18px}
+.tg{display:flex;justify-content:center;align-items:center;gap:10px;width:100%;margin-top:10px;padding:16px;border-radius:999px;background:#2A8BC9;color:#fff;font-size:15px;font-weight:600}
+.tg svg,.wa svg{width:20px;height:20px;fill:#fff}
+
+/* политика */
+.legal p+p{margin-top:10px}
+
+/* мобильная плашка: иконки */
+.mbar .ic.tg2{background:#2A8BC9;border-color:#2A8BC9}
+.op>button{display:block;width:100%;padding:0;cursor:zoom-in}
+.legal ul{margin:10px 0 0 20px}
+.legal{overflow-wrap:anywhere}
+.vids .vid.wide{grid-column:1/-1;aspect-ratio:16/9!important}
+@media(min-width:1000px){.vids .vid.wide{flex:0 1 100%;max-width:1000px}}
+[data-slider="cert"] .sl-t button img{object-position:50% 35%}
+
+/* ===== круг 2: светлая основа, бордо только акцентом; плавные переходы как у Светы ===== */
+:root{--soft:#F0E7DD}
+.cover{color:var(--choc);background:linear-gradient(180deg,rgba(238,242,245,1) 0,rgba(238,242,245,1) calc(235px + 100vw*.58),rgba(238,242,245,1.0) calc(235px + 100vw*.58 + (235px + 100vw*1.16 - 235px + 100vw*.58)*0.0),rgba(238,242,245,1.0) calc(235px + 100vw*.58 + (235px + 100vw*1.16 - 235px + 100vw*.58)*0.0385),rgba(238,242,245,1.0) calc(235px + 100vw*.58 + (235px + 100vw*1.16 - 235px + 100vw*.58)*0.0769),rgba(238,242,245,1.0) calc(235px + 100vw*.58 + (235px + 100vw*1.16 - 235px + 100vw*.58)*0.1154),rgba(239,242,244,1.0) calc(235px + 100vw*.58 + (235px + 100vw*1.16 - 235px + 100vw*.58)*0.1538),rgba(239,242,244,1.0) calc(235px + 100vw*.58 + (235px + 100vw*1.16 - 235px + 100vw*.58)*0.1923),rgba(239,242,244,1.0) calc(235px + 100vw*.58 + (235px + 100vw*1.16 - 235px + 100vw*.58)*0.2308),rgba(240,242,243,1.0) calc(235px + 100vw*.58 + (235px + 100vw*1.16 - 235px + 100vw*.58)*0.2692),rgba(240,242,243,1.0) calc(235px + 100vw*.58 + (235px + 100vw*1.16 - 235px + 100vw*.58)*0.3077),rgba(240,242,242,1.0) calc(235px + 100vw*.58 + (235px + 100vw*1.16 - 235px + 100vw*.58)*0.3462),rgba(241,242,241,1.0) calc(235px + 100vw*.58 + (235px + 100vw*1.16 - 235px + 100vw*.58)*0.3846),rgba(241,242,241,1.0) calc(235px + 100vw*.58 + (235px + 100vw*1.16 - 235px + 100vw*.58)*0.4231),rgba(242,242,240,1.0) calc(235px + 100vw*.58 + (235px + 100vw*1.16 - 235px + 100vw*.58)*0.4615),rgba(242,242,240,1.0) calc(235px + 100vw*.58 + (235px + 100vw*1.16 - 235px + 100vw*.58)*0.5),rgba(243,241,239,1.0) calc(235px + 100vw*.58 + (235px + 100vw*1.16 - 235px + 100vw*.58)*0.5385),rgba(244,241,238,1.0) calc(235px + 100vw*.58 + (235px + 100vw*1.16 - 235px + 100vw*.58)*0.5769),rgba(244,241,238,1.0) calc(235px + 100vw*.58 + (235px + 100vw*1.16 - 235px + 100vw*.58)*0.6154),rgba(245,241,237,1.0) calc(235px + 100vw*.58 + (235px + 100vw*1.16 - 235px + 100vw*.58)*0.6538),rgba(245,241,236,1.0) calc(235px + 100vw*.58 + (235px + 100vw*1.16 - 235px + 100vw*.58)*0.6923),rgba(245,241,236,1.0) calc(235px + 100vw*.58 + (235px + 100vw*1.16 - 235px + 100vw*.58)*0.7308),rgba(246,241,235,1.0) calc(235px + 100vw*.58 + (235px + 100vw*1.16 - 235px + 100vw*.58)*0.7692),rgba(246,241,235,1.0) calc(235px + 100vw*.58 + (235px + 100vw*1.16 - 235px + 100vw*.58)*0.8077),rgba(246,241,235,1.0) calc(235px + 100vw*.58 + (235px + 100vw*1.16 - 235px + 100vw*.58)*0.8462),rgba(247,241,234,1.0) calc(235px + 100vw*.58 + (235px + 100vw*1.16 - 235px + 100vw*.58)*0.8846),rgba(247,241,234,1.0) calc(235px + 100vw*.58 + (235px + 100vw*1.16 - 235px + 100vw*.58)*0.9231),rgba(247,241,234,1.0) calc(235px + 100vw*.58 + (235px + 100vw*1.16 - 235px + 100vw*.58)*0.9615),rgba(247,241,234,1.0) calc(235px + 100vw*.58 + (235px + 100vw*1.16 - 235px + 100vw*.58)*1.0),rgba(247,241,234,1) 100%)}
+.cover .ph{top:235px;background-size:100% auto;background-position:50% 0;-webkit-mask-image:linear-gradient(180deg,transparent 0,rgba(0,0,0,0.0) calc(0px + (46px - 0px)*0.0),rgba(0,0,0,0.02) calc(0px + (46px - 0px)*0.0833),rgba(0,0,0,0.074) calc(0px + (46px - 0px)*0.1667),rgba(0,0,0,0.156) calc(0px + (46px - 0px)*0.25),rgba(0,0,0,0.259) calc(0px + (46px - 0px)*0.3333),rgba(0,0,0,0.376) calc(0px + (46px - 0px)*0.4167),rgba(0,0,0,0.5) calc(0px + (46px - 0px)*0.5),rgba(0,0,0,0.624) calc(0px + (46px - 0px)*0.5833),rgba(0,0,0,0.741) calc(0px + (46px - 0px)*0.6667),rgba(0,0,0,0.844) calc(0px + (46px - 0px)*0.75),rgba(0,0,0,0.926) calc(0px + (46px - 0px)*0.8333),rgba(0,0,0,0.98) calc(0px + (46px - 0px)*0.9167),rgba(0,0,0,1.0) calc(0px + (46px - 0px)*1.0),#000 calc(100vw*.6),rgba(0,0,0,1.0) calc(100vw*.6 + (100vw*1.12 - 100vw*.6)*0.0),rgba(0,0,0,0.996) calc(100vw*.6 + (100vw*1.12 - 100vw*.6)*0.0385),rgba(0,0,0,0.983) calc(100vw*.6 + (100vw*1.12 - 100vw*.6)*0.0769),rgba(0,0,0,0.963) calc(100vw*.6 + (100vw*1.12 - 100vw*.6)*0.1154),rgba(0,0,0,0.936) calc(100vw*.6 + (100vw*1.12 - 100vw*.6)*0.1538),rgba(0,0,0,0.903) calc(100vw*.6 + (100vw*1.12 - 100vw*.6)*0.1923),rgba(0,0,0,0.865) calc(100vw*.6 + (100vw*1.12 - 100vw*.6)*0.2308),rgba(0,0,0,0.822) calc(100vw*.6 + (100vw*1.12 - 100vw*.6)*0.2692),rgba(0,0,0,0.774) calc(100vw*.6 + (100vw*1.12 - 100vw*.6)*0.3077),rgba(0,0,0,0.723) calc(100vw*.6 + (100vw*1.12 - 100vw*.6)*0.3462),rgba(0,0,0,0.67) calc(100vw*.6 + (100vw*1.12 - 100vw*.6)*0.3846),rgba(0,0,0,0.614) calc(100vw*.6 + (100vw*1.12 - 100vw*.6)*0.4231),rgba(0,0,0,0.558) calc(100vw*.6 + (100vw*1.12 - 100vw*.6)*0.4615),rgba(0,0,0,0.5) calc(100vw*.6 + (100vw*1.12 - 100vw*.6)*0.5),rgba(0,0,0,0.442) calc(100vw*.6 + (100vw*1.12 - 100vw*.6)*0.5385),rgba(0,0,0,0.386) calc(100vw*.6 + (100vw*1.12 - 100vw*.6)*0.5769),rgba(0,0,0,0.33) calc(100vw*.6 + (100vw*1.12 - 100vw*.6)*0.6154),rgba(0,0,0,0.277) calc(100vw*.6 + (100vw*1.12 - 100vw*.6)*0.6538),rgba(0,0,0,0.226) calc(100vw*.6 + (100vw*1.12 - 100vw*.6)*0.6923),rgba(0,0,0,0.178) calc(100vw*.6 + (100vw*1.12 - 100vw*.6)*0.7308),rgba(0,0,0,0.135) calc(100vw*.6 + (100vw*1.12 - 100vw*.6)*0.7692),rgba(0,0,0,0.097) calc(100vw*.6 + (100vw*1.12 - 100vw*.6)*0.8077),rgba(0,0,0,0.064) calc(100vw*.6 + (100vw*1.12 - 100vw*.6)*0.8462),rgba(0,0,0,0.037) calc(100vw*.6 + (100vw*1.12 - 100vw*.6)*0.8846),rgba(0,0,0,0.017) calc(100vw*.6 + (100vw*1.12 - 100vw*.6)*0.9231),rgba(0,0,0,0.004) calc(100vw*.6 + (100vw*1.12 - 100vw*.6)*0.9615),rgba(0,0,0,0.0) calc(100vw*.6 + (100vw*1.12 - 100vw*.6)*1.0),transparent 100%);mask-image:linear-gradient(180deg,transparent 0,rgba(0,0,0,0.0) calc(0px + (46px - 0px)*0.0),rgba(0,0,0,0.02) calc(0px + (46px - 0px)*0.0833),rgba(0,0,0,0.074) calc(0px + (46px - 0px)*0.1667),rgba(0,0,0,0.156) calc(0px + (46px - 0px)*0.25),rgba(0,0,0,0.259) calc(0px + (46px - 0px)*0.3333),rgba(0,0,0,0.376) calc(0px + (46px - 0px)*0.4167),rgba(0,0,0,0.5) calc(0px + (46px - 0px)*0.5),rgba(0,0,0,0.624) calc(0px + (46px - 0px)*0.5833),rgba(0,0,0,0.741) calc(0px + (46px - 0px)*0.6667),rgba(0,0,0,0.844) calc(0px + (46px - 0px)*0.75),rgba(0,0,0,0.926) calc(0px + (46px - 0px)*0.8333),rgba(0,0,0,0.98) calc(0px + (46px - 0px)*0.9167),rgba(0,0,0,1.0) calc(0px + (46px - 0px)*1.0),#000 calc(100vw*.6),rgba(0,0,0,1.0) calc(100vw*.6 + (100vw*1.12 - 100vw*.6)*0.0),rgba(0,0,0,0.996) calc(100vw*.6 + (100vw*1.12 - 100vw*.6)*0.0385),rgba(0,0,0,0.983) calc(100vw*.6 + (100vw*1.12 - 100vw*.6)*0.0769),rgba(0,0,0,0.963) calc(100vw*.6 + (100vw*1.12 - 100vw*.6)*0.1154),rgba(0,0,0,0.936) calc(100vw*.6 + (100vw*1.12 - 100vw*.6)*0.1538),rgba(0,0,0,0.903) calc(100vw*.6 + (100vw*1.12 - 100vw*.6)*0.1923),rgba(0,0,0,0.865) calc(100vw*.6 + (100vw*1.12 - 100vw*.6)*0.2308),rgba(0,0,0,0.822) calc(100vw*.6 + (100vw*1.12 - 100vw*.6)*0.2692),rgba(0,0,0,0.774) calc(100vw*.6 + (100vw*1.12 - 100vw*.6)*0.3077),rgba(0,0,0,0.723) calc(100vw*.6 + (100vw*1.12 - 100vw*.6)*0.3462),rgba(0,0,0,0.67) calc(100vw*.6 + (100vw*1.12 - 100vw*.6)*0.3846),rgba(0,0,0,0.614) calc(100vw*.6 + (100vw*1.12 - 100vw*.6)*0.4231),rgba(0,0,0,0.558) calc(100vw*.6 + (100vw*1.12 - 100vw*.6)*0.4615),rgba(0,0,0,0.5) calc(100vw*.6 + (100vw*1.12 - 100vw*.6)*0.5),rgba(0,0,0,0.442) calc(100vw*.6 + (100vw*1.12 - 100vw*.6)*0.5385),rgba(0,0,0,0.386) calc(100vw*.6 + (100vw*1.12 - 100vw*.6)*0.5769),rgba(0,0,0,0.33) calc(100vw*.6 + (100vw*1.12 - 100vw*.6)*0.6154),rgba(0,0,0,0.277) calc(100vw*.6 + (100vw*1.12 - 100vw*.6)*0.6538),rgba(0,0,0,0.226) calc(100vw*.6 + (100vw*1.12 - 100vw*.6)*0.6923),rgba(0,0,0,0.178) calc(100vw*.6 + (100vw*1.12 - 100vw*.6)*0.7308),rgba(0,0,0,0.135) calc(100vw*.6 + (100vw*1.12 - 100vw*.6)*0.7692),rgba(0,0,0,0.097) calc(100vw*.6 + (100vw*1.12 - 100vw*.6)*0.8077),rgba(0,0,0,0.064) calc(100vw*.6 + (100vw*1.12 - 100vw*.6)*0.8462),rgba(0,0,0,0.037) calc(100vw*.6 + (100vw*1.12 - 100vw*.6)*0.8846),rgba(0,0,0,0.017) calc(100vw*.6 + (100vw*1.12 - 100vw*.6)*0.9231),rgba(0,0,0,0.004) calc(100vw*.6 + (100vw*1.12 - 100vw*.6)*0.9615),rgba(0,0,0,0.0) calc(100vw*.6 + (100vw*1.12 - 100vw*.6)*1.0),transparent 100%)}
+.cover .ph::after{display:none}
+.cover .tl{bottom:162px;text-shadow:none}
+.cover h1{color:var(--wine);font-size:25px;max-width:350px}
+.cover h1 em{display:block;color:var(--gold-d);margin-top:4px}
+.cover .cta2{display:grid;gap:10px;bottom:30px}
+.cover .cta2 .btn{width:100%}
+.mast{color:var(--wine)}.mast small{color:var(--gold-d)}
+@media(min-width:1000px){.cover{background:linear-gradient(180deg,rgba(238,242,245,1) 0,rgba(238,242,245,1) 55%,rgba(238,242,245,1.0) 55.0%,rgba(238,242,245,1.0) 56.73%,rgba(238,242,245,1.0) 58.46%,rgba(238,242,245,1.0) 60.19%,rgba(239,242,244,1.0) 61.92%,rgba(239,242,244,1.0) 63.65%,rgba(239,242,244,1.0) 65.38%,rgba(240,242,243,1.0) 67.12%,rgba(240,242,243,1.0) 68.85%,rgba(240,242,242,1.0) 70.58%,rgba(241,242,241,1.0) 72.31%,rgba(241,242,241,1.0) 74.04%,rgba(242,242,240,1.0) 75.77%,rgba(242,242,240,1.0) 77.5%,rgba(243,241,239,1.0) 79.23%,rgba(244,241,238,1.0) 80.96%,rgba(244,241,238,1.0) 82.69%,rgba(245,241,237,1.0) 84.42%,rgba(245,241,236,1.0) 86.15%,rgba(245,241,236,1.0) 87.88%,rgba(246,241,235,1.0) 89.62%,rgba(246,241,235,1.0) 91.35%,rgba(246,241,235,1.0) 93.08%,rgba(247,241,234,1.0) 94.81%,rgba(247,241,234,1.0) 96.54%,rgba(247,241,234,1.0) 98.27%,rgba(247,241,234,1.0) 100.0%)}.cover .ph{top:0;right:0;left:auto;width:60%;background-size:cover;background-position:50% 8%;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 26%),linear-gradient(180deg,#000 0,#000 58%,rgba(0,0,0,1.0) 58.0%,rgba(0,0,0,0.996) 59.62%,rgba(0,0,0,0.983) 61.23%,rgba(0,0,0,0.963) 62.85%,rgba(0,0,0,0.936) 64.46%,rgba(0,0,0,0.903) 66.08%,rgba(0,0,0,0.865) 67.69%,rgba(0,0,0,0.822) 69.31%,rgba(0,0,0,0.774) 70.92%,rgba(0,0,0,0.723) 72.54%,rgba(0,0,0,0.67) 74.15%,rgba(0,0,0,0.614) 75.77%,rgba(0,0,0,0.558) 77.38%,rgba(0,0,0,0.5) 79.0%,rgba(0,0,0,0.442) 80.62%,rgba(0,0,0,0.386) 82.23%,rgba(0,0,0,0.33) 83.85%,rgba(0,0,0,0.277) 85.46%,rgba(0,0,0,0.226) 87.08%,rgba(0,0,0,0.178) 88.69%,rgba(0,0,0,0.135) 90.31%,rgba(0,0,0,0.097) 91.92%,rgba(0,0,0,0.064) 93.54%,rgba(0,0,0,0.037) 95.15%,rgba(0,0,0,0.017) 96.77%,rgba(0,0,0,0.004) 98.38%,rgba(0,0,0,0.0) 100.0%);-webkit-mask-composite:source-in;mask-image:linear-gradient(90deg,transparent 0,#000 26%),linear-gradient(180deg,#000 0,#000 58%,rgba(0,0,0,1.0) 58.0%,rgba(0,0,0,0.996) 59.62%,rgba(0,0,0,0.983) 61.23%,rgba(0,0,0,0.963) 62.85%,rgba(0,0,0,0.936) 64.46%,rgba(0,0,0,0.903) 66.08%,rgba(0,0,0,0.865) 67.69%,rgba(0,0,0,0.822) 69.31%,rgba(0,0,0,0.774) 70.92%,rgba(0,0,0,0.723) 72.54%,rgba(0,0,0,0.67) 74.15%,rgba(0,0,0,0.614) 75.77%,rgba(0,0,0,0.558) 77.38%,rgba(0,0,0,0.5) 79.0%,rgba(0,0,0,0.442) 80.62%,rgba(0,0,0,0.386) 82.23%,rgba(0,0,0,0.33) 83.85%,rgba(0,0,0,0.277) 85.46%,rgba(0,0,0,0.226) 87.08%,rgba(0,0,0,0.178) 88.69%,rgba(0,0,0,0.135) 90.31%,rgba(0,0,0,0.097) 91.92%,rgba(0,0,0,0.064) 93.54%,rgba(0,0,0,0.037) 95.15%,rgba(0,0,0,0.017) 96.77%,rgba(0,0,0,0.004) 98.38%,rgba(0,0,0,0.0) 100.0%);mask-composite:intersect}.cover .tl{bottom:auto;top:calc(17vh + clamp(110px,10.5vw,170px)*1.72 + 60px)}.cover h1{font-size:34px;max-width:560px}.cover .cta2{display:flex;left:var(--pad);right:auto;width:auto;bottom:64px}.cover .cta2 .btn{width:auto}}
+.soft{--ft:linear-gradient(180deg,rgba(247,241,234,1.0) 0.0%,rgba(247,241,234,1.0) 3.85%,rgba(247,241,234,1.0) 7.69%,rgba(247,241,234,1.0) 11.54%,rgba(247,240,233,1.0) 15.38%,rgba(246,240,233,1.0) 19.23%,rgba(246,240,232,1.0) 23.08%,rgba(246,239,232,1.0) 26.92%,rgba(245,239,231,1.0) 30.77%,rgba(245,238,230,1.0) 34.62%,rgba(245,238,230,1.0) 38.46%,rgba(244,237,229,1.0) 42.31%,rgba(244,237,228,1.0) 46.15%,rgba(244,236,228,1.0) 50.0%,rgba(243,235,227,1.0) 53.85%,rgba(243,235,226,1.0) 57.69%,rgba(242,234,225,1.0) 61.54%,rgba(242,234,225,1.0) 65.38%,rgba(242,233,224,1.0) 69.23%,rgba(241,233,223,1.0) 73.08%,rgba(241,232,223,1.0) 76.92%,rgba(241,232,222,1.0) 80.77%,rgba(240,232,222,1.0) 84.62%,rgba(240,231,221,1.0) 88.46%,rgba(240,231,221,1.0) 92.31%,rgba(240,231,221,1.0) 96.15%,rgba(240,231,221,1.0) 100.0%);--fb:linear-gradient(180deg,rgba(240,231,221,1.0) 0.0%,rgba(240,231,221,1.0) 3.85%,rgba(240,231,221,1.0) 7.69%,rgba(240,231,221,1.0) 11.54%,rgba(240,232,222,1.0) 15.38%,rgba(241,232,222,1.0) 19.23%,rgba(241,232,223,1.0) 23.08%,rgba(241,233,223,1.0) 26.92%,rgba(242,233,224,1.0) 30.77%,rgba(242,234,225,1.0) 34.62%,rgba(242,234,225,1.0) 38.46%,rgba(243,235,226,1.0) 42.31%,rgba(243,235,227,1.0) 46.15%,rgba(244,236,228,1.0) 50.0%,rgba(244,237,228,1.0) 53.85%,rgba(244,237,229,1.0) 57.69%,rgba(245,238,230,1.0) 61.54%,rgba(245,238,230,1.0) 65.38%,rgba(245,239,231,1.0) 69.23%,rgba(246,239,232,1.0) 73.08%,rgba(246,240,232,1.0) 76.92%,rgba(246,240,233,1.0) 80.77%,rgba(247,240,233,1.0) 84.62%,rgba(247,241,234,1.0) 88.46%,rgba(247,241,234,1.0) 92.31%,rgba(247,241,234,1.0) 96.15%,rgba(247,241,234,1.0) 100.0%);background:var(--ft) top/100% 160px no-repeat,var(--fb) bottom/100% 160px no-repeat,var(--soft)}
+.soft+.soft{--ft:none}.soft:has(+.soft){--fb:none}
+.sec.soft{padding:80px 0}
+.band{padding-top:190px}.band::before{content:"";position:absolute;left:0;right:0;top:0;height:200px;z-index:1;pointer-events:none;background:linear-gradient(180deg,rgba(247,241,234,1.0) 0.0%,rgba(247,241,234,0.996) 3.85%,rgba(247,241,234,0.983) 7.69%,rgba(247,241,234,0.963) 11.54%,rgba(247,241,234,0.936) 15.38%,rgba(247,241,234,0.903) 19.23%,rgba(247,241,234,0.865) 23.08%,rgba(247,241,234,0.822) 26.92%,rgba(247,241,234,0.774) 30.77%,rgba(247,241,234,0.723) 34.62%,rgba(247,241,234,0.67) 38.46%,rgba(247,241,234,0.614) 42.31%,rgba(247,241,234,0.558) 46.15%,rgba(247,241,234,0.5) 50.0%,rgba(247,241,234,0.442) 53.85%,rgba(247,241,234,0.386) 57.69%,rgba(247,241,234,0.33) 61.54%,rgba(247,241,234,0.277) 65.38%,rgba(247,241,234,0.226) 69.23%,rgba(247,241,234,0.178) 73.08%,rgba(247,241,234,0.135) 76.92%,rgba(247,241,234,0.097) 80.77%,rgba(247,241,234,0.064) 84.62%,rgba(247,241,234,0.037) 88.46%,rgba(247,241,234,0.017) 92.31%,rgba(247,241,234,0.004) 96.15%,rgba(247,241,234,0.0) 100.0%)}
+.band .in{z-index:2}
+.bbtn{display:flex;flex-wrap:wrap;justify-content:center;gap:10px}.bbtn .btn{padding:0 24px}
+@media(min-width:1000px){.band{padding-top:230px}.band::before{height:240px}}
+.pcover{background:var(--milk);color:var(--choc)}
+.pcover::after{display:none}
+.pcover .ph{bottom:auto;height:72%;-webkit-mask-image:linear-gradient(180deg,#000 0,#000 46%,rgba(0,0,0,1.0) 46.0%,rgba(0,0,0,0.996) 48.08%,rgba(0,0,0,0.983) 50.15%,rgba(0,0,0,0.963) 52.23%,rgba(0,0,0,0.936) 54.31%,rgba(0,0,0,0.903) 56.38%,rgba(0,0,0,0.865) 58.46%,rgba(0,0,0,0.822) 60.54%,rgba(0,0,0,0.774) 62.62%,rgba(0,0,0,0.723) 64.69%,rgba(0,0,0,0.67) 66.77%,rgba(0,0,0,0.614) 68.85%,rgba(0,0,0,0.558) 70.92%,rgba(0,0,0,0.5) 73.0%,rgba(0,0,0,0.442) 75.08%,rgba(0,0,0,0.386) 77.15%,rgba(0,0,0,0.33) 79.23%,rgba(0,0,0,0.277) 81.31%,rgba(0,0,0,0.226) 83.38%,rgba(0,0,0,0.178) 85.46%,rgba(0,0,0,0.135) 87.54%,rgba(0,0,0,0.097) 89.62%,rgba(0,0,0,0.064) 91.69%,rgba(0,0,0,0.037) 93.77%,rgba(0,0,0,0.017) 95.85%,rgba(0,0,0,0.004) 97.92%,rgba(0,0,0,0.0) 100.0%);mask-image:linear-gradient(180deg,#000 0,#000 46%,rgba(0,0,0,1.0) 46.0%,rgba(0,0,0,0.996) 48.08%,rgba(0,0,0,0.983) 50.15%,rgba(0,0,0,0.963) 52.23%,rgba(0,0,0,0.936) 54.31%,rgba(0,0,0,0.903) 56.38%,rgba(0,0,0,0.865) 58.46%,rgba(0,0,0,0.822) 60.54%,rgba(0,0,0,0.774) 62.62%,rgba(0,0,0,0.723) 64.69%,rgba(0,0,0,0.67) 66.77%,rgba(0,0,0,0.614) 68.85%,rgba(0,0,0,0.558) 70.92%,rgba(0,0,0,0.5) 73.0%,rgba(0,0,0,0.442) 75.08%,rgba(0,0,0,0.386) 77.15%,rgba(0,0,0,0.33) 79.23%,rgba(0,0,0,0.277) 81.31%,rgba(0,0,0,0.226) 83.38%,rgba(0,0,0,0.178) 85.46%,rgba(0,0,0,0.135) 87.54%,rgba(0,0,0,0.097) 89.62%,rgba(0,0,0,0.064) 91.69%,rgba(0,0,0,0.037) 93.77%,rgba(0,0,0,0.017) 95.85%,rgba(0,0,0,0.004) 97.92%,rgba(0,0,0,0.0) 100.0%)}
+.pcover .in{text-shadow:none}.pcover h1{color:var(--wine)}.pcover h1 em{color:var(--gold-d)}.pcover p{color:var(--muted)}.pcover .eyebrow.l{color:var(--gold-d)}
+.pcover .btn.glass,.cover .btn.glass{color:var(--ivory);background:linear-gradient(140deg,#7a1f33,var(--wine) 60%,var(--wine-d));border:1px solid rgba(201,168,118,.6);box-shadow:inset 0 1.5px 0 rgba(255,255,255,.25),0 12px 28px rgba(89,19,42,.28)}
+@media(min-width:1000px){.pcover .ph{height:100%;left:42%;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 34%),linear-gradient(180deg,#000 0,#000 58%,rgba(0,0,0,1.0) 58.0%,rgba(0,0,0,0.996) 59.62%,rgba(0,0,0,0.983) 61.23%,rgba(0,0,0,0.963) 62.85%,rgba(0,0,0,0.936) 64.46%,rgba(0,0,0,0.903) 66.08%,rgba(0,0,0,0.865) 67.69%,rgba(0,0,0,0.822) 69.31%,rgba(0,0,0,0.774) 70.92%,rgba(0,0,0,0.723) 72.54%,rgba(0,0,0,0.67) 74.15%,rgba(0,0,0,0.614) 75.77%,rgba(0,0,0,0.558) 77.38%,rgba(0,0,0,0.5) 79.0%,rgba(0,0,0,0.442) 80.62%,rgba(0,0,0,0.386) 82.23%,rgba(0,0,0,0.33) 83.85%,rgba(0,0,0,0.277) 85.46%,rgba(0,0,0,0.226) 87.08%,rgba(0,0,0,0.178) 88.69%,rgba(0,0,0,0.135) 90.31%,rgba(0,0,0,0.097) 91.92%,rgba(0,0,0,0.064) 93.54%,rgba(0,0,0,0.037) 95.15%,rgba(0,0,0,0.017) 96.77%,rgba(0,0,0,0.004) 98.38%,rgba(0,0,0,0.0) 100.0%);-webkit-mask-composite:source-in;mask-image:linear-gradient(90deg,transparent 0,#000 34%),linear-gradient(180deg,#000 0,#000 58%,rgba(0,0,0,1.0) 58.0%,rgba(0,0,0,0.996) 59.62%,rgba(0,0,0,0.983) 61.23%,rgba(0,0,0,0.963) 62.85%,rgba(0,0,0,0.936) 64.46%,rgba(0,0,0,0.903) 66.08%,rgba(0,0,0,0.865) 67.69%,rgba(0,0,0,0.822) 69.31%,rgba(0,0,0,0.774) 70.92%,rgba(0,0,0,0.723) 72.54%,rgba(0,0,0,0.67) 74.15%,rgba(0,0,0,0.614) 75.77%,rgba(0,0,0,0.558) 77.38%,rgba(0,0,0,0.5) 79.0%,rgba(0,0,0,0.442) 80.62%,rgba(0,0,0,0.386) 82.23%,rgba(0,0,0,0.33) 83.85%,rgba(0,0,0,0.277) 85.46%,rgba(0,0,0,0.226) 87.08%,rgba(0,0,0,0.178) 88.69%,rgba(0,0,0,0.135) 90.31%,rgba(0,0,0,0.097) 91.92%,rgba(0,0,0,0.064) 93.54%,rgba(0,0,0,0.037) 95.15%,rgba(0,0,0,0.017) 96.77%,rgba(0,0,0,0.004) 98.38%,rgba(0,0,0,0.0) 100.0%);mask-composite:intersect}}
+.sec .eyebrow.l{color:var(--gold-d)}
+.sec .gd{background:linear-gradient(140deg,rgba(255,255,255,.62),rgba(255,255,255,.3) 55%,rgba(255,255,255,.48));border:1px solid rgba(255,255,255,.7);box-shadow:inset 0 1.5px 0 rgba(255,255,255,.9),0 14px 34px rgba(46,33,28,.12);color:var(--choc)}
+.dt{color:var(--choc)}.sec .dt .when b{color:var(--wine)}.sec .dt .when span{color:var(--muted)}.sec .dt .when{border-color:rgba(176,141,87,.45)}
+.sec .dt h3{color:var(--wine)}.sec .dt .meta{color:var(--muted)}.sec .dt .pr{color:var(--wine)}.sec .dt .pr s{color:var(--muted)}
+.sec .dt .tag{background:var(--wine);color:var(--ivory)}
+.sec .dates-note,.sec .dates-empty{color:var(--muted)}
+.sec .prc{border-color:var(--line)}.sec .prc div{border-color:var(--line);color:var(--choc)}.sec .prc b{color:var(--wine)}.sec .prc small{color:var(--muted)}
+.sec .notice{color:var(--choc)}.sec .notice b{color:var(--wine)}
+.sec .course{color:var(--choc)}.sec .course small{color:var(--gold-d)}.sec .course h3{color:var(--wine)}.sec .course .meta,.sec .course .bonus,.sec .course .big span{color:var(--muted)}
+.sec .course .big{color:var(--wine)}.sec .course .claim{color:var(--gold-d)}.sec .course .btn.line{color:var(--wine)}
+.sec .course .fmt div{border-color:var(--line)}.sec .course .fmt span{color:var(--muted)}.sec .course .fmt b{color:var(--wine)}.sec .course .fmt b small{color:var(--muted)}
+.sec .course li{color:var(--choc);border-color:var(--line)}.sec .course li::before{color:var(--gold-d)}
+.sec .course.pro{background:linear-gradient(150deg,#6a1a33,var(--wine) 55%,var(--wine-d));border:1px solid rgba(201,168,118,.7);color:var(--ivory)}
+.sec .course.pro small{color:var(--gold)}.sec .course.pro h3,.sec .course.pro .big{color:var(--ivory)}.sec .course.pro .meta,.sec .course.pro .bonus,.sec .course.pro .big span{color:#D9C6BC}
+.sec .course.pro .claim{color:#F1DDB6}.sec .course.pro .btn.line{color:var(--ivory)}.sec .course.pro li{color:#EFE4DA;border-color:rgba(243,233,225,.12)}.sec .course.pro li::before{color:var(--gold)}
+.sec .course.pro .fmt div{border-color:rgba(243,233,225,.14)}.sec .course.pro .fmt span{color:#E4D6CA}.sec .course.pro .fmt b{color:var(--ivory)}.sec .course.pro .fmt b small{color:#D9C6BC}
+.sec .pricebox .big{color:var(--wine)}.sec .pricebox .big span,.sec .pricebox p{color:var(--muted)}
+.sec .case-num{color:var(--wine)}.sec .case-copy h3{color:var(--wine)}.sec .case-copy p{color:var(--muted)}
+.sec .lessons li{color:var(--choc);border-color:var(--line)}.sec .lessons li b{color:var(--gold-d)}
+.sec .pts li{color:var(--choc);border-color:var(--line)}
+.sec .day p{color:var(--muted)}.sec .day .d{background:var(--milk)}.sec .day h4{color:var(--gold-d)}
+.sec .tagline{color:var(--gold-d)}
+.sec .vts figcaption{color:var(--muted)}.sec .vts figcaption b{color:var(--wine)}
+.sec .tlx::before{background:linear-gradient(var(--gold-d),rgba(176,141,87,.15))}
+.about-ed{background:var(--milk)}
+.sec .btn.glass{color:var(--ivory);background:linear-gradient(140deg,#7a1f33,var(--wine) 60%,var(--wine-d));border:1px solid rgba(201,168,118,.6);box-shadow:inset 0 1.5px 0 rgba(255,255,255,.25),0 12px 28px rgba(89,19,42,.28)}
+.sec .course.pro .btn.glass{background:linear-gradient(140deg,rgba(255,255,255,.2),rgba(255,255,255,.06) 55%,rgba(255,255,255,.12));border:1px solid rgba(201,168,118,.85)}
+.dirs{padding:30px 0 40px}
+@media(max-width:999px){.about-ed .media{-webkit-mask-image:linear-gradient(180deg,transparent 0,rgba(0,0,0,0.0) 0.0%,rgba(0,0,0,0.043) 1.5%,rgba(0,0,0,0.156) 3.0%,rgba(0,0,0,0.316) 4.5%,rgba(0,0,0,0.5) 6.0%,rgba(0,0,0,0.684) 7.5%,rgba(0,0,0,0.844) 9.0%,rgba(0,0,0,0.957) 10.5%,rgba(0,0,0,1.0) 12.0%,#000 40%,rgba(0,0,0,1.0) 40.0%,rgba(0,0,0,0.995) 42.17%,rgba(0,0,0,0.98) 44.33%,rgba(0,0,0,0.957) 46.5%,rgba(0,0,0,0.926) 48.67%,rgba(0,0,0,0.888) 50.83%,rgba(0,0,0,0.844) 53.0%,rgba(0,0,0,0.794) 55.17%,rgba(0,0,0,0.741) 57.33%,rgba(0,0,0,0.684) 59.5%,rgba(0,0,0,0.624) 61.67%,rgba(0,0,0,0.562) 63.83%,rgba(0,0,0,0.5) 66.0%,rgba(0,0,0,0.438) 68.17%,rgba(0,0,0,0.376) 70.33%,rgba(0,0,0,0.316) 72.5%,rgba(0,0,0,0.259) 74.67%,rgba(0,0,0,0.206) 76.83%,rgba(0,0,0,0.156) 79.0%,rgba(0,0,0,0.112) 81.17%,rgba(0,0,0,0.074) 83.33%,rgba(0,0,0,0.043) 85.5%,rgba(0,0,0,0.02) 87.67%,rgba(0,0,0,0.005) 89.83%,rgba(0,0,0,0.0) 92.0%,transparent 100%);mask-image:linear-gradient(180deg,transparent 0,rgba(0,0,0,0.0) 0.0%,rgba(0,0,0,0.043) 1.5%,rgba(0,0,0,0.156) 3.0%,rgba(0,0,0,0.316) 4.5%,rgba(0,0,0,0.5) 6.0%,rgba(0,0,0,0.684) 7.5%,rgba(0,0,0,0.844) 9.0%,rgba(0,0,0,0.957) 10.5%,rgba(0,0,0,1.0) 12.0%,#000 40%,rgba(0,0,0,1.0) 40.0%,rgba(0,0,0,0.995) 42.17%,rgba(0,0,0,0.98) 44.33%,rgba(0,0,0,0.957) 46.5%,rgba(0,0,0,0.926) 48.67%,rgba(0,0,0,0.888) 50.83%,rgba(0,0,0,0.844) 53.0%,rgba(0,0,0,0.794) 55.17%,rgba(0,0,0,0.741) 57.33%,rgba(0,0,0,0.684) 59.5%,rgba(0,0,0,0.624) 61.67%,rgba(0,0,0,0.562) 63.83%,rgba(0,0,0,0.5) 66.0%,rgba(0,0,0,0.438) 68.17%,rgba(0,0,0,0.376) 70.33%,rgba(0,0,0,0.316) 72.5%,rgba(0,0,0,0.259) 74.67%,rgba(0,0,0,0.206) 76.83%,rgba(0,0,0,0.156) 79.0%,rgba(0,0,0,0.112) 81.17%,rgba(0,0,0,0.074) 83.33%,rgba(0,0,0,0.043) 85.5%,rgba(0,0,0,0.02) 87.67%,rgba(0,0,0,0.005) 89.83%,rgba(0,0,0,0.0) 92.0%,transparent 100%)}}
+@media(max-width:999px){.about-ed .copy{margin-top:-90px}}
+.band .ph{-webkit-mask-image:linear-gradient(180deg,#000 0,#000 55%,rgba(0,0,0,1.0) 55.0%,rgba(0,0,0,0.995) 56.88%,rgba(0,0,0,0.98) 58.75%,rgba(0,0,0,0.957) 60.62%,rgba(0,0,0,0.926) 62.5%,rgba(0,0,0,0.888) 64.38%,rgba(0,0,0,0.844) 66.25%,rgba(0,0,0,0.794) 68.12%,rgba(0,0,0,0.741) 70.0%,rgba(0,0,0,0.684) 71.88%,rgba(0,0,0,0.624) 73.75%,rgba(0,0,0,0.562) 75.62%,rgba(0,0,0,0.5) 77.5%,rgba(0,0,0,0.438) 79.38%,rgba(0,0,0,0.376) 81.25%,rgba(0,0,0,0.316) 83.12%,rgba(0,0,0,0.259) 85.0%,rgba(0,0,0,0.206) 86.88%,rgba(0,0,0,0.156) 88.75%,rgba(0,0,0,0.112) 90.62%,rgba(0,0,0,0.074) 92.5%,rgba(0,0,0,0.043) 94.38%,rgba(0,0,0,0.02) 96.25%,rgba(0,0,0,0.005) 98.12%,rgba(0,0,0,0.0) 100.0%);mask-image:linear-gradient(180deg,#000 0,#000 55%,rgba(0,0,0,1.0) 55.0%,rgba(0,0,0,0.995) 56.88%,rgba(0,0,0,0.98) 58.75%,rgba(0,0,0,0.957) 60.62%,rgba(0,0,0,0.926) 62.5%,rgba(0,0,0,0.888) 64.38%,rgba(0,0,0,0.844) 66.25%,rgba(0,0,0,0.794) 68.12%,rgba(0,0,0,0.741) 70.0%,rgba(0,0,0,0.684) 71.88%,rgba(0,0,0,0.624) 73.75%,rgba(0,0,0,0.562) 75.62%,rgba(0,0,0,0.5) 77.5%,rgba(0,0,0,0.438) 79.38%,rgba(0,0,0,0.376) 81.25%,rgba(0,0,0,0.316) 83.12%,rgba(0,0,0,0.259) 85.0%,rgba(0,0,0,0.206) 86.88%,rgba(0,0,0,0.156) 88.75%,rgba(0,0,0,0.112) 90.62%,rgba(0,0,0,0.074) 92.5%,rgba(0,0,0,0.043) 94.38%,rgba(0,0,0,0.02) 96.25%,rgba(0,0,0,0.005) 98.12%,rgba(0,0,0,0.0) 100.0%)}
+.sec.soft{padding:64px 0}
+@media(min-width:1000px){.about-ed .media{align-self:stretch;height:auto;-webkit-mask-image:linear-gradient(90deg,rgba(0,0,0,1.0) 0.0%,rgba(0,0,0,1.0) 30.0%,rgba(0,0,0,1.0) 60.0%,rgba(0,0,0,1.0) 60.0%,rgba(0,0,0,0.994) 61.82%,rgba(0,0,0,0.977) 63.64%,rgba(0,0,0,0.949) 65.45%,rgba(0,0,0,0.913) 67.27%,rgba(0,0,0,0.869) 69.09%,rgba(0,0,0,0.817) 70.91%,rgba(0,0,0,0.761) 72.73%,rgba(0,0,0,0.699) 74.55%,rgba(0,0,0,0.635) 76.36%,rgba(0,0,0,0.568) 78.18%,rgba(0,0,0,0.5) 80.0%,rgba(0,0,0,0.432) 81.82%,rgba(0,0,0,0.365) 83.64%,rgba(0,0,0,0.301) 85.45%,rgba(0,0,0,0.239) 87.27%,rgba(0,0,0,0.183) 89.09%,rgba(0,0,0,0.131) 90.91%,rgba(0,0,0,0.087) 92.73%,rgba(0,0,0,0.051) 94.55%,rgba(0,0,0,0.023) 96.36%,rgba(0,0,0,0.006) 98.18%,rgba(0,0,0,0.0) 100.0%),linear-gradient(180deg,rgba(0,0,0,0.0) 0.0%,rgba(0,0,0,0.043) 1.5%,rgba(0,0,0,0.156) 3.0%,rgba(0,0,0,0.316) 4.5%,rgba(0,0,0,0.5) 6.0%,rgba(0,0,0,0.684) 7.5%,rgba(0,0,0,0.844) 9.0%,rgba(0,0,0,0.957) 10.5%,rgba(0,0,0,1.0) 12.0%,#000 12%,#000 52%,rgba(0,0,0,1.0) 52.0%,rgba(0,0,0,0.994) 53.82%,rgba(0,0,0,0.977) 55.64%,rgba(0,0,0,0.949) 57.45%,rgba(0,0,0,0.913) 59.27%,rgba(0,0,0,0.869) 61.09%,rgba(0,0,0,0.817) 62.91%,rgba(0,0,0,0.761) 64.73%,rgba(0,0,0,0.699) 66.55%,rgba(0,0,0,0.635) 68.36%,rgba(0,0,0,0.568) 70.18%,rgba(0,0,0,0.5) 72.0%,rgba(0,0,0,0.432) 73.82%,rgba(0,0,0,0.365) 75.64%,rgba(0,0,0,0.301) 77.45%,rgba(0,0,0,0.239) 79.27%,rgba(0,0,0,0.183) 81.09%,rgba(0,0,0,0.131) 82.91%,rgba(0,0,0,0.087) 84.73%,rgba(0,0,0,0.051) 86.55%,rgba(0,0,0,0.023) 88.36%,rgba(0,0,0,0.006) 90.18%,rgba(0,0,0,0.0) 92.0%,transparent 100%);-webkit-mask-composite:source-in;mask-image:linear-gradient(90deg,rgba(0,0,0,1.0) 0.0%,rgba(0,0,0,1.0) 30.0%,rgba(0,0,0,1.0) 60.0%,rgba(0,0,0,1.0) 60.0%,rgba(0,0,0,0.994) 61.82%,rgba(0,0,0,0.977) 63.64%,rgba(0,0,0,0.949) 65.45%,rgba(0,0,0,0.913) 67.27%,rgba(0,0,0,0.869) 69.09%,rgba(0,0,0,0.817) 70.91%,rgba(0,0,0,0.761) 72.73%,rgba(0,0,0,0.699) 74.55%,rgba(0,0,0,0.635) 76.36%,rgba(0,0,0,0.568) 78.18%,rgba(0,0,0,0.5) 80.0%,rgba(0,0,0,0.432) 81.82%,rgba(0,0,0,0.365) 83.64%,rgba(0,0,0,0.301) 85.45%,rgba(0,0,0,0.239) 87.27%,rgba(0,0,0,0.183) 89.09%,rgba(0,0,0,0.131) 90.91%,rgba(0,0,0,0.087) 92.73%,rgba(0,0,0,0.051) 94.55%,rgba(0,0,0,0.023) 96.36%,rgba(0,0,0,0.006) 98.18%,rgba(0,0,0,0.0) 100.0%),linear-gradient(180deg,rgba(0,0,0,0.0) 0.0%,rgba(0,0,0,0.043) 1.5%,rgba(0,0,0,0.156) 3.0%,rgba(0,0,0,0.316) 4.5%,rgba(0,0,0,0.5) 6.0%,rgba(0,0,0,0.684) 7.5%,rgba(0,0,0,0.844) 9.0%,rgba(0,0,0,0.957) 10.5%,rgba(0,0,0,1.0) 12.0%,#000 12%,#000 52%,rgba(0,0,0,1.0) 52.0%,rgba(0,0,0,0.994) 53.82%,rgba(0,0,0,0.977) 55.64%,rgba(0,0,0,0.949) 57.45%,rgba(0,0,0,0.913) 59.27%,rgba(0,0,0,0.869) 61.09%,rgba(0,0,0,0.817) 62.91%,rgba(0,0,0,0.761) 64.73%,rgba(0,0,0,0.699) 66.55%,rgba(0,0,0,0.635) 68.36%,rgba(0,0,0,0.568) 70.18%,rgba(0,0,0,0.5) 72.0%,rgba(0,0,0,0.432) 73.82%,rgba(0,0,0,0.365) 75.64%,rgba(0,0,0,0.301) 77.45%,rgba(0,0,0,0.239) 79.27%,rgba(0,0,0,0.183) 81.09%,rgba(0,0,0,0.131) 82.91%,rgba(0,0,0,0.087) 84.73%,rgba(0,0,0,0.051) 86.55%,rgba(0,0,0,0.023) 88.36%,rgba(0,0,0,0.006) 90.18%,rgba(0,0,0,0.0) 92.0%,transparent 100%);mask-composite:intersect}.about-ed .h2{font-size:56px}.about-ed .h2 em{white-space:normal}}
+/* стрелки: тонкая линия в золотом круге вместо значка ↗ */
+.arr{width:44px;height:44px;flex:0 0 44px;border-radius:50%;border:1px solid rgba(176,141,87,.6);background:rgba(255,255,255,.35);color:var(--gold-d)}
+.arr svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.1;stroke-linecap:round;stroke-linejoin:round}
+.row:hover .arr,.opt:hover .arr{transform:translateX(4px);background:var(--wine);color:var(--ivory);border-color:var(--wine)}
+.arr{transition:transform .3s,background .3s,color .3s}
+/* подвал: имя в одну строку */
+.ftr .brand{white-space:nowrap}
+/* обложка: каждая фраза в одну строку */
+@media(max-width:999px){.cover h1{font-size:5.6vw;max-width:none;white-space:nowrap}.cover h1 em{font-size:4.25vw;white-space:nowrap}.cover .tl{right:auto}}
+/* одиночные кнопки по центру */
+.wrap.cbtn{display:flex;justify-content:center}
+.dates-note{text-align:center}
+@media(max-width:999px){.about-ed .copy>.btn{display:flex;width:fit-content;margin-left:auto;margin-right:auto}}
+@media(max-width:999px){.sec .wrap>a.btn,.sec .reveal>a.btn,.sec .split>div>a.btn,.sec div>a.btn:only-child{display:flex;width:fit-content;margin-left:auto;margin-right:auto}}
+/* круг 3 */
+.pcover .eyebrow{text-shadow:none}
+.sec .day .d{background:linear-gradient(140deg,#7a1f33,var(--wine) 60%,var(--wine-d));color:var(--ivory);border-color:rgba(201,168,118,.8)}
+.sec .day h3{color:var(--wine)}.sec .day p{color:var(--muted)}
+.sec .pricebox{color:var(--choc)}
+/* короткие заголовки не разрывать */
+.h2.one em{display:inline}
+/* отзывы: одинаковые текстовые карточки */
+.op.rv{display:flex;flex-direction:column;padding:26px 24px 20px;background:rgba(255,255,255,.72);border:1px solid rgba(176,141,87,.28);box-shadow:0 14px 34px rgba(46,33,28,.08)}
+.rv .q{font-family:var(--bod);font-size:64px;line-height:.6;height:28px;color:var(--gold-d)}
+.rv blockquote{margin:6px 0 0;font-size:15px;line-height:1.7;color:var(--choc)}
+.rv .tr{margin-top:14px}
+.rv figcaption{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;margin-top:auto;padding:18px 0 0;border-top:1px solid var(--line);margin-top:18px}
+.rv figcaption span{display:flex;flex-direction:column}
+.rv figcaption b{font-family:var(--bod);font-weight:400;font-size:20px;color:var(--wine);line-height:1.1}
+.rv figcaption small{font-size:12px;color:var(--muted);letter-spacing:.04em}
+.rv .orig{flex:none;font-size:12px;color:var(--gold-d);text-decoration:underline;text-underline-offset:3px;cursor:zoom-in;padding:6px 0;background:none;border:0}
+/* приложение */
+.phones{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:26px}
+.phones button{display:block;padding:0;border:0;background:none;cursor:zoom-in}
+.phones img{display:block;width:100%;aspect-ratio:454/930;object-fit:cover;object-position:top;border-radius:18px;border:1px solid var(--line);box-shadow:0 16px 34px rgba(46,33,28,.14)}
+.worth{margin-top:18px;padding:14px 18px;border-left:2px solid var(--gold-d);font-family:var(--bod);font-size:21px;line-height:1.35;color:var(--wine)}
+.prod .pts{margin:14px 0 4px}
+@media(min-width:1000px){.phones{margin-top:0;gap:16px}}
+/* запись: подписи на кнопках мессенджеров */
+.form .wa span,.form .tg span,.form .ig span{display:flex;flex-direction:column;align-items:flex-start;line-height:1.2}
+.form .wa small,.form .tg small,.form .ig small{font-size:11.5px;font-weight:500;opacity:.85;margin-top:3px}
+.ig{display:flex;justify-content:center;align-items:center;gap:10px;width:100%;margin-top:10px;padding:16px;border-radius:999px;background:linear-gradient(90deg,#8a3ab9,#c13584 50%,#e1306c);color:#fff;font-size:15px;font-weight:600}
+.wa svg,.tg svg,.ig svg{width:22px;height:22px;flex:none;fill:currentColor}
+/* страницы курсов */
+.bkrow{margin-top:30px}
+.pcover .nx{display:block;margin-top:10px;font-weight:600;color:var(--wine)}
+.vipx,.care{max-width:820px;margin:0 auto;text-align:center;padding:36px 24px;border-radius:26px;border:1px solid rgba(176,141,87,.45);background:rgba(255,255,255,.55)}
+.vipx p,.care p{margin-top:16px;font-size:16.5px;line-height:1.75;color:var(--choc)}
+.vipx .eyebrow,.care .eyebrow{justify-content:center}
+.courses.one{max-width:620px;margin:26px auto 0}
+@media(min-width:1000px){.courses.one{grid-template-columns:1fr}}
+.lessons-d{margin-top:10px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.lessons-d summary{list-style:none;cursor:pointer;padding:16px 0;font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-d)}
+.lessons-d summary::-webkit-details-marker{display:none}
+.lessons-d summary::after{content:" +"}.lessons-d[open] summary::after{content:" −"}
+.lessons-d .lessons{margin:0 0 18px}
+.forwho.tlx{max-width:860px}
+
+.rv.long:not(.open) blockquote{display:-webkit-box;-webkit-line-clamp:7;-webkit-box-orient:vertical;overflow:hidden}
+.rv .rmore{align-self:flex-start;margin-top:8px;padding:4px 0;background:none;border:0;font-size:12px;font-weight:600;letter-spacing:.06em;color:var(--wine);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+@media(min-width:1000px){.rv.long:not(.open) blockquote{-webkit-line-clamp:12}}
+@media(max-width:999px){.pcover.short .ph{height:50%}.pcover.short{min-height:680px}}
+
+/* круг 4 */
+.pcover h1 em{display:block}.pcover h1 .one em{display:inline}
+@media(max-width:999px){
+  .pcover h1{font-size:34px;line-height:1.05}
+  .pcover.face .ph{top:64px;height:calc(72% - 40px)}
+  .h2{font-size:36px}
+  .rows .row .t{font-size:30px}
+}
+@media(min-width:1000px){.pcover h1{font-size:64px}.pcover.face .ph{top:0}}
+.dirs .eyebrow{margin-bottom:6px}
+.dt .pr{display:flex;flex-direction:column;gap:2px}
+.dt .pr span{display:block}
+.course .fmt b{white-space:nowrap}
+.course .fmt b small.per{display:block;text-align:right;margin:2px 0 0}
+.phones{grid-template-columns:repeat(4,1fr);gap:8px}
+.phones img{aspect-ratio:auto;object-fit:contain;border:0;border-radius:0;box-shadow:none;filter:drop-shadow(0 14px 22px rgba(46,33,28,.22))}
+@media(max-width:999px){.phones{grid-template-columns:repeat(2,1fr);gap:14px;max-width:420px;margin-left:auto;margin-right:auto}}
+.prod [data-slider="teoriya"] .sl-t button{background:none}
+.prod [data-slider="teoriya"] .sl-t button img{object-fit:contain;filter:drop-shadow(0 12px 18px rgba(46,33,28,.2))}
+@media(max-width:999px){
+  .pcover.face{height:auto;min-height:0;max-height:none;padding-top:64px}
+  .pcover.face .ph{position:relative;inset:auto;top:auto;height:108vw;max-height:520px}
+  .pcover.face .in{position:relative;margin-top:-70px;padding-bottom:36px}
+}
+@media(min-width:1000px){.pcover.face .ph{background-position-y:0 !important}}
