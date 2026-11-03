@@ -7,7 +7,7 @@ import json, os, re, sys, html
 B = os.path.dirname(os.path.abspath(__file__))
 OUT = sys.argv[1]
 SITE = 'https://anyakay.pl'
-V = '51'
+V = '52'
 TG_I, WA_I, IG_I = json.load(open(os.path.join(B, 'svgs.json')))
 TG = 'https://t.me/anyalashkey'
 IGM = 'https://ig.me/m/anya.key_'
@@ -70,8 +70,8 @@ FAQ_LASH = [
 ]
 FAQ_EDU = [
     ('Что будет после курса?', 'Я всегда на связи. Не знаете, что нарастить конкретной клиентке, или что-то не получается в работе? Пишете мне, и я объясню, как сделать правильно. Вы не остаётесь одна: я рядом и поддержу даже в трудную минуту.'),
-    ('Чем VIP отличается от BASIC?', 'VIP включает всё из BASIC и в два раза больше практики: 6 дней и 6 моделей вместо 3, отработку L- и M-изгибов, 2 трендовых эффекта на выбор, стартовый набор материалов и кубок VIP-мастера.'),
-    ('Индивидуально или в группе: в чём разница?', 'Программа одна и та же. Индивидуально всё время только ваше, и темп подстраивается под вас. В мини-группе максимум 2 человека, поэтому внимания всё равно много, а цена ниже: BASIC 2000 zł вместо 3000 zł, VIP 3000 zł вместо 4500 zł с человека.'),
+    ('Чем VIP отличается от BASIC?', 'VIP включает всё из BASIC и в два раза больше практики: 6 дней и 6 моделей вместо 3, отработку L- и M-изгибов, эффекты лисичка, кукла, белка и стрелки, мокрый эффект или Ким на выбор, стартовый набор материалов и кубок VIP-мастера.'),
+    ('Индивидуально или в группе: в чём разница?', 'Программа одинаковая. Индивидуально вы учитесь одна, и всё внимание только вам. В группе вас двое, а цена ниже: BASIC 2000 zł вместо 3000 zł, VIP 3000 zł вместо 4500 zł с человека.'),
     ('Нужна ли предоплата?', 'Да, дата бронируется после предоплаты 500 zł. Отменить или перенести запись можно не позже чем за 3 недели до начала, позже предоплата не возвращается. Перенести дату можно один раз, при втором переносе предоплата сгорает.'),
     ('Выдаёте сертификат?', 'Да, после обучения вы получаете именной сертификат с печатью.'),
     ('Сколько можно зарабатывать после курса?', 'Зависит от вас, но вот пример: ученица Света за первые 2,5 недели после обучения обслужила 9 клиенток и заработала 800 zł, параллельно работая на заводе. Её модели возвращаются и становятся постоянными клиентками.'),
@@ -155,9 +155,15 @@ def slider(cats, limit=''):
             '<div class="sl-n"><button class="sl-p" aria-label="Назад">←</button><button class="sl-x" aria-label="Дальше">→</button></div></div></div>')
 
 
+FACE = {'anya-kay-zhaket.jpg', 'anya-kay-vzglyad.jpg', 'konsultaciya-oblozhka.jpg', 'povyshenie-oblozhka.jpg', 'basic-oblozhka.jpg', 'vip-oblozhka.jpg'}
+
+
 def pcover(img, pos, eyebrow, h1, text, btns):
     b = ''.join(f'<a href="{h}" class="btn {c}">{t}</a>' for t, h, c in btns)
-    return (f'<section class="pcover"><div class="ph" style="background-image:url(\'/img/{img}\');background-position:{pos}" role="img" aria-label=""></div>'
+    cls = 'pcover face' if img in FACE else 'pcover'
+    one = ' class="one"' if len(re.sub('<[^>]+>', '', h1)) <= 22 else ''
+    h1 = f'<span{one}>{h1}</span>' if one else h1
+    return (f'<section class="{cls}"><div class="ph" style="background-image:url(\'/img/{img}\');background-position:{pos}" role="img" aria-label=""></div>'
             f'<div class="in"><div class="eyebrow l">{eyebrow}</div><h1>{h1}</h1><p>{text}</p><div class="btns">{b}</div></div></section>')
 
 
@@ -288,7 +294,7 @@ def page(path, title, desc, body, ld=None, nav_on='', home=False, noindex=False)
     html = (head + body + foot).replace(' ↗', '').replace('↗', '')
     # короткие заголовки держим в одну строку
     html = re.sub(r'<h2 class="h2">([^<]*)<em>([^<]*)</em></h2>',
-                  lambda m: m.group(0).replace('class="h2"', 'class="h2 one"') if len(m.group(1) + m.group(2)) <= 15 else m.group(0), html)
+                  lambda m: m.group(0).replace('class="h2"', 'class="h2 one"') if len(m.group(1) + m.group(2)) <= 20 else m.group(0), html)
     open(fn, 'w', encoding='utf-8').write(html)
 
 
@@ -302,6 +308,7 @@ home = f'''
 </section>
 
 <section class="sec dirs"><div class="wrap">
+  <div class="eyebrow">Мои услуги</div>
   <div class="rows">
     <a class="row reveal" href="/naraschivanie/"><span class="n">01</span><span class="t">Наращивание ресниц</span><span class="arr"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h17M14 6l6 6-6 6"/></svg></span></a>
     <a class="row reveal" href="/obuchenie/"><span class="n">02</span><span class="t">Обучение</span><span class="arr"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h17M14 6l6 6-6 6"/></svg></span></a>
@@ -394,7 +401,7 @@ C_BASIC = course('Хочу начать с нуля', 'Курс BASIC', '3 дн�
                  'Теория в приложении, практика на манекене и 3 живых моделях, поддержка после курса.', '/zapis/?w=basic', '/basic-lash-course/')
 C_VIP = course('Хочу больше практики', 'VIP «мастер<br>под ключ»', '6 дней · 6 живых моделей · стартовый набор',
                [('Индивидуально', f'4 500{ZL}'), ('В группе до 2 человек', f'3 000{ZL}')],
-               'Авторский курс: 36 часов практики, L- и M-изгибы, 2 трендовых эффекта, кубок VIP-мастера.', '/zapis/?w=vip', '/vip-lash-course/', 'VIP')
+               'Авторский курс: 36 часов практики, L- и M-изгибы, стрелки, мокрый эффект или Ким, кубок VIP-мастера.', '/zapis/?w=vip', '/vip-lash-course/', 'VIP')
 C_ADV = course('Я уже работаю мастером', 'Повышение<br>квалификации', '1 день · индивидуально',
                [('Индивидуально', f'1 000{ZL}<small>/ день</small>')], 'Сначала разбор ваших работ, потом программа под ваши точки роста.', '/zapis/?w=advanced', '/povyshenie-kvalifikacii/')
 C_KONS = course('Нужен разбор', 'Онлайн-<br>консультация', '2 часа · онлайн · 1:1',
@@ -437,7 +444,7 @@ page('/obuchenie/', 'Обучение наращиванию ресниц в В�
 
 # ================= BASIC / VIP: отдельные страницы с прогревом =================
 APP_PTS = ['Видеоуроки и тест после каждого урока', 'Прогресс по урокам и результаты тестов', 'Все мои гайды и пособие', 'Платный Telegram-канал по обработке фото и видео']
-APP_SHOTS = [('prilozhenie-uroki.jpg', 'Приложение Lash Academy: список уроков'), ('prilozhenie-urok.jpg', 'Приложение Lash Academy: урок и материалы'), ('prilozhenie-progress.jpg', 'Приложение Lash Academy: прогресс ученицы')]
+APP_SHOTS = [('prilozhenie-0.png', 'Приложение Anya Kay Lash Academy'), ('prilozhenie-1.png', 'Приложение: список уроков'), ('prilozhenie-2.png', 'Приложение: урок и материалы'), ('prilozhenie-3.png', 'Приложение: прогресс ученицы')]
 
 
 def phones():
@@ -452,34 +459,34 @@ def bk(c, label='Записаться'):
 COURSES = {
     'basic': dict(
         path='/basic-lash-course/', name='BASIC', short='Курс BASIC', days=3, models=3, hours='21 час практики',
-        img='uchenica-basic-1.jpg', pos='50% 50%', band='uchenica-basic-3.jpg',
+        img='basic-oblozhka.jpg', pos='50% 0%', band='uchenica-basic-3.jpg',
         eyebrow='Курс с нуля · 3 дня', h1='Курс BASIC: <em>наращивание с нуля</em>',
         lead='Для тех, кто хочет не просто научиться наращивать, а понимать, что и почему делает в работе.',
         who=[('Начинаете с нуля', 'Объясню всё с основ: материалы, клей, постановка руки, схемы эффектов.'),
              ('Хотите работать на себя', 'После курса вы умеете наращивать и знаете, как снимать работы и искать первых клиенток.'),
              ('Учились, но нет уверенности', 'Закроем пробелы в теории и поставим технику на живых моделях.')],
         gets=[(IC_BOOK, 'Теория в приложении', 'уроки, тесты и прогресс'), (IC_EYE, '3 живые модели', 'и практика на 3D-манекене'),
-              (IC_STAR, 'Схемы эффектов', 'моделирование взгляда'), (IC_CERT, 'Сертификат', 'именной, с печатью')],
+              (IC_STAR, 'Эффекты', 'лисичка, кукла, белка'), (IC_CERT, 'Сертификат', 'именной, с печатью')],
         bonus='Бонус: курс по обработке контента и ретуши фото.',
-        incl=['Углублённая теория в приложении', 'Практика на 3D-манекене и 3 живых моделях', 'Моделирование и схемы актуальных эффектов', 'Базовое пособие и все мои гайды', 'Поддержка после обучения', 'Именной сертификат с печатью'],
+        incl=['Углублённая теория в приложении', 'Практика на 3D-манекене и 3 живых моделях', 'Эффекты: лисичка, кукла, белка', 'Базовое пособие и все мои гайды', 'Поддержка после обучения', 'Именной сертификат с печатью'],
         price=('3 000', '2 000'), other=('Нужно больше практики?', '/vip-lash-course/', 'Курс VIP «мастер под ключ»'),
         ld='Курс наращивания ресниц с нуля: теория в приложении, 3 дня практики, 3 живые модели, сертификат.',
         title='Курс наращивания ресниц с нуля в Варшаве · BASIC · Anya Kay',
         desc='Курс наращивания ресниц с нуля BASIC в Варшаве: 3 дня, 3 живые модели, теория в приложении, сертификат. 3000 zł индивидуально, 2000 zł в мини-группе.'),
     'vip': dict(
         path='/vip-lash-course/', name='VIP «мастер под ключ»', short='Курс VIP', days=6, models=6, hours='36 часов практики',
-        img='uchenica-basic-2.jpg', pos='50% 50%', band='sertifikat-3.jpg',
+        img='vip-oblozhka.jpg', pos='50% 0%', band='sertifikat-3.jpg',
         eyebrow='Авторский курс · 6 дней', h1='VIP <em>«мастер под ключ»</em>',
         lead='Моя личная программа: 36 часов практики и индивидуальный подход. Выходите с курса уверенным мастером.',
         who=[('Хотите сразу уверенную технику', 'Вдвое больше практики, чем на BASIC: 6 дней и 6 живых моделей.'),
-             ('Хотите трендовые эффекты', 'Отрабатываем L- и M-изгибы и 2 трендовых эффекта на выбор.'),
+             ('Хотите больше эффектов', 'Кроме лисички, куклы и белки: эффект стрелки, мокрый эффект или Ким на выбор, L- и M-изгибы.'),
              ('Хотите стартовать без лишних трат', 'Стартовый набор материалов уже входит в курс.')],
-        gets=[(IC_EYE, '6 живых моделей', '36 часов практики'), (IC_STAR, 'L- и M-изгибы', 'и 2 трендовых эффекта'),
+        gets=[(IC_EYE, '6 живых моделей', '36 часов практики'), (IC_STAR, 'Эффекты', 'лисичка, кукла, белка, стрелки, мокрый или Ким'),
               (IC_BOOK, 'Теория в приложении', 'уроки, тесты и прогресс'), (IC_CERT, 'Кубок VIP-мастера', 'и именной сертификат')],
         bonus='Стартовый набор материалов входит в курс.',
-        incl=['Всё из BASIC и в два раза больше практики', '6 живых моделей вместо 3', 'Отработка L- и M-изгибов', '2 трендовых эффекта на выбор', 'Стартовый набор материалов', 'Кубок VIP-мастера и сертификат'],
+        incl=['Всё из BASIC и в два раза больше практики', '6 живых моделей вместо 3', 'Отработка L- и M-изгибов', 'Эффекты: лисичка, кукла, белка, стрелки', 'Мокрый эффект или Ким на выбор', 'Стартовый набор материалов', 'Кубок VIP-мастера и сертификат'],
         price=('4 500', '3 000'), other=('Хотите начать с базы?', '/basic-lash-course/', 'Курс BASIC'),
-        ld='Авторский курс наращивания ресниц с нуля: 6 дней, 36 часов практики, 6 моделей, L/M-изгибы, 2 трендовых эффекта, стартовый набор.',
+        ld='Авторский курс наращивания ресниц с нуля: 6 дней, 36 часов практики, 6 моделей, L/M-изгибы, эффекты лисичка, кукла, белка, стрелки, мокрый или Ким, стартовый набор.',
         title='Курс VIP «мастер под ключ» · наращивание ресниц с нуля в Варшаве · Anya Kay',
         desc='Авторский курс наращивания ресниц VIP «мастер под ключ» в Варшаве: 6 дней, 36 часов практики, 6 живых моделей, L/M-изгибы, стартовый набор. 4500 zł индивидуально, 3000 zł в мини-группе.'),
 }
@@ -507,6 +514,15 @@ for c, C in COURSES.items():
   <div class="reveal"><div class="eyebrow l">Для кого</div><h2 class="h2">Этот курс <em>для вас, если</em></h2></div>
   <div class="tlx forwho">{''.join(f'<div class="day reveal"><div class="d">{i + 1}</div><div><h3>{a}</h3><p>{b}</p></div></div>' for i, (a, b) in enumerate(C['who']))}</div>
 </div>{bk(c)}</section>
+<section class="sec soft" id="cena"><div class="wrap">
+  <div class="reveal"><div class="eyebrow l">Цена и форматы</div><h2 class="h2">Сколько <em>стоит</em></h2><p class="lead">Индивидуально: только вы и я. В группе: вас двое, цена ниже.</p></div>
+  <div class="courses one"><article class="course gd reveal{' pro' if c == 'vip' else ''}">{'<span class="tag">VIP</span>' if c == 'vip' else ''}<small>{C['days']} {'дня' if C['days'] < 5 else 'дней'} · {C['models']} живых моделей</small><h3>{C['name']}</h3>
+    <div class="fmt"><div><span>Индивидуально</span><b>{C['price'][0]}{ZL}</b></div><div><span>В группе до 2 человек</span><b>{C['price'][1]}{ZL}<small class="per">с человека</small></b></div></div>
+    <ul>{''.join(f'<li>{t}</li>' for t in C['incl'])}</ul>
+    <p class="bonus">{C['bonus']}</p>
+    <div class="btns"><a href="/zapis/?w={c}" class="btn glass" data-book="{c}">Записаться</a></div></article></div>
+  <p class="dates-note reveal">{C['other'][0]} <a href="{C['other'][1]}" style="text-decoration:underline">{C['other'][2]} ↗</a></p>
+</div></section>
 <section class="sec soft"><div class="wrap">
   <div class="reveal"><div class="eyebrow l">Что вы получите</div><h2 class="h2">{C['short']}: <em>что внутри</em></h2></div>
   <div class="gets">{''.join(get(i, b, s) for i, b, s in C['gets'])}</div>
@@ -534,15 +550,6 @@ for c, C in COURSES.items():
 <div class="vts">{vt('testimonial_1', 'Настя', 'прилетела на курс из Швеции, 6 дней обучения')}{vt('testimonial_2', 'Арина', 'курс 6 дней')}</div></div>
 {ops(OP_STUD)}{bk(c)}
 </section>
-<section class="sec soft" id="cena"><div class="wrap">
-  <div class="reveal"><div class="eyebrow l">Цена и форматы</div><h2 class="h2">Сколько <em>стоит</em></h2><p class="lead">Программа одна и та же. Индивидуально всё время только ваше, в мини-группе максимум 2 человека и цена ниже.</p></div>
-  <div class="courses one"><article class="course gd reveal{' pro' if c == 'vip' else ''}">{'<span class="tag">VIP</span>' if c == 'vip' else ''}<small>{C['days']} {'дня' if C['days'] < 5 else 'дней'} · {C['models']} живых моделей</small><h3>{C['name']}</h3>
-    <div class="fmt"><div><span>Индивидуально</span><b>{C['price'][0]}{ZL}</b></div><div><span>В группе до 2 человек</span><b>{C['price'][1]}{ZL}<small>с человека</small></b></div></div>
-    <ul>{''.join(f'<li>{t}</li>' for t in C['incl'])}</ul>
-    <p class="bonus">{C['bonus']}</p>
-    <div class="btns"><a href="/zapis/?w={c}" class="btn glass" data-book="{c}">Записаться</a></div></article></div>
-  <p class="dates-note reveal">{C['other'][0]} <a href="{C['other'][1]}" style="text-decoration:underline">{C['other'][2]} ↗</a></p>
-</div></section>
 <section class="sec"><div class="wrap split">
   <div class="reveal"><div class="eyebrow">Вопросы</div><h2 class="h2">О <em>курсе</em></h2><p class="lead">Условия записи и предоплаты в <a href="/reglament-obucheniya/" style="text-decoration:underline">регламенте обучения</a>.</p></div>
   {faq_html(FAQ_EDU[1:6])}
@@ -556,7 +563,7 @@ for c, C in COURSES.items():
 
 # ================= ПОВЫШЕНИЕ =================
 adv = f'''
-{pcover('povyshenie-oblozhka.jpg', '50% 18%', 'Обучение · для мастеров', 'Повышение <em>квалификации</em>', 'Сначала разбираю ваши работы, потом составляю программу обучения. Только то, что нужно именно вам.', [('Записаться ↗', '/zapis/?w=advanced', 'glass')])}
+{pcover('povyshenie-oblozhka.jpg', '50% 0%', 'Обучение · для мастеров', 'Повышение <em>квалификации</em>', 'Сначала разбираю ваши работы, потом составляю программу обучения. Только то, что нужно именно вам.', [('Записаться ↗', '/zapis/?w=advanced', 'glass')])}
 <section class="sec"><div class="wrap split">
   <div class="reveal"><div class="eyebrow">Что прорабатываем</div><h2 class="h2">Ваши <em>точки роста</em></h2><p class="lead">Ошибки в технике, скорость, объёмы до 5D, моделирование взгляда и эффекты.</p></div>
   <div class="reveal forwho"><div class="tlx">
@@ -586,7 +593,7 @@ page('/povyshenie-kvalifikacii/', 'Повышение квалификации l
 # ================= КОНСУЛЬТАЦИЯ =================
 TOP = ['Технику', 'Носку', 'Скорость', 'Клей', 'Пучки', 'Программу своего курса', 'Старт преподавания', 'Поиск учениц']
 kons = f'''
-{pcover('konsultaciya-oblozhka.jpg', '50% 18%', 'Обучение · онлайн', 'Онлайн-консультация <em>для lash-мастеров</em>', 'Разберём ваши работы, найдём ошибки и определим, что именно мешает двигаться дальше.', [('Записаться ↗', '/zapis/?w=consultation', 'glass')])}
+{pcover('konsultaciya-oblozhka.jpg', '50% 0%', 'Обучение · онлайн', 'Онлайн-консультация <em>для lash-мастеров</em>', 'Разберём ваши работы, найдём ошибки и определим, что именно мешает двигаться дальше.', [('Записаться ↗', '/zapis/?w=consultation', 'glass')])}
 <section class="sec"><div class="wrap split">
   <div class="reveal"><div class="eyebrow">Что можно разобрать</div><h2 class="h2">2 часа <em>лично со мной</em></h2>
     <div class="tags" style="margin-top:20px">{''.join(f'<span>{t}</span>' for t in TOP)}</div>
@@ -602,7 +609,7 @@ page('/konsultaciya/', 'Онлайн-консультация для lash-мас
 
 # ================= ОНЛАЙН-ПРОДУКТЫ =================
 mat = f'''
-{pcover('anya-kay-vzglyad.jpg', '50% 15%', 'Онлайн-продукты', 'Пособие и онлайн-теория <em>по наращиванию</em>', 'Для мастеров, которые хотят систематизировать базу, и преподавателей, которым нужна готовая основа для курса.', [('Пособие ↓', '#posobie', 'glass'), ('Теория в приложении ↓', '#teoriya', 'line')]).replace('class="pcover"', 'class="pcover short"', 1)}
+{pcover('anya-kay-vzglyad.jpg', '50% 0%', 'Для мастеров и преподавателей', 'Онлайн-продукты', 'Для мастеров, которые хотят систематизировать базу, и преподавателей, которым нужна готовая основа для курса.', [('Пособие ↓', '#posobie', 'glass'), ('Теория в приложении ↓', '#teoriya', 'line')]).replace('class="pcover"', 'class="pcover short"', 1)}
 <section class="sec"><div class="wrap"><div class="prods">
   <article class="prod reveal" id="posobie">{slider('posobie')}<div class="bd">
     <h2>Базовое пособие</h2><div class="pr">200 zł</div>

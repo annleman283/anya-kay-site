@@ -112,9 +112,10 @@
     ['posobie-4.jpg', 'Страница пособия: работа с клеем', 'posobie'],
     ['posobie-5.jpg', 'Страница пособия: наращивание на анагены', 'posobie'],
     ['posobie-6.jpg', 'Страница пособия: ожог слизистой', 'posobie'],
-    ['prilozhenie-uroki.jpg', 'Приложение Lash Academy: список уроков', 'teoriya'],
-    ['prilozhenie-urok.jpg', 'Приложение Lash Academy: урок и материалы', 'teoriya'],
-    ['prilozhenie-progress.jpg', 'Приложение Lash Academy: прогресс по урокам и тестам', 'teoriya']
+    ['prilozhenie-0.png', 'Приложение Anya Kay Lash Academy', 'teoriya'],
+    ['prilozhenie-1.png', 'Приложение: список уроков', 'teoriya'],
+    ['prilozhenie-2.png', 'Приложение: урок и материалы', 'teoriya'],
+    ['prilozhenie-3.png', 'Приложение: прогресс по урокам и тестам', 'teoriya']
   ];
   var lb = $('#lbx'), lbList = [], lbI = 0;
   function lbShow(i) {
@@ -180,7 +181,7 @@
     if (a.getMonth() === b.getMonth()) return a.getDate() + '–' + b.getDate() + ' ' + MON[a.getMonth()];
     return a.getDate() + ' ' + MON[a.getMonth()] + ' – ' + b.getDate() + ' ' + MON[b.getMonth()];
   }
-  function zl(n) { n = String(n || '').replace(/[^\d]/g, ''); return n ? n.replace(/\B(?=(\d{3})+(?!\d))/g, ' ') + ' zł' : ''; }
+  function zl(n) { n = String(n || '').replace(/[^\d]/g, ''); return n ? n.replace(/\B(?=(\d{3})+(?!\d))/g, '\u00a0') + '\u00a0zł' : ''; }
   function upcoming(course) {
     var t = new Date(); t.setHours(0, 0, 0, 0);
     return DATES.map(function (d) { return { c: d.c, a: pd(d.a), b: pd(d.b) || pd(d.a), i: d.i, g: d.g, n: d.n || '' }; })
@@ -190,10 +191,10 @@
   function card(d, showPrice, more) {
     var go = more && CPAGE[d.c] ? '<a class="btn glass go" href="' + url(CPAGE[d.c]) + '">Подробнее о курсе</a>'
       : '<a class="btn glass go" href="' + url('zapis/?w=' + d.c + '&d=' + iso(d.a)) + '">Записаться на эту дату</a>';
-    var price = showPrice ? '<div class="pr">Индивидуально: ' + zl(d.i) + (d.g ? ' · в группе: ' + zl(d.g) + ' с человека' : '') + '</div>' : '';
+    var price = showPrice ? '<div class="pr"><span>Индивидуально — <b>' + zl(d.i) + '</b></span>' + (d.g ? '<span>В группе до 2 человек — <b>' + zl(d.g) + '</b> с\u00a0человека</span>' : '') + '</div>' : '';
     var fmt = d.g ? 'Индивидуально или в группе до 2 человек' : 'Индивидуально';
     return '<article class="dt gd reveal in-view"><div class="when"><b>' + d.a.getDate() + (+d.a !== +d.b ? '–' + d.b.getDate() : '') + '</b><span>' + MSH[d.b.getMonth()] + ' ' + d.b.getFullYear() + '</span></div>' +
-      '<h3>' + esc(CNAME[d.c] || d.c) + (d.n ? ' <span class="tag">' + esc(d.n) + '</span>' : '') + '</h3><div class="meta">' + range(d.a, d.b) + (showPrice ? ' · ' + fmt : '') + '</div>' + price +
+      '<h3>' + esc(CNAME[d.c] || d.c) + (d.n ? ' <span class="tag">' + esc(d.n) + '</span>' : '') + '</h3><div class="meta">' + range(d.a, d.b) + '</div>' + price +
       go + '</article>';
   }
   function bookLinks() {

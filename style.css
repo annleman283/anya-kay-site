@@ -779,3 +779,28 @@ h1,h2,h3{font-weight:500}
 .rv .rmore{align-self:flex-start;margin-top:8px;padding:4px 0;background:none;border:0;font-size:12px;font-weight:600;letter-spacing:.06em;color:var(--wine);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
 @media(min-width:1000px){.rv.long:not(.open) blockquote{-webkit-line-clamp:12}}
 @media(max-width:999px){.pcover.short .ph{height:50%}.pcover.short{min-height:680px}}
+
+/* круг 4 */
+.pcover h1 em{display:block}.pcover h1 .one em{display:inline}
+@media(max-width:999px){
+  .pcover h1{font-size:34px;line-height:1.05}
+  .pcover.face .ph{top:64px;height:calc(72% - 40px)}
+  .h2{font-size:36px}
+  .rows .row .t{font-size:30px}
+}
+@media(min-width:1000px){.pcover h1{font-size:64px}.pcover.face .ph{top:0}}
+.dirs .eyebrow{margin-bottom:6px}
+.dt .pr{display:flex;flex-direction:column;gap:2px}
+.dt .pr span{display:block}
+.course .fmt b{white-space:nowrap}
+.course .fmt b small.per{display:block;text-align:right;margin:2px 0 0}
+.phones{grid-template-columns:repeat(4,1fr);gap:8px}
+.phones img{aspect-ratio:auto;object-fit:contain;border:0;border-radius:0;box-shadow:none;filter:drop-shadow(0 14px 22px rgba(46,33,28,.22))}
+@media(max-width:999px){.phones{grid-template-columns:repeat(2,1fr);gap:14px;max-width:420px;margin-left:auto;margin-right:auto}}
+.prod [data-slider="teoriya"] .sl-t button{background:none}
+.prod [data-slider="teoriya"] .sl-t button img{object-fit:contain;filter:drop-shadow(0 12px 18px rgba(46,33,28,.2))}
+@media(max-width:999px){
+  .pcover.face{height:auto;min-height:0;max-height:none;padding-top:64px}
+  .pcover.face .ph{position:relative;inset:auto;top:auto;height:108vw;max-height:520px}
+  .pcover.face .in{position:relative;margin-top:-70px;padding-bottom:36px}
+}
