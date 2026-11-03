@@ -4,7 +4,9 @@
 
   /* ---------- настройки ---------- */
   var WA = '48788214369';
-  var TG = 'https://t.me/AnyaKayClientBot';
+  var TG = 'https://t.me/anyalashkey';
+  var IGM = 'https://ig.me/m/anya.key_';
+  var CPAGE = { basic: 'basic-lash-course/', vip: 'vip-lash-course/' };
   // Ссылка на Google Таблицу с датами (Файл → Поделиться → Опубликовать в интернете → CSV).
   // Пусто = берутся даты ниже.
   var SHEET_CSV = '__SHEET_CSV__';
@@ -73,14 +75,21 @@
   /* ---------- портфолио и ленты ---------- */
   // [файл, подпись, лента]; v: = видео
   var PH = [
+    ['naraschivanie-oblozhka.jpg', 'Натуральный эффект, работа Anya Kay', 'lash'],
     ['lash-1.jpg', 'Наращивание ресниц, работа Anya Kay', 'lash'],
     ['v:lash-1', 'Наращивание ресниц, видео', 'lash'],
     ['lash-2.jpg', 'Эффект наращивания ресниц', 'lash'],
     ['v:lash-2', 'Наращивание ресниц, видео', 'lash'],
     ['lash-3.jpg', 'Пушистый объём, работа Anya Kay', 'lash'],
     ['v:lash-3', 'Наращивание ресниц, видео', 'lash'],
+    ['uchenica-1.jpg', 'Работа ученицы', 'uch'],
+    ['v:uchenica-1', 'Работа ученицы, видео', 'uch'],
+    ['uchenica-2.jpg', 'Работа ученицы', 'uch'],
+    ['uchenica-3.jpg', 'Работа ученицы', 'uch'],
+    ['v:uchenica-2', 'Работа ученицы, видео', 'uch'],
+    ['uchenica-4.jpg', 'Работа ученицы', 'uch'],
+    ['uchenica-5.jpg', 'Работа ученицы', 'uch'],
     ['uchenica-basic-1.jpg', 'Работа ученицы после BASIC', 'uch'],
-    ['otzyv-karina.jpg', 'Ученица Карина с сертификатом', 'uch'],
     ['uchenica-basic-2.jpg', 'Работа ученицы после BASIC', 'uch'],
     ['uchenica-basic-3.jpg', 'Работа ученицы после BASIC', 'uch'],
     ['povyshenie-1.jpg', 'Работа после повышения квалификации', 'uch'],
@@ -103,10 +112,9 @@
     ['posobie-4.jpg', 'Страница пособия: работа с клеем', 'posobie'],
     ['posobie-5.jpg', 'Страница пособия: наращивание на анагены', 'posobie'],
     ['posobie-6.jpg', 'Страница пособия: ожог слизистой', 'posobie'],
-    ['teoriya-1.jpg', 'Anya Kay Basic Lash в Telegram', 'teoriya'],
-    ['teoriya-2.jpg', 'Урок в Telegram', 'teoriya'],
-    ['teoriya-3.jpg', 'Тест после урока', 'teoriya'],
-    ['teoriya-4.jpg', 'Видеоурок', 'teoriya']
+    ['prilozhenie-uroki.jpg', 'Приложение Lash Academy: список уроков', 'teoriya'],
+    ['prilozhenie-urok.jpg', 'Приложение Lash Academy: урок и материалы', 'teoriya'],
+    ['prilozhenie-progress.jpg', 'Приложение Lash Academy: прогресс по урокам и тестам', 'teoriya']
   ];
   var lb = $('#lbx'), lbList = [], lbI = 0;
   function lbShow(i) {
@@ -179,19 +187,32 @@
       .filter(function (d) { return d.a && d.b >= t && (!course || d.c === course); })
       .sort(function (x, y) { return x.a - y.a; });
   }
-  function card(d, showPrice) {
+  function card(d, showPrice, more) {
+    var go = more && CPAGE[d.c] ? '<a class="btn glass go" href="' + url(CPAGE[d.c]) + '">Подробнее о курсе</a>'
+      : '<a class="btn glass go" href="' + url('zapis/?w=' + d.c + '&d=' + iso(d.a)) + '">Записаться на эту дату</a>';
     var price = showPrice ? '<div class="pr">Индивидуально: ' + zl(d.i) + (d.g ? ' · в группе: ' + zl(d.g) + ' с человека' : '') + '</div>' : '';
     var fmt = d.g ? 'Индивидуально или в группе до 2 человек' : 'Индивидуально';
     return '<article class="dt gd reveal in-view"><div class="when"><b>' + d.a.getDate() + (+d.a !== +d.b ? '–' + d.b.getDate() : '') + '</b><span>' + MSH[d.b.getMonth()] + ' ' + d.b.getFullYear() + '</span></div>' +
       '<h3>' + esc(CNAME[d.c] || d.c) + (d.n ? ' <span class="tag">' + esc(d.n) + '</span>' : '') + '</h3><div class="meta">' + range(d.a, d.b) + (showPrice ? ' · ' + fmt : '') + '</div>' + price +
-      '<a class="btn glass go" href="' + url('zapis/?w=' + d.c + '&d=' + iso(d.a)) + '">Записаться на эту дату</a></article>';
+      go + '</article>';
+  }
+  function bookLinks() {
+    $$('[data-book]').forEach(function (a) {
+      var c = a.dataset.book, n = upcoming(c)[0];
+      a.href = url('zapis/?w=' + c + (n ? '&d=' + iso(n.a) : ''));
+    });
+    $$('[data-next]').forEach(function (s) {
+      var n = upcoming(s.dataset.next)[0];
+      s.textContent = n ? 'Ближайший старт: ' + range(n.a, n.b) + '.' : '';
+    });
   }
   function renderDates() {
     $$('[data-dates]').forEach(function (box) {
       var list = upcoming(box.dataset.dates || ''), lim = +box.dataset.limit || 99;
-      box.innerHTML = list.length ? list.slice(0, lim).map(function (d) { return card(d, box.dataset.price !== undefined); }).join('')
+      box.innerHTML = list.length ? list.slice(0, lim).map(function (d) { return card(d, box.dataset.price !== undefined, box.dataset.more !== undefined); }).join('')
         : '<div class="dates-empty gd">Новые даты скоро появятся. Напишите, и я сообщу первой.</div>';
     });
+    bookLinks();
   }
   function parseCSV(t) {
     var rows = [], row = [], f = '', q = false;
@@ -226,9 +247,9 @@
   var app = $('#fapp');
   var KIND = { lashes: 'Запись на наращивание', obuchenie: 'Обучение', materialy: 'Онлайн-продукты', vopros: 'Вопрос' };
   var OPTS = {
-    lashes: [['1D–4D', 'Классика и объёмы до 4D', '200 zł', 'lashes'], ['5D', 'Самый пышный объём', '230 zł', 'lashes'], ['Подберём вместе', 'Посоветую эффект по форме глаз', '', 'lashes']],
+    lashes: [['1D–4D', 'Классика и объёмы до 4D', '200 zł', 'lashes'], ['5D', 'Самый пышный объём', '230 zł', 'lashes'], ['Коррекция', 'Не позже 2–3 недель после наращивания у меня', '−20 zł', 'lashes'], ['Подберём вместе', 'Посоветую эффект по форме глаз', '', 'lashes']],
     obuchenie: [['BASIC', 'С нуля · 3 дня · индивидуально или вдвоём', 'от 2 000 zł', 'basic'], ['VIP «мастер под ключ»', 'С нуля · 6 дней · индивидуально или вдвоём', 'от 3 000 zł', 'vip'], ['Повышение квалификации', 'Для мастеров · программа после разбора работ', '1 000 zł / день', 'advanced'], ['Онлайн-консультация', '2 часа · разбор работ и вопросов', '500 zł', 'consultation']],
-    materialy: [['Базовое пособие', '51 страница · редактируется в Canva', '200 zł', 'manual'], ['Теория BASIC в Telegram', '16 уроков, тесты, финальная проверка', '500 zł', 'theory']]
+    materialy: [['Базовое пособие', '51 страница · редактируется в Canva', '200 zł', 'manual'], ['Теория BASIC в приложении', '16 уроков, тесты, прогресс, гайды', '500 zł', 'theory']]
   };
   var W2K = { lashes: 'lashes', basic: 'obuchenie', vip: 'obuchenie', advanced: 'obuchenie', consultation: 'obuchenie', manual: 'materialy', theory: 'materialy' };
   var st = {};
@@ -262,7 +283,7 @@
     if (!app) return;
     var k = st.kind, h;
     if (!k) {
-      h = prog(1, 4) + '<div class="q">Что вас интересует?</div><div class="h">Пара коротких шагов. В конце сообщение откроется в WhatsApp или Telegram, останется нажать «Отправить».</div>' +
+      h = prog(1, 4) + '<div class="q">Что вас интересует?</div><div class="h">Пара коротких шагов. В конце сообщение будет готово: отправьте его в WhatsApp, Telegram или Instagram.</div>' +
         opt(1, 'Наращивание ресниц', 'Krucza 16/22 · 90 минут', 'от 200 zł', 'lashes') + opt(2, 'Обучение', 'BASIC, VIP, повышение, консультация', '', 'obuchenie') +
         opt(3, 'Онлайн-продукты', 'Пособие и теория BASIC', 'от 200 zł', 'materialy') + opt(4, 'Задать вопрос', 'Отвечу лично', '', 'vopros');
       app.innerHTML = h;
@@ -330,13 +351,18 @@
     if (d.msg) lines.push((st.kind === 'vopros' ? 'Вопрос: ' : 'Комментарий: ') + d.msg);
     var text = lines.join('\n');
     var wa = 'https://wa.me/' + WA + '?text=' + encodeURIComponent(text);
-    var tg = TG + (st.w ? '?start=' + st.w : '');
-    app.innerHTML = prog(4, 4) + '<div class="q">Спасибо, ' + esc(d.imya) + '!</div><div class="h">Сообщение готово. Выберите мессенджер и нажмите «Отправить».</div>' +
-      '<a class="wa" href="' + wa + '" target="_blank" rel="noopener">' + ICON.wa + 'Отправить в WhatsApp</a>' +
-      '<a class="tg" href="' + tg + '" target="_blank" rel="noopener" id="f-tg">' + ICON.tg + 'Скопировать и открыть Telegram</a>' +
-      '<div class="sum-all">' + esc(text) + '</div><p class="h" style="margin-top:12px">В Telegram текст скопируется сам, вставьте его в чат.</p>' +
+    app.innerHTML = prog(4, 4) + '<div class="q">Спасибо, ' + esc(d.imya) + '!</div><div class="h">Сообщение готово. Выберите, куда отправить.</div>' +
+      '<a class="wa" href="' + wa + '" target="_blank" rel="noopener">' + ICON.wa + '<span>Отправить в WhatsApp<small>текст уже будет в чате</small></span></a>' +
+      '<a class="tg cp" href="' + TG + '" target="_blank" rel="noopener">' + ICON.tg + '<span>Telegram<small>текст скопируется, вставьте его в чат</small></span></a>' +
+      '<a class="ig cp" href="' + IGM + '" target="_blank" rel="noopener">' + ICON.ig + '<span>Instagram<small>текст скопируется, вставьте его в чат</small></span></a>' +
+      '<div class="sum-all">' + esc(text) + '</div><p class="h" id="f-cp" style="margin-top:12px">В Telegram и Instagram нажмите на поле сообщения и выберите «Вставить».</p>' +
       '<button type="button" class="back" id="f-new">Новая заявка</button>';
-    $('#f-tg').addEventListener('click', function () { try { navigator.clipboard.writeText(text).catch(function () {}); } catch (e) {} });
+    $$('.cp', app).forEach(function (a) {
+      a.addEventListener('click', function () {
+        try { navigator.clipboard.writeText(text).then(function () { $('#f-cp').textContent = 'Текст скопирован. В чате нажмите на поле сообщения и выберите «Вставить».'; }).catch(function () {}); } catch (e) {}
+      });
+    });
+
     $('#f-new').addEventListener('click', function () { st = {}; render(); });
     scrollTop();
   }
@@ -434,5 +460,8 @@
     hideOn.forEach(function (el) { ho.observe(el); });
   }
 
+  $$('[data-rmore]').forEach(function (b) { b.addEventListener('click', function () { var f = b.closest('.rv'); f.classList.toggle('open'); b.textContent = f.classList.contains('open') ? 'Свернуть' : 'Читать полностью'; }); });
+  function rvFit() { Array.prototype.forEach.call(document.querySelectorAll('.rv.long:not(.open)'), function (f) { var q = f.querySelector('blockquote'), b = f.querySelector('.rmore'); if (b) b.hidden = q.scrollHeight <= q.clientHeight + 2; }); }
+  rvFit(); window.addEventListener('resize', rvFit);
   watch(); autoVideos();
 })();

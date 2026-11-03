@@ -2,14 +2,15 @@
 """Сборка anyakay.pl (версия 2, стиль «стекло и бордо»).
 Запуск из корня репозитория:  python3 -I _build/build.py .
 Тексты и цены правятся здесь. Даты курсов: в Google Таблице (SHEET_CSV) или в DATES ниже."""
-import json, os, sys, html
+import json, os, re, sys, html
 
 B = os.path.dirname(os.path.abspath(__file__))
 OUT = sys.argv[1]
 SITE = 'https://anyakay.pl'
-V = '50'
+V = '51'
 TG_I, WA_I, IG_I = json.load(open(os.path.join(B, 'svgs.json')))
-TG = 'https://t.me/AnyaKayClientBot'
+TG = 'https://t.me/anyalashkey'
+IGM = 'https://ig.me/m/anya.key_'
 WA = 'https://wa.me/48788214369'
 IG = 'https://www.instagram.com/anya.key_/'
 MAP = 'https://www.google.com/maps/search/?api=1&query=Krucza+16%2F22+Warszawa'
@@ -29,38 +30,41 @@ def e(s):
     return html.escape(s, quote=True)
 
 
-# ---------- отзывы-скрины ----------
-# (файл, имя, подпись, перевод)
+# ---------- отзывы: текст дословно со скринов, оригинал открывается по ссылке ----------
+# (файл-оригинал, имя, кто, текст, перевод)
 OP_CLIENT = [
-    ('otzyv-klient-4.jpg', 'Клиентка', 'после наращивания', ''),
-    ('otzyv-klient-3.jpg', 'Клиентка', 'после наращивания', ''),
-    ('otzyv-klient-2.jpg', 'Клиентка', 'после отпуска', ''),
-    ('otzyv-klient-1.jpg', 'Марина', 'сторис в Instagram', ''),
+    ('otzyv-klient-4.jpg', 'Клиентка', 'клиентка', 'Анечка, реснички просто космос, хожу кайфую, спасибо большое!', ''),
+    ('otzyv-klient-3.jpg', 'Клиентка', 'клиентка', 'Здравствуйте, Аня. Хотела поблагодарить тебя за прекрасную работу. Я очень довольна. Приятно в зеркало смотреть.', ''),
+    ('otzyv-klient-2.jpg', 'Клиентка', 'клиентка', 'Реснички супер, прошли тест-драйв в Красном море.', ''),
+    ('otzyv-klient-1.jpg', 'Марина', 'клиентка', '2,5 года не наращивала ресниц и доверилась @anya.key_. Новый эффект в наращивании.', ''),
 ]
 OP_STUD = [
-    ('otzyv-uchenica-praktika.jpg', 'Ученица', 'после курса', ''),
-    ('otzyv-karina.jpg', 'Карина', 'ученица', ''),
-    ('otzyv-sveta.jpg', 'Света', 'ученица', ''),
-    ('otzyv-nastya.jpg', 'Настя', 'ученица', ''),
-    ('otzyv-yana.jpg', 'Яна', 'ученица VIP, 6 дней', 'Хочу ещё раз поблагодарить за эти 6 дней. Они пролетели как 5 минут. Я бы ещё раз записалась к тебе на VIP-курс.'),
+    ('otzyv-uchenica-praktika.jpg', 'Ученица', 'ученица', 'Хочу сказать тебе огромное спасибо! Всё прошло просто супер, мне безумно всё понравилось. Больше всего ценю то, что мы каждый день отрабатывали и практиковались, и ты действительно ставила мне руку. Благодаря этому я наконец-то чётко поняла, что и как делать. Было очень классно, приятно и невероятно тепло в процессе. Спасибо тебе за знания и поддержку!', ''),
+    ('otzyv-karina.jpg', 'Карина', 'ученица', 'Курсом осталась очень довольна. Ты рассказываешь всё чётко, грамотно, по делу, что действительно будет важно в работе: какие материалы лучше и выгоднее купить, про все способы и виды наращивания, где искать клиентов, в общем абсолютно всё, что нужно для начинающего мастера. И что очень важно, практика: ты реально сидишь и наращиваешь, а не как на курсах, смотришь, как мастер делает. Ещё очень хочу добавить: спасибо за терпение! Одним словом, супер, буду дальше тренироваться и оттачивать приобретённые навыки.', ''),
+    ('otzyv-sveta.jpg', 'Света', 'ученица', 'Хочу выразить тебе свою огромную благодарность за титанический труд, который ты проделала, чтобы передать мне свой опыт, научить и показать, как нужно наращивать ресницы. Я безумно рада, что выбрала тебя в качестве своего учителя, ты превзошла мои ожидания от обучения! Подарила мне вдохновение и дала хороший толчок для развития в этой сфере. Благодаря тебе я освоила правильную технику наращивания, научилась наращивать трендовые эффекты и объёмы. Каждый шаг и нюанс в этом деле теперь мне понятен. Вопросов после курса не осталось, всё разложила по полочкам и без лишней воды. Ещё раз большое спасибо за это чудесное обучение, время прошло быстро, но очень продуктивно!', ''),
+    ('otzyv-nastya.jpg', 'Настя', 'ученица', 'Спасибо большое! Мне безумно приятно. Так я научилась только благодаря тебе, самый лучший тренер. Кстати, я вышла на новое время, последние наращивания сделаны уже ровно за 2.40–3 максимум, для меня это рекорд.', ''),
+    ('otzyv-yana.jpg', 'Яна', 'ученица VIP', 'Хочу ще раз подякувати за ці 6 днів. Вони просто пролетіли як 5 хвилин. Було дуже приємно відпрацьовувати з тобою кожну модель, дякую за нові знання, за те що все пояснюєш доступно (і не один раз пояснюєш), дякую за терпіння і таке чуйне ставлення. Я би ще раз записалася до тебе на VIP курс.',
+     'Хочу ещё раз поблагодарить за эти 6 дней. Они просто пролетели как 5 минут. Было очень приятно отрабатывать с тобой каждую модель, спасибо за новые знания, за то, что всё объясняешь доступно (и не один раз объясняешь), спасибо за терпение и такое чуткое отношение. Я бы ещё раз записалась к тебе на VIP-курс.'),
 ]
 
 
 def ops(items):
     out = []
-    for f, who, note, tr in items:
-        t = f'<details class="tr"><summary>Перевод с украинского</summary><p>{e(tr)}</p></details>' if tr else ''
-        out.append(f'<figure class="op"><button type="button" data-shot="{f}" data-alt="Отзыв: {e(who)}" aria-label="Открыть отзыв: {e(who)}"><img src="/img/{f}" alt="Отзыв: {e(who)}, {e(note)}" loading="lazy"></button>'
-                   f'<figcaption><b>{e(who)}</b> · {e(note)}{t}</figcaption></figure>')
+    for f, who, role, text, tr in items:
+        t = f'<details class="tr"><summary>Перевод на русский</summary><p>{e(tr)}</p></details>' if tr else ''
+        more = '<button type="button" class="rmore" data-rmore>Читать полностью</button>' if len(text) > 230 else ''
+        out.append(f'<figure class="op rv{" long" if more else ""}"><div class="q" aria-hidden="true">“</div><blockquote>{e(text)}</blockquote>{more}{t}'
+                   f'<figcaption><span><b>{e(who)}</b><small>{e(role)}</small></span>'
+                   f'<button type="button" class="orig" data-shot="{f}" data-alt="Отзыв: {e(who)}, оригинал">Смотреть оригинал</button></figcaption></figure>')
     return f'<div class="ops wrap n{len(items)}">' + ''.join(out) + '</div>'
 
 
 # ---------- вопросы ----------
 FAQ_LASH = [
-    ('Сколько стоит наращивание ресниц?', 'Наращивание 1D–4D стоит 200 zł, 5D 230 zł. Изгибы L / M +20 zł. Снятие ресниц другого мастера с последующим наращиванием +30 zł. ' + RISE),
+    ('Сколько стоит наращивание ресниц?', '1D–4D — 200 zł\n5D — 230 zł\nИзгибы L / M — +20 zł\nСнятие ресниц другого мастера с последующим наращиванием — +30 zł\nКоррекция — на 20 zł меньше основной цены\n\n' + RISE),
     ('Сколько длится процедура?', 'Само наращивание около 90 минут, вместе со снятием до 2 часов.'),
     ('Сколько держатся ресницы?', 'Носка 3–5 недель. Техника рассчитана на комфортное и аккуратное отрастание.'),
-    ('Делаете коррекцию?', 'Коррекции не делаю, только полное перенаращивание. Так результат каждый раз свежий и аккуратный.'),
+    ('Делаете коррекцию?', 'Да. Коррекция стоит на 20 zł меньше основной цены. Прийти на неё нужно не позже чем через 2–3 недели после наращивания. Коррекцию делаю только после своей работы: если ресницы наращивал другой мастер, делаю снятие и новое наращивание.'),
     ('Как выбрать эффект?', 'Эффект подбирается индивидуально: по форме глаз, состоянию ваших ресниц и тому, какой образ вам ближе. Можно прийти без идеи, подберём вместе.'),
     ('Где проходит процедура?', 'В центре Варшавы, Krucza 16/22. Запись через сайт, Telegram, WhatsApp или Instagram.'),
 ]
@@ -82,7 +86,7 @@ FAQ_ADV = [
 FAQ_MAT = [
     ('Что внутри пособия?', '51 страница углублённой теории по наращиванию ресниц: рабочее место, материалы, клей, правила наращивания, работа с анагенами, ожог слизистой и другое.'),
     ('Пособие можно редактировать?', 'Да, оно полностью редактируется в Canva, без водяных знаков и подходит для печати. Подойдёт преподавателям как основа для своего курса.'),
-    ('Как устроена теория BASIC в Telegram?', 'Урок, затем тест, затем следующий урок, в конце финальная проверка. Внутри видеоуроки, базовое пособие, дополнительные гайды и курс по контенту.'),
+    ('Как устроена теория BASIC в приложении?', 'Всё проходит в приложении: урок, затем тест, затем следующий урок, в конце финальная проверка. Прогресс по урокам виден в профиле. Внутри видеоуроки, все мои гайды и пособие, а ещё платный Telegram-канал по обработке фото и видео.'),
     ('Кому подойдёт онлайн-теория?', 'Мастерам, которые уже проходили практическое обучение, но хотят закрыть пробелы и систематизировать теорию.'),
 ]
 FAQ_HOME = [FAQ_LASH[0], FAQ_LASH[2], FAQ_EDU[0], FAQ_EDU[1], FAQ_EDU[2]]
@@ -113,17 +117,18 @@ CHAT = [
     ('obuchenie', 'Что такое онлайн-консультация?', ['консультац', 'разбор', 'созвон'], 'Это 2 часа онлайн лично со мной, 500 zł. Разбираем ваши работы, ошибки, носку, скорость, клей, программу своего курса или старт преподавания.', 'consultation'),
     ('materialy', FAQ_MAT[0][0], ['пособи', 'страниц'], FAQ_MAT[0][1], 'manual'),
     ('materialy', FAQ_MAT[1][0], ['canva', 'канва', 'редактир', 'печат'], FAQ_MAT[1][1], 'manual'),
-    ('materialy', FAQ_MAT[2][0], ['telegram', 'телеграм', 'онлайн', 'теори', 'урок'], FAQ_MAT[2][1], 'theory'),
+    ('materialy', FAQ_MAT[2][0], ['приложени', 'онлайн', 'теори', 'урок'], FAQ_MAT[2][1], 'theory'),
     ('materialy', FAQ_MAT[3][0], ['кому подойд'], FAQ_MAT[3][1], 'theory'),
-    ('materialy', 'Сколько стоят онлайн-продукты?', ['стоят', 'стоит пособие', 'цена пособия'], 'Базовое пособие 200 zł, теория BASIC в Telegram 500 zł.', 'manual'),
-    ('kontakt', 'Как записаться?', ['записат', 'запись', 'записаться'], 'Нажмите «Записаться»: пара коротких шагов, и сообщение откроется в WhatsApp или Telegram, останется нажать «Отправить». Можно и сразу написать мне в WhatsApp.', 'any'),
+    ('materialy', 'Сколько стоят онлайн-продукты?', ['стоят', 'стоит пособие', 'цена пособия'], 'Базовое пособие 200 zł, теория BASIC в приложении 500 zł.', 'manual'),
+    ('kontakt', 'Как записаться?', ['записат', 'запись', 'записаться'], 'Нажмите «Записаться»: пара коротких шагов, и сообщение будет готово. В WhatsApp оно откроется само, для Telegram и Instagram текст скопируется, останется вставить его в чат. Можно и сразу написать мне.', 'any'),
     ('kontakt', 'Где вы находитесь?', ['адрес', 'где', 'находит', 'krucza', 'крушa', 'метро'], 'В центре Варшавы, Krucza 16/22.', 'any'),
-    ('kontakt', 'Как с вами связаться?', ['связат', 'телефон', 'whatsapp', 'ватсап', 'инстаграм', 'instagram'], 'WhatsApp +48 788 214 369, Telegram и Instagram @anya.key_. Отвечаю лично.', ''),
+    ('kontakt', 'Как с вами связаться?', ['связат', 'телефон', 'whatsapp', 'ватсап', 'инстаграм', 'instagram'], 'WhatsApp +48 788 214 369, Telegram @anyalashkey, Instagram @anya.key_. Отвечаю лично.', ''),
 ]
 
 
 def faq_html(items):
-    return '<div class="faq">' + ''.join(f'<details class="reveal"><summary>{e(q)}<i></i></summary><p>{e(a)}</p></details>' for q, a in items) + '</div>'
+    return '<div class="faq">' + ''.join(f'<details class="reveal"><summary>{e(q)}<i></i></summary><p>{e(a).replace(chr(10), "<br>")}</p></details>' for q, a in items) + '</div>'
+
 
 
 def faq_ld(items):
@@ -174,10 +179,11 @@ def vt(name, who, cap):
             f'<source src="/assets/videos/{name}.mp4" type="video/mp4"></video></div><figcaption><b>{who}</b><br>{cap}</figcaption></figure>')
 
 
-def dates(course='', price=True, limit=''):
+def dates(course='', price=True, limit='', more=False):
     p = ' data-price' if price else ''
     lim = f' data-limit="{limit}"' if limit else ''
-    return f'<div class="dates" data-dates="{course}"{p}{lim}></div>'
+    m = ' data-more' if more else ''
+    return f'<div class="dates" data-dates="{course}"{p}{lim}{m}></div>'
 
 
 def get(icon, b, s):
@@ -199,7 +205,7 @@ CASE = '''<section class="sec soft"><div class="wrap"><div class="case gd reveal
 </div></div></section>'''
 
 NAV = [('Наращивание', '/naraschivanie/'), ('Обучение', '/obuchenie/'), ('Онлайн-продукты', '/materialy/'), ('Запись', '/zapis/')]
-MENU = [('Главная', '/'), ('Наращивание ресниц', '/naraschivanie/'), ('Обучение', '/obuchenie/'), ('Курс BASIC и VIP', '/basic-lash-course/'),
+MENU = [('Главная', '/'), ('Наращивание ресниц', '/naraschivanie/'), ('Обучение', '/obuchenie/'), ('Курс BASIC', '/basic-lash-course/'), ('Курс VIP', '/vip-lash-course/'),
         ('Повышение квалификации', '/povyshenie-kvalifikacii/'), ('Онлайн-продукты', '/materialy/'), ('Запись', '/zapis/')]
 
 
@@ -256,7 +262,7 @@ def page(path, title, desc, body, ld=None, nav_on='', home=False, noindex=False)
   <div class="top"><div class="brand">ANYA KAY<small>lash-мастер и тренер · Варшава</small></div></div>
   <div class="cols">
     <div><h4>Наращивание</h4><a href="/naraschivanie/">Наращивание ресниц</a><a href="/naraschivanie/#prajs">Прайс</a><a href="/zapis/?w=lashes">Запись</a></div>
-    <div><h4>Обучение</h4><a href="/basic-lash-course/">Курс с нуля BASIC и VIP</a><a href="/povyshenie-kvalifikacii/">Повышение квалификации</a><a href="/konsultaciya/">Онлайн-консультация</a><a href="/materialy/">Пособие и онлайн-теория</a></div>
+    <div><h4>Обучение</h4><a href="/basic-lash-course/">Курс BASIC</a><a href="/vip-lash-course/">Курс VIP «мастер под ключ»</a><a href="/povyshenie-kvalifikacii/">Повышение квалификации</a><a href="/konsultaciya/">Онлайн-консультация</a><a href="/materialy/">Пособие и онлайн-теория</a></div>
     <div><h4>Где я работаю</h4><p><a href="{MAP}" target="_blank" rel="noopener">Krucza 16/22, Варшава ↗</a></p></div>
     <div><h4>Связаться</h4><a href="{WA}" target="_blank" rel="noopener">+48 788 214 369</a>
       <div class="soc"><a href="{WA}" target="_blank" rel="noopener" aria-label="WhatsApp">{WA_I}</a><a href="{TG}" target="_blank" rel="noopener" aria-label="Telegram">{TG_I}</a><a href="{IG}" target="_blank" rel="noopener" aria-label="Instagram">{IG_I}</a></div></div>
@@ -280,6 +286,9 @@ def page(path, title, desc, body, ld=None, nav_on='', home=False, noindex=False)
     else:
         fn = os.path.join(OUT, path.strip('/'))
     html = (head + body + foot).replace(' ↗', '').replace('↗', '')
+    # короткие заголовки держим в одну строку
+    html = re.sub(r'<h2 class="h2">([^<]*)<em>([^<]*)</em></h2>',
+                  lambda m: m.group(0).replace('class="h2"', 'class="h2 one"') if len(m.group(1) + m.group(2)) <= 15 else m.group(0), html)
     open(fn, 'w', encoding='utf-8').write(html)
 
 
@@ -314,7 +323,7 @@ home = f'''
 
 <section class="sec soft"><div class="wrap">
   <div class="reveal"><div class="eyebrow">Обучение</div><h2 class="h2">Ближайшие <em>курсы</em></h2></div>
-  {dates('', price=False, limit=3)}
+  {dates('', price=False, limit=3, more=True)}
   <p class="dates-note reveal"><a href="/obuchenie/" style="text-decoration:underline">Все форматы обучения ↗</a></p>
 </div></section>
 
@@ -337,15 +346,16 @@ page('/', 'Anya Kay — Обучение и наращивание ресниц,
 
 # ================= НАРАЩИВАНИЕ =================
 lash = f'''
-{pcover('lash-1.jpg', '50% 40%', 'Наращивание · Варшава', 'Наращивание ресниц <em>в Варшаве</em>', 'Продуманная техника, эффект под вашу форму глаз и комфортная носка. Центр Варшавы, Krucza 16/22.', [('Записаться ↗', '/zapis/?w=lashes', 'glass')])}
+{pcover('naraschivanie-oblozhka.jpg', '50% 30%', 'Наращивание · Варшава', 'Наращивание ресниц <em>в Варшаве</em>', 'Продуманная техника, эффект под вашу форму глаз и комфортная носка. Центр Варшавы, Krucza 16/22.', [('Записаться ↗', '/zapis/?w=lashes', 'glass')])}
 <section class="sec soft" id="prajs" style="padding-top:40px"><div class="wrap split">
-  <div class="reveal"><div class="eyebrow l">Прайс</div><h2 class="h2">Стоимость <em>наращивания</em></h2><p class="lead">Коррекции не делаю, только полное перенаращивание. Так результат каждый раз свежий.</p></div>
+  <div class="reveal"><div class="eyebrow l">Прайс</div><h2 class="h2">Стоимость <em>наращивания</em></h2><p class="lead">Коррекция на 20 zł меньше основной цены: не позже чем через 2–3 недели после наращивания у меня.</p></div>
   <div class="reveal">
     <div class="prc">
       <div><span>Наращивание · 1D–4D</span><b>200 zł</b></div>
       <div><span>Наращивание · 5D</span><b>230 zł</b></div>
       <div><span>Изгибы L / M</span><b>+20 zł</b></div>
       <div><span>Снятие другого мастера<small>с последующим наращиванием</small></span><b>+30 zł</b></div>
+      <div><span>Коррекция<small>до 3 недель, только после моей работы</small></span><b>−20 zł</b></div>
     </div>
     <div class="notice gd"><b>С 1 декабря</b> цены на наращивание повышаются на 20 zł: 1D–4D будет 220 zł, 5D 250 zł. Запишитесь в ноябре по текущей цене.</div>
     <div class="facts"><div><b>90 мин</b><span>наращивание</span></div><div><b>до 2 ч</b><span>со снятием</span></div><div><b>3–5 нед.</b><span>носка</span></div></div>
@@ -381,10 +391,10 @@ def course(small, title, meta, fmt, claim, href, more, tag=''):
 ZL = '<small>zł</small>'
 C_BASIC = course('Хочу начать с нуля', 'Курс BASIC', '3 дня · 3 живые модели · сертификат',
                  [('Индивидуально', f'3 000{ZL}'), ('В группе до 2 человек', f'2 000{ZL}')],
-                 'Сильная теория в Telegram, практика на манекене и 3 живых моделях, поддержка после курса.', '/zapis/?w=basic', '/basic-lash-course/')
+                 'Теория в приложении, практика на манекене и 3 живых моделях, поддержка после курса.', '/zapis/?w=basic', '/basic-lash-course/')
 C_VIP = course('Хочу больше практики', 'VIP «мастер<br>под ключ»', '6 дней · 6 живых моделей · стартовый набор',
                [('Индивидуально', f'4 500{ZL}'), ('В группе до 2 человек', f'3 000{ZL}')],
-               'Всё из BASIC и вдвое больше практики: L- и M-изгибы, 2 трендовых эффекта, кубок VIP-мастера.', '/zapis/?w=vip', '/basic-lash-course/#vip', 'VIP')
+               'Авторский курс: 36 часов практики, L- и M-изгибы, 2 трендовых эффекта, кубок VIP-мастера.', '/zapis/?w=vip', '/vip-lash-course/', 'VIP')
 C_ADV = course('Я уже работаю мастером', 'Повышение<br>квалификации', '1 день · индивидуально',
                [('Индивидуально', f'1 000{ZL}<small>/ день</small>')], 'Сначала разбор ваших работ, потом программа под ваши точки роста.', '/zapis/?w=advanced', '/povyshenie-kvalifikacii/')
 C_KONS = course('Нужен разбор', 'Онлайн-<br>консультация', '2 часа · онлайн · 1:1',
@@ -394,16 +404,17 @@ edu = f'''
 {pcover('anya-kay-zhaket.jpg', '50% 15%', 'Обучение Anya Kay', 'Обучение <em>наращиванию ресниц</em>', 'Начать с нуля, усилить технику, разобрать ошибки или учиться самостоятельно. Обучаю тому, что использую в работе сама.', [('Ближайшие даты ↓', '#daty', 'glass')])}
 <section class="sec soft" id="daty" style="padding-top:40px"><div class="wrap">
   <div class="reveal"><div class="eyebrow l">Расписание</div><h2 class="h2">Ближайшие <em>курсы</em></h2><p class="lead">{GROUP}</p></div>
-  {dates('', price=True)}
+  {dates('', price=True, more=True)}
 </div></section>
 <section class="sec soft" id="formaty" style="padding-top:10px"><div class="wrap">
   <div class="reveal"><div class="eyebrow l">Форматы</div><h2 class="h2">Выберите <em>под свою задачу</em></h2></div>
   <div class="courses">{C_BASIC}{C_VIP}{C_ADV}{C_KONS}</div>
-  <p class="dates-note reveal">Хотите учиться самостоятельно? <a href="/materialy/" style="text-decoration:underline">Пособие и теория BASIC в Telegram ↗</a></p>
+  <p class="dates-note reveal">Хотите учиться самостоятельно? <a href="/materialy/" style="text-decoration:underline">Пособие и теория BASIC в приложении ↗</a></p>
 </div></section>
 <section class="sec soft" style="padding-top:20px"><div class="wrap">
   <div class="reveal"><div class="eyebrow l">Почему у меня</div><h2 class="h2">Понимание техники, <em>а не повторение</em></h2></div>
-  <div class="gets">{get(IC_BOOK, 'Сильная теория', 'уроки в Telegram и тест после каждого')}{get(IC_EYE, 'Много практики', 'на живых моделях под моим контролем')}{get(IC_USER, 'До 2 человек', 'внимание каждой ученице')}{get(IC_CHAT, 'Поддержка', 'после курса: работы и вопросы')}</div>
+  <div class="gets">{get(IC_BOOK, 'Сильная теория', 'уроки в приложении и тест после каждого')}
+{get(IC_EYE, 'Много практики', 'на живых моделях под моим контролем')}{get(IC_USER, 'До 2 человек', 'внимание каждой ученице')}{get(IC_CHAT, 'Поддержка', 'после курса: работы и вопросы')}</div>
   <div class="vids">{vid('praktika-ruka', 'Ставлю руку на практике', 'wide')}{vid('kurs', 'Как проходит курс')}{vid('praktika-1', 'Практика на курсе')}</div>
 </div></section>
 <section class="sec soft" style="padding-top:10px"><div class="wrap"><div class="eyebrow l">Выпускницы</div><h2 class="h2">Мои <em>ученицы</em></h2><p class="lead">С сертификатом и кубком в руках, в моей студии на Krucza.</p></div>
@@ -421,82 +432,131 @@ edu = f'''
 {band('uchenica-basic-2.jpg', '50% 50%', 'Запись', 'Выберите формат <em>и запишитесь</em>', 'Расскажите о своём опыте и удобных датах, предложу подходящий вариант.', '/zapis/?k=obuchenie', 'Записаться на обучение')}
 '''
 page('/obuchenie/', 'Обучение наращиванию ресниц в Варшаве · курсы с нуля и для мастеров · Anya Kay',
-     'Обучение наращиванию ресниц в Варшаве у Anya Kay: курс с нуля BASIC (от 2000 zł) и VIP «мастер под ключ» (от 3000 zł), повышение квалификации, онлайн-консультация, теория в Telegram. 100+ учениц.',
+     'Обучение наращиванию ресниц в Варшаве у Anya Kay: курс с нуля BASIC (от 2000 zł) и VIP «мастер под ключ» (от 3000 zł), повышение квалификации, онлайн-консультация, теория в приложении. 100+ учениц.',
      edu, [faq_ld(FAQ_EDU)], nav_on='/obuchenie/')
 
-# ================= BASIC / VIP =================
-STEPS = [('Теория в Telegram', 'В своём темпе, до практики.'), ('Тесты', 'После каждого урока.'), ('Пособие', 'Вся база остаётся у вас.'),
-         ('Итоговая проверка', 'Перед выходом на практику.'), ('Практика', 'Манекен и живые модели: 3 на BASIC, 6 на VIP.'), ('Сертификат', 'Именной, с печатью, после завершения.')]
-basic = f'''
-{pcover('uchenica-basic-1.jpg', '50% 50%', 'Курс с нуля · BASIC и VIP', 'Курс наращивания ресниц <em>с нуля</em>', 'Для тех, кто хочет не просто научиться наращивать, а понимать, что и почему делает в работе.', [('Ближайшие даты ↓', '#daty', 'glass')])}
+# ================= BASIC / VIP: отдельные страницы с прогревом =================
+APP_PTS = ['Видеоуроки и тест после каждого урока', 'Прогресс по урокам и результаты тестов', 'Все мои гайды и пособие', 'Платный Telegram-канал по обработке фото и видео']
+APP_SHOTS = [('prilozhenie-uroki.jpg', 'Приложение Lash Academy: список уроков'), ('prilozhenie-urok.jpg', 'Приложение Lash Academy: урок и материалы'), ('prilozhenie-progress.jpg', 'Приложение Lash Academy: прогресс ученицы')]
+
+
+def phones():
+    return '<div class="phones reveal">' + ''.join(
+        f'<button type="button" data-shot="{f}" data-alt="{e(a)}" aria-label="{e(a)}"><img src="/img/{f}" alt="{e(a)}" loading="lazy"></button>' for f, a in APP_SHOTS) + '</div>'
+
+
+def bk(c, label='Записаться'):
+    return f'<div class="wrap cbtn bkrow reveal"><a href="/zapis/?w={c}" class="btn glass" data-book="{c}">{label}</a></div>'
+
+
+COURSES = {
+    'basic': dict(
+        path='/basic-lash-course/', name='BASIC', short='Курс BASIC', days=3, models=3, hours='21 час практики',
+        img='uchenica-basic-1.jpg', pos='50% 50%', band='uchenica-basic-3.jpg',
+        eyebrow='Курс с нуля · 3 дня', h1='Курс BASIC: <em>наращивание с нуля</em>',
+        lead='Для тех, кто хочет не просто научиться наращивать, а понимать, что и почему делает в работе.',
+        who=[('Начинаете с нуля', 'Объясню всё с основ: материалы, клей, постановка руки, схемы эффектов.'),
+             ('Хотите работать на себя', 'После курса вы умеете наращивать и знаете, как снимать работы и искать первых клиенток.'),
+             ('Учились, но нет уверенности', 'Закроем пробелы в теории и поставим технику на живых моделях.')],
+        gets=[(IC_BOOK, 'Теория в приложении', 'уроки, тесты и прогресс'), (IC_EYE, '3 живые модели', 'и практика на 3D-манекене'),
+              (IC_STAR, 'Схемы эффектов', 'моделирование взгляда'), (IC_CERT, 'Сертификат', 'именной, с печатью')],
+        bonus='Бонус: курс по обработке контента и ретуши фото.',
+        incl=['Углублённая теория в приложении', 'Практика на 3D-манекене и 3 живых моделях', 'Моделирование и схемы актуальных эффектов', 'Базовое пособие и все мои гайды', 'Поддержка после обучения', 'Именной сертификат с печатью'],
+        price=('3 000', '2 000'), other=('Нужно больше практики?', '/vip-lash-course/', 'Курс VIP «мастер под ключ»'),
+        ld='Курс наращивания ресниц с нуля: теория в приложении, 3 дня практики, 3 живые модели, сертификат.',
+        title='Курс наращивания ресниц с нуля в Варшаве · BASIC · Anya Kay',
+        desc='Курс наращивания ресниц с нуля BASIC в Варшаве: 3 дня, 3 живые модели, теория в приложении, сертификат. 3000 zł индивидуально, 2000 zł в мини-группе.'),
+    'vip': dict(
+        path='/vip-lash-course/', name='VIP «мастер под ключ»', short='Курс VIP', days=6, models=6, hours='36 часов практики',
+        img='uchenica-basic-2.jpg', pos='50% 50%', band='sertifikat-3.jpg',
+        eyebrow='Авторский курс · 6 дней', h1='VIP <em>«мастер под ключ»</em>',
+        lead='Моя личная программа: 36 часов практики и индивидуальный подход. Выходите с курса уверенным мастером.',
+        who=[('Хотите сразу уверенную технику', 'Вдвое больше практики, чем на BASIC: 6 дней и 6 живых моделей.'),
+             ('Хотите трендовые эффекты', 'Отрабатываем L- и M-изгибы и 2 трендовых эффекта на выбор.'),
+             ('Хотите стартовать без лишних трат', 'Стартовый набор материалов уже входит в курс.')],
+        gets=[(IC_EYE, '6 живых моделей', '36 часов практики'), (IC_STAR, 'L- и M-изгибы', 'и 2 трендовых эффекта'),
+              (IC_BOOK, 'Теория в приложении', 'уроки, тесты и прогресс'), (IC_CERT, 'Кубок VIP-мастера', 'и именной сертификат')],
+        bonus='Стартовый набор материалов входит в курс.',
+        incl=['Всё из BASIC и в два раза больше практики', '6 живых моделей вместо 3', 'Отработка L- и M-изгибов', '2 трендовых эффекта на выбор', 'Стартовый набор материалов', 'Кубок VIP-мастера и сертификат'],
+        price=('4 500', '3 000'), other=('Хотите начать с базы?', '/basic-lash-course/', 'Курс BASIC'),
+        ld='Авторский курс наращивания ресниц с нуля: 6 дней, 36 часов практики, 6 моделей, L/M-изгибы, 2 трендовых эффекта, стартовый набор.',
+        title='Курс VIP «мастер под ключ» · наращивание ресниц с нуля в Варшаве · Anya Kay',
+        desc='Авторский курс наращивания ресниц VIP «мастер под ключ» в Варшаве: 6 дней, 36 часов практики, 6 живых моделей, L/M-изгибы, стартовый набор. 4500 zł индивидуально, 3000 zł в мини-группе.'),
+}
+
+for c, C in COURSES.items():
+    steps = [('Теория в приложении', 'В своём темпе, до практики.'), ('Тесты', 'После каждого урока, прогресс виден в приложении.'), ('Итоговая проверка', 'Перед выходом на практику.'),
+             ('Практика', f'{C["days"]} дня на 3D-манекене и {C["models"]} живых моделях под моим контролем.' if C['days'] == 3 else f'{C["days"]} дней, {C["hours"]}, {C["models"]} живых моделей под моим контролем.'),
+             ('Сертификат', 'Именной, с печатью, после завершения.' if c == 'basic' else 'Именной сертификат и кубок VIP-мастера.')]
+    cover = pcover(C['img'], C['pos'], C['eyebrow'], C['h1'], C['lead'] + f'<span class="nx" data-next="{c}"></span>',
+                   [('Записаться', f'/zapis/?w={c}', 'glass'), ('Ближайшие даты ↓', '#daty', 'line')]).replace(
+        f'href="/zapis/?w={c}" class="btn glass"', f'href="/zapis/?w={c}" class="btn glass" data-book="{c}"')
+    vip_intro = '' if c != 'vip' else f'''
+<section class="sec soft"><div class="wrap"><div class="vipx reveal">
+  <div class="eyebrow l">Только у меня</div>
+  <h2 class="h2">Авторский курс, <em>которого больше нигде нет</em></h2>
+  <p>VIP-мастер — моя личная программа. 36 часов практики с индивидуальным подходом вы получите только у меня. Я веду вас шаг за шагом, пока техника не станет уверенной.</p>
+</div></div></section>'''
+    body = f'''
+{cover}
 <section class="sec soft" id="daty" style="padding-top:40px"><div class="wrap">
   <div class="reveal"><div class="eyebrow l">Расписание</div><h2 class="h2">Ближайшие <em>даты</em></h2><p class="lead">{GROUP}</p></div>
-  {dates('', price=True)}
-</div></section>
-<section class="sec soft" style="padding-top:10px"><div class="wrap">
-  <div class="reveal"><div class="eyebrow l">Тарифы</div><h2 class="h2">BASIC <em>или VIP</em></h2></div>
-  <div class="courses">
-    <article class="course gd reveal"><small>3 дня · 21 час практики · 3 модели</small><h3>BASIC</h3>
-      <div class="fmt"><div><span>Индивидуально</span><b>3 000{ZL}</b></div><div><span>В группе до 2 человек</span><b>2 000{ZL}<small>с человека</small></b></div></div>
-      <ul><li>Углублённая теория в Telegram-боте</li><li>Практика на 3D-манекене и 3 живых моделях</li><li>Моделирование и схемы актуальных эффектов</li><li>Базовое пособие и дополнительные гайды</li><li>Неограниченная поддержка после обучения</li><li>Именной сертификат с печатью</li></ul>
-      <p class="bonus"><b>Бонус:</b> курс по обработке контента и ретуши фото.</p>
-      <div class="btns"><a href="/zapis/?w=basic" class="btn glass">Записаться на BASIC ↗</a></div></article>
-    <article class="course gd reveal" id="vip"><span class="tag">VIP</span><small>6 дней практики · 6 моделей</small><h3>VIP «мастер под ключ»</h3>
-      <div class="fmt"><div><span>Индивидуально</span><b>4 500{ZL}</b></div><div><span>В группе до 2 человек</span><b>3 000{ZL}<small>с человека</small></b></div></div>
-      <ul><li>Всё из BASIC и в два раза больше практики</li><li>6 моделей для практики вместо 3</li><li>Отработка L- и M-изгибов</li><li>2 трендовых эффекта на выбор</li><li>Стартовый набор материалов</li><li>Кубок VIP-мастера</li></ul>
-      <div class="btns"><a href="/zapis/?w=vip" class="btn glass">Записаться на VIP ↗</a></div></article>
-  </div>
-</div></section>
-<section class="sec"><div class="wrap">
-  <div class="reveal"><div class="eyebrow">Сравнение</div><h2 class="h2">Что входит <em>в каждый курс</em></h2></div>
-  <div class="cmpw reveal"><table class="cmp">
-    <thead><tr><th></th><th>BASIC</th><th class="v">VIP</th></tr></thead>
-    <tbody>
-      <tr><td>Дней практики</td><td>3</td><td class="v">6</td></tr>
-      <tr><td>Живые модели</td><td>3</td><td class="v">6</td></tr>
-      <tr><td>Теория в Telegram, тесты, пособие</td><td>✓</td><td class="v">✓</td></tr>
-      <tr><td>Моделирование и схемы эффектов</td><td>✓</td><td class="v">✓ + 2 трендовых</td></tr>
-      <tr><td>L- и M-изгибы</td><td>—</td><td class="v">✓</td></tr>
-      <tr><td>Стартовый набор материалов</td><td>—</td><td class="v">✓</td></tr>
-      <tr><td>Сертификат и поддержка</td><td>✓</td><td class="v">✓</td></tr>
-      <tr><td>Индивидуально</td><td>3 000 zł</td><td class="v">4 500 zł</td></tr>
-      <tr><td>В группе до 2 человек, с человека</td><td>2 000 zł</td><td class="v">3 000 zł</td></tr>
-    </tbody>
-  </table></div>
-</div></section>
+  {dates(c, price=True)}
+</div></section>{vip_intro}
 <section class="sec soft"><div class="wrap">
-  <div class="reveal"><div class="eyebrow">Как проходит</div><h2 class="h2">Обучение <em>шаг за шагом</em></h2></div>
-  <div class="prog-in"><div class="tlx">{''.join(f'<div class="day reveal"><div class="d">{i + 1}</div><div><h3>{a}</h3><p>{b}</p></div></div>' for i, (a, b) in enumerate(STEPS))}</div></div>
-</div></section>
-<section class="sec soft" style="padding-top:10px"><div class="wrap">
-  <div class="reveal"><div class="eyebrow l">Программа теории</div><h2 class="h2">16 уроков <em>до практики</em></h2></div>
-  <ol class="lessons">{''.join(f'<li><b>{i:02d}</b>{e(t)}</li>' for i, t in enumerate(LESSONS))}</ol>
+  <div class="reveal"><div class="eyebrow l">Для кого</div><h2 class="h2">Этот курс <em>для вас, если</em></h2></div>
+  <div class="tlx forwho">{''.join(f'<div class="day reveal"><div class="d">{i + 1}</div><div><h3>{a}</h3><p>{b}</p></div></div>' for i, (a, b) in enumerate(C['who']))}</div>
+</div>{bk(c)}</section>
+<section class="sec soft"><div class="wrap">
+  <div class="reveal"><div class="eyebrow l">Что вы получите</div><h2 class="h2">{C['short']}: <em>что внутри</em></h2></div>
+  <div class="gets">{''.join(get(i, b, s) for i, b, s in C['gets'])}</div>
+</div>{bk(c)}</section>
+<section class="sec soft"><div class="wrap">
+  <div class="reveal"><div class="eyebrow l">Программа</div><h2 class="h2">Обучение <em>шаг за шагом</em></h2></div>
+  <div class="prog-in"><div class="tlx">{''.join(f'<div class="day reveal"><div class="d">{i + 1}</div><div><h3>{a}</h3><p>{b}</p></div></div>' for i, (a, b) in enumerate(steps))}</div></div>
+  <details class="lessons-d reveal"><summary>16 уроков теории до практики</summary><ol class="lessons">{''.join(f'<li><b>{i:02d}</b>{e(t)}</li>' for i, t in enumerate(LESSONS))}</ol></details>
   <div class="vids">{vid('praktika-ruka', 'Ставлю руку на практике', 'wide')}{vid('kurs', 'Как проходит курс')}{vid('praktika-1', 'Практика на курсе')}</div>
-</div></section>
-<section class="sec soft" style="padding-top:10px"><div class="wrap"><div class="eyebrow l">Выпускницы</div><h2 class="h2">Мои <em>ученицы</em></h2><p class="lead">С сертификатом и кубком в руках, в моей студии на Krucza.</p></div>
-{slider('cert')}</section>
-<section class="sec soft" style="padding-top:10px"><div class="wrap"><div class="eyebrow l">Ученицы</div><h2 class="h2">Работы <em>учениц</em></h2></div>
-{slider('uch')}
-<div class="wrap" style="margin-top:60px"><div class="eyebrow l">Отзывы</div><h2 class="h2">Что говорят <em>ученицы</em></h2>
+</div>{bk(c)}</section>
+<section class="sec soft"><div class="wrap split">
+  <div class="reveal"><div class="eyebrow l">Приложение</div><h2 class="h2">Вся теория <em>в приложении</em></h2>
+    <p class="lead">Уроки, тесты и прогресс в одном месте, прямо в телефоне.</p>
+    <ul class="pts">{''.join(f'<li>{t}</li>' for t in APP_PTS)}</ul>
+    <p class="worth">По отдельности всё это стоило бы 1&nbsp;200&nbsp;zł, а в курсе уже включено.</p></div>
+  {phones()}
+</div>{bk(c)}</section>
+<section class="sec soft"><div class="wrap"><div class="care reveal">
+  <div class="eyebrow l">Всегда на связи</div><h2 class="h2">Поддержка <em>после курса</em></h2>
+  <p>{e(FAQ_EDU[0][1])}</p>
+</div></div>{bk(c)}</section>
+<section class="sec soft"><div class="wrap"><div class="eyebrow l">Ученицы</div><h2 class="h2">Работы <em>учениц</em></h2></div>
+{slider('uch')}{bk(c)}</section>
+<section class="sec soft"><div class="wrap"><div class="eyebrow l">Отзывы</div><h2 class="h2">Что говорят <em>ученицы</em></h2>
 <div class="vts">{vt('testimonial_1', 'Настя', 'прилетела на курс из Швеции, 6 дней обучения')}{vt('testimonial_2', 'Арина', 'курс 6 дней')}</div></div>
-{ops(OP_STUD)}
+{ops(OP_STUD)}{bk(c)}
 </section>
-{CASE}
+<section class="sec soft" id="cena"><div class="wrap">
+  <div class="reveal"><div class="eyebrow l">Цена и форматы</div><h2 class="h2">Сколько <em>стоит</em></h2><p class="lead">Программа одна и та же. Индивидуально всё время только ваше, в мини-группе максимум 2 человека и цена ниже.</p></div>
+  <div class="courses one"><article class="course gd reveal{' pro' if c == 'vip' else ''}">{'<span class="tag">VIP</span>' if c == 'vip' else ''}<small>{C['days']} {'дня' if C['days'] < 5 else 'дней'} · {C['models']} живых моделей</small><h3>{C['name']}</h3>
+    <div class="fmt"><div><span>Индивидуально</span><b>{C['price'][0]}{ZL}</b></div><div><span>В группе до 2 человек</span><b>{C['price'][1]}{ZL}<small>с человека</small></b></div></div>
+    <ul>{''.join(f'<li>{t}</li>' for t in C['incl'])}</ul>
+    <p class="bonus">{C['bonus']}</p>
+    <div class="btns"><a href="/zapis/?w={c}" class="btn glass" data-book="{c}">Записаться</a></div></article></div>
+  <p class="dates-note reveal">{C['other'][0]} <a href="{C['other'][1]}" style="text-decoration:underline">{C['other'][2]} ↗</a></p>
+</div></section>
 <section class="sec"><div class="wrap split">
   <div class="reveal"><div class="eyebrow">Вопросы</div><h2 class="h2">О <em>курсе</em></h2><p class="lead">Условия записи и предоплаты в <a href="/reglament-obucheniya/" style="text-decoration:underline">регламенте обучения</a>.</p></div>
-  {faq_html(FAQ_EDU[:6])}
+  {faq_html(FAQ_EDU[1:6])}
 </div></section>
-{band('uchenica-basic-3.jpg', '50% 50%', 'Запись', 'Запишитесь <em>на курс</em>', 'Выберите дату и формат. Если удобной даты нет, напишите, подберём вместе.', '/zapis/?w=basic', 'Записаться')}
+{band(C['band'], '50% 40%', 'Запись', 'Запишитесь <em>на курс</em>', 'Выберите дату и формат. Если удобной даты нет, напишите, подберём вместе.', f'/zapis/?w={c}', 'Записаться')}
 '''
-page('/basic-lash-course/', 'Курс наращивания ресниц с нуля в Варшаве · BASIC и VIP · Anya Kay',
-     'Курс наращивания ресниц с нуля в Варшаве: BASIC 3 дня, 3 живые модели, 3000 zł (в группе до 2 человек 2000 zł); VIP «мастер под ключ» 6 дней, 6 моделей, 4500 zł (в группе 3000 zł). Сертификат и поддержка.',
-     basic, [faq_ld(FAQ_EDU[:6]), course_ld('BASIC LASH COURSE', 'Курс наращивания ресниц с нуля: теория в Telegram, 3 дня практики, 3 живые модели, сертификат.', '3000', '/basic-lash-course/'),
-             course_ld('VIP «мастер под ключ»', 'Курс наращивания ресниц с нуля: 6 дней практики, 6 моделей, L/M-изгибы, 2 трендовых эффекта, стартовый набор.', '4500', '/basic-lash-course/#vip')],
-     nav_on='/obuchenie/')
+    body = body.replace(f'<a href="/zapis/?w={c}" class="btn glass">Записаться</a></div></section>', f'<a href="/zapis/?w={c}" class="btn glass" data-book="{c}">Записаться</a></div></section>')
+    page(C['path'], C['title'], C['desc'], body,
+         [faq_ld(FAQ_EDU[1:6]), course_ld(('BASIC LASH COURSE' if c == 'basic' else 'VIP «мастер под ключ»'), C['ld'], C['price'][0].replace(' ', ''), C['path'])],
+         nav_on='/obuchenie/')
 
 # ================= ПОВЫШЕНИЕ =================
 adv = f'''
-{pcover('povyshenie-1.jpg', '50% 40%', 'Обучение · для мастеров', 'Повышение <em>квалификации</em>', 'Сначала разбираю ваши работы, потом составляю программу обучения. Только то, что нужно именно вам.', [('Записаться ↗', '/zapis/?w=advanced', 'glass'), ('Сначала консультация', '/konsultaciya/', 'line')])}
+{pcover('povyshenie-oblozhka.jpg', '50% 18%', 'Обучение · для мастеров', 'Повышение <em>квалификации</em>', 'Сначала разбираю ваши работы, потом составляю программу обучения. Только то, что нужно именно вам.', [('Записаться ↗', '/zapis/?w=advanced', 'glass')])}
 <section class="sec"><div class="wrap split">
   <div class="reveal"><div class="eyebrow">Что прорабатываем</div><h2 class="h2">Ваши <em>точки роста</em></h2><p class="lead">Ошибки в технике, скорость, объёмы до 5D, моделирование взгляда и эффекты.</p></div>
   <div class="reveal forwho"><div class="tlx">
@@ -526,7 +586,7 @@ page('/povyshenie-kvalifikacii/', 'Повышение квалификации l
 # ================= КОНСУЛЬТАЦИЯ =================
 TOP = ['Технику', 'Носку', 'Скорость', 'Клей', 'Пучки', 'Программу своего курса', 'Старт преподавания', 'Поиск учениц']
 kons = f'''
-{pcover('uchenica-basic-4.jpg', '50% 50%', 'Обучение · онлайн', 'Онлайн-консультация <em>для lash-мастеров</em>', 'Разберём ваши работы, найдём ошибки и определим, что именно мешает двигаться дальше.', [('Записаться ↗', '/zapis/?w=consultation', 'glass')])}
+{pcover('konsultaciya-oblozhka.jpg', '50% 18%', 'Обучение · онлайн', 'Онлайн-консультация <em>для lash-мастеров</em>', 'Разберём ваши работы, найдём ошибки и определим, что именно мешает двигаться дальше.', [('Записаться ↗', '/zapis/?w=consultation', 'glass')])}
 <section class="sec"><div class="wrap split">
   <div class="reveal"><div class="eyebrow">Что можно разобрать</div><h2 class="h2">2 часа <em>лично со мной</em></h2>
     <div class="tags" style="margin-top:20px">{''.join(f'<span>{t}</span>' for t in TOP)}</div>
@@ -542,7 +602,7 @@ page('/konsultaciya/', 'Онлайн-консультация для lash-мас
 
 # ================= ОНЛАЙН-ПРОДУКТЫ =================
 mat = f'''
-{pcover('posobie-1.jpg', '50% 30%', 'Онлайн-продукты', 'Пособие и онлайн-теория <em>по наращиванию</em>', 'Для мастеров, которые хотят систематизировать базу, и преподавателей, которым нужна готовая основа для курса.', [('Пособие ↓', '#posobie', 'glass'), ('Теория в Telegram ↓', '#teoriya', 'line')])}
+{pcover('anya-kay-vzglyad.jpg', '50% 15%', 'Онлайн-продукты', 'Пособие и онлайн-теория <em>по наращиванию</em>', 'Для мастеров, которые хотят систематизировать базу, и преподавателей, которым нужна готовая основа для курса.', [('Пособие ↓', '#posobie', 'glass'), ('Теория в приложении ↓', '#teoriya', 'line')]).replace('class="pcover"', 'class="pcover short"', 1)}
 <section class="sec"><div class="wrap"><div class="prods">
   <article class="prod reveal" id="posobie">{slider('posobie')}<div class="bd">
     <h2>Базовое пособие</h2><div class="pr">200 zł</div>
@@ -550,9 +610,11 @@ mat = f'''
     <p>Полностью редактируется в Canva, без водяных знаков, подходит для печати. Для мастеров, которые хотят систематизировать базу, и преподавателей, которым нужна основа для собственного курса.</p>
     <div style="margin-top:20px"><a href="/zapis/?w=manual" class="btn wine">Купить пособие</a></div></div></article>
   <article class="prod reveal" id="teoriya">{slider('teoriya')}<div class="bd">
-    <h2>Теория BASIC в Telegram</h2><div class="pr">500 zł</div>
-    <p><b>Весь теоретический блок BASIC LASH COURSE в самостоятельном онлайн-формате.</b></p>
-    <p>Урок → тест → следующий урок → финальная проверка. Внутри: видеоуроки, базовое пособие, тесты, прогресс, дополнительные гайды и курс по контенту.</p>
+    <h2>Теория BASIC в приложении</h2><div class="pr">500 zł</div>
+    <p><b>Весь теоретический блок BASIC LASH COURSE в моём приложении.</b></p>
+    <p>Всё проходит в приложении: урок, тест, следующий урок, в конце финальная проверка. Ваш прогресс и результаты тестов всегда перед глазами.</p>
+    <ul class="pts">{''.join(f'<li>{t}</li>' for t in APP_PTS)}</ul>
+    <p class="worth">По отдельности всё это стоило бы 1&nbsp;200&nbsp;zł, а вместе 500&nbsp;zł.</p>
     <details><summary>Программа: 16 уроков ↓</summary><ol>{''.join(f'<li>{e(t)}</li>' for t in LESSONS)}</ol></details>
     <div style="margin-top:20px"><a href="/zapis/?w=theory" class="btn wine">Купить доступ</a></div></div></article>
 </div></div></section>
@@ -563,10 +625,10 @@ mat = f'''
 {band('uchenica-basic-1.jpg', '50% 50%', 'Практика', 'Хотите <em>больше практики?</em>', 'Теорию можно продолжить на курсе BASIC или VIP с живыми моделями.', '/basic-lash-course/', 'Курс с нуля')}
 '''
 page('/materialy/', 'Пособие и онлайн-теория по наращиванию ресниц · Anya Kay',
-     'Онлайн-продукты для lash-мастеров от Anya Kay: базовое пособие на 51 страницу (редактируется в Canva, 200 zł) и теория BASIC в Telegram: 16 уроков с тестами (500 zł).',
+     'Онлайн-продукты для lash-мастеров от Anya Kay: базовое пособие на 51 страницу (редактируется в Canva, 200 zł) и теория BASIC в приложении: 16 уроков с тестами и прогрессом (500 zł).',
      mat, [faq_ld(FAQ_MAT), {"@type": "Product", "name": "Базовое пособие по наращиванию ресниц", "description": "51 страница углублённой теории, редактируется в Canva.", "brand": {"@type": "Brand", "name": "Anya Kay"},
            "offers": {"@type": "Offer", "price": "200", "priceCurrency": "PLN", "availability": "https://schema.org/InStock", "url": SITE + "/materialy/"}},
-           course_ld('Теория BASIC в Telegram', '16 видеоуроков с тестами и финальной проверкой, пособие и гайды.', '500', '/materialy/#teoriya', 'online')],
+           course_ld('Теория BASIC в приложении', '16 видеоуроков с тестами и финальной проверкой, прогресс, пособие и гайды.', '500', '/materialy/#teoriya', 'online')],
      nav_on='/materialy/')
 
 # ================= ЗАПИСЬ =================
@@ -575,7 +637,7 @@ zap = f'''
   <div class="reveal book-l">
     <div class="eyebrow">Запись</div>
     <h1 class="h2" style="font-size:clamp(40px,6vw,76px)">Запись <em>за минуту</em></h1>
-    <p class="lead">Выберите услугу или курс и пару деталей. В конце сообщение откроется в WhatsApp или Telegram, останется нажать «Отправить». Отвечаю лично.</p>
+    <p class="lead">Выберите услугу или курс и пару деталей. В конце сообщение будет готово: отправьте его в WhatsApp, Telegram или Instagram. Отвечаю лично.</p>
     <div class="how"><div><b>1</b>Выберите услугу или курс</div><div><b>2</b>Дату и детали</div><div><b>3</b>Отправьте сообщение</div></div>
     <div class="direct"><b>Хотите написать сразу?</b><span>Krucza 16/22, Варшава</span><div class="soc"><a href="{WA}" target="_blank" rel="noopener" aria-label="WhatsApp">{WA_I}</a><a href="{TG}" target="_blank" rel="noopener" aria-label="Telegram">{TG_I}</a><a href="{IG}" target="_blank" rel="noopener" aria-label="Instagram">{IG_I}</a></div></div>
   </div>
@@ -583,7 +645,7 @@ zap = f'''
 </div></section>
 '''
 page('/zapis/', 'Запись на наращивание ресниц и обучение · Anya Kay, Варшава',
-     'Онлайн-запись к Anya Kay: наращивание ресниц в Варшаве, курсы BASIC и VIP, повышение квалификации, консультация, пособие. Заявка уходит в WhatsApp или Telegram.',
+     'Онлайн-запись к Anya Kay: наращивание ресниц в Варшаве, курсы BASIC и VIP, повышение квалификации, консультация, пособие. Заявка уходит в WhatsApp, Telegram или Instagram.',
      zap, nav_on='/zapis/')
 
 # ================= РЕГЛАМЕНТ (черновик, ждём условия Ани) =================
@@ -625,11 +687,11 @@ pol = f'''
   <h2>1. Кто отвечает за данные</h2>
   <p>Администратор персональных данных: Hanna Karbiwska (jednoosobowa działalność gospodarcza, marka Anya Kay), NIP 9671462488, REGON 524282369. Место оказания услуг: Krucza 16/22, Warszawa, Polska. Связь: <a href="{WA}">WhatsApp +48 788 214 369</a>, <a href="{TG}">Telegram</a>.</p>
   <h2>2. Какие данные и зачем</h2>
-  <p>Через форму записи и помощник на сайте вы сами составляете сообщение (имя, телефон или ник, выбранная услуга, комментарий) и отправляете его мне в WhatsApp или Telegram. Сайт не сохраняет эти данные на сервере. Я использую их только чтобы ответить вам, записать на процедуру или обучение и выставить счёт (основание: art. 6 ust. 1 lit. b i f RODO).</p>
+  <p>Через форму записи и помощник на сайте вы сами составляете сообщение (имя, телефон или ник, выбранная услуга, комментарий) и отправляете его мне в WhatsApp, Telegram или Instagram. Сайт не сохраняет эти данные на сервере. Я использую их только чтобы ответить вам, записать на процедуру или обучение и выставить счёт (основание: art. 6 ust. 1 lit. b i f RODO).</p>
   <h2>3. Сколько храню</h2>
   <p>Переписку храню, пока она нужна для записи и обслуживания, данные для счетов столько, сколько требует польское налоговое право.</p>
   <h2>4. Кому передаются</h2>
-  <p>Данные не продаются и не передаются третьим лицам для рекламы. Сообщения проходят через сервисы, которые вы выбираете сами: WhatsApp (Meta) и Telegram. Сайт подключает шрифты Google Fonts.</p>
+  <p>Данные не продаются и не передаются третьим лицам для рекламы. Сообщения проходят через сервисы, которые вы выбираете сами: WhatsApp и Instagram (Meta) или Telegram. Сайт подключает шрифты Google Fonts.</p>
   <h2>5. Ваши права</h2>
   <p>Вы можете запросить доступ к своим данным, их исправление или удаление, ограничить обработку или возразить против неё, а также подать жалобу в Prezes Urzędu Ochrony Danych Osobowych (UODO). Для этого просто напишите мне.</p>
   <h2>6. Cookies</h2>
@@ -650,12 +712,13 @@ open(os.path.join(OUT, 'style.css'), 'w', encoding='utf-8').write(css)
 chat = [{'t': t, 'q': q, 'k': k, 'a': a, 'go': g} for t, q, k, a, g in CHAT]
 js = open(os.path.join(B, 'app.src.js'), encoding='utf-8').read()
 js = (js.replace("'__SHEET_CSV__'", json.dumps(SHEET_CSV)).replace('__DATES__', json.dumps(DATES, ensure_ascii=False))
-      .replace('__ICONS__', json.dumps({'wa': WA_I, 'tg': TG_I}, ensure_ascii=False)).replace('__FAQ__', json.dumps(chat, ensure_ascii=False)))
+      .replace('__ICONS__', json.dumps({'wa': WA_I, 'tg': TG_I, 'ig': IG_I}, ensure_ascii=False)).replace('__FAQ__', json.dumps(chat, ensure_ascii=False)))
 assert '__' not in js.replace('__proto__', ''), 'placeholder left'
 open(os.path.join(OUT, 'app.js'), 'w', encoding='utf-8').write(js)
 open(os.path.join(OUT, 'CNAME'), 'w').write('anyakay.pl')
 open(os.path.join(OUT, 'robots.txt'), 'w').write(f'User-agent: *\nAllow: /\n\nSitemap: {SITE}/sitemap.xml\n')
-URLS = [('/', '1.0'), ('/naraschivanie/', '0.9'), ('/obuchenie/', '0.9'), ('/basic-lash-course/', '0.9'), ('/povyshenie-kvalifikacii/', '0.8'),
+URLS = [('/', '1.0'), ('/naraschivanie/', '0.9'), ('/obuchenie/', '0.9'), ('/basic-lash-course/', '0.9'), ('/vip-lash-course/', '0.9'),
+ ('/povyshenie-kvalifikacii/', '0.8'),
         ('/konsultaciya/', '0.7'), ('/materialy/', '0.7'), ('/zapis/', '0.6'), ('/reglament-obucheniya/', '0.3'), ('/politika-konfidencialnosti/', '0.2')]
 sm = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + ''.join(
     f'  <url><loc>{SITE}{u}</loc><lastmod>2026-11-03</lastmod><priority>{p}</priority></url>\n' for u, p in URLS) + '</urlset>\n'
