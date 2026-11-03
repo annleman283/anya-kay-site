@@ -5,6 +5,8 @@
   /* ---------- настройки ---------- */
   var WA = '48788214369';
   var TG = 'https://t.me/AnyaKayClientBot';
+  // Адрес бота для передачи заявки (Railway). Пока пусто, Telegram открывает бот по-старому.
+  var LEAD = '';
   var IGM = 'https://ig.me/m/anya.key_';
   var CPAGE = { basic: 'basic-lash-course/', vip: 'vip-lash-course/' };
   // Ссылка на Google Таблицу с датами (Файл → Поделиться → Опубликовать в интернете → CSV).
@@ -364,6 +366,20 @@
       });
     });
 
+    var tgA = $('.tg', app);
+    if (LEAD && tgA) tgA.addEventListener('click', function (ev) {
+      // Заявка сохраняется у бота, и он открывается уже с ней: клиентке остаётся нажать «Отправить Ане».
+      ev.preventDefault();
+      var fallback = tgA.href, win = null, done = false;
+      try { win = window.open('', '_blank'); } catch (e) {}
+      function go(u) { if (done) return; done = true; if (win && !win.closed) win.location.href = u; else location.href = u; }
+      setTimeout(function () { go(fallback); }, 6000);
+      fetch(LEAD, { method: 'POST', headers: { 'Content-Type': 'text/plain' },
+        body: JSON.stringify({ kind: st.kind, w: st.w || '', rows: rows(), name: d.imya, contact: d.tel, msg: d.msg, page: location.pathname }) })
+        .then(function (r) { return r.json(); })
+        .then(function (j) { go(j && j.token ? TG + '?start=s_' + j.token : fallback); })
+        .catch(function () { go(fallback); });
+    });
     $('#f-new').addEventListener('click', function () { st = {}; render(); });
     scrollTop();
   }
