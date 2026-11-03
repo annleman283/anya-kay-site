@@ -290,7 +290,7 @@
       });
     } else if (st.step === 3) {
       var d = st.date;
-      h = prog(3, 4) + chipsSum() + '<div class="q">Индивидуально или вдвоём?</div><div class="h">В группе максимум 2 человека. Если на дату кто-то записывается индивидуально, группы не будет, поэтому лучше записаться заранее.</div>' +
+      h = prog(3, 4) + chipsSum() + '<div class="q">Индивидуально или вдвоём?</div><div class="h">В группе максимум 2 человека.</div>' +
         opt(1, 'Индивидуально', 'Только вы и я', zl(d.i), 'i') + opt(2, 'В группе до 2 человек', 'Цена с человека', zl(d.g), 'g') + '<button type="button" class="back" data-back>← Назад</button>';
       app.innerHTML = h;
       $$('.opt', app).forEach(function (b) { b.addEventListener('click', function () { st.d.format = b.dataset.v === 'i' ? 'индивидуально, ' + zl(d.i) : 'в группе, ' + zl(d.g) + ' с человека'; next(); }); });
