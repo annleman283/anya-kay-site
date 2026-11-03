@@ -7,9 +7,9 @@ import json, os, re, sys, html
 B = os.path.dirname(os.path.abspath(__file__))
 OUT = sys.argv[1]
 SITE = 'https://anyakay.pl'
-V = '52'
+V = '53'
 TG_I, WA_I, IG_I = json.load(open(os.path.join(B, 'svgs.json')))
-TG = 'https://t.me/anyalashkey'
+TG = 'https://t.me/AnyaKayClientBot'
 IGM = 'https://ig.me/m/anya.key_'
 WA = 'https://wa.me/48788214369'
 IG = 'https://www.instagram.com/anya.key_/'
@@ -120,9 +120,9 @@ CHAT = [
     ('materialy', FAQ_MAT[2][0], ['приложени', 'онлайн', 'теори', 'урок'], FAQ_MAT[2][1], 'theory'),
     ('materialy', FAQ_MAT[3][0], ['кому подойд'], FAQ_MAT[3][1], 'theory'),
     ('materialy', 'Сколько стоят онлайн-продукты?', ['стоят', 'стоит пособие', 'цена пособия'], 'Базовое пособие 200 zł, теория BASIC в приложении 500 zł.', 'manual'),
-    ('kontakt', 'Как записаться?', ['записат', 'запись', 'записаться'], 'Нажмите «Записаться»: пара коротких шагов, и сообщение будет готово. В WhatsApp оно откроется само, для Telegram и Instagram текст скопируется, останется вставить его в чат. Можно и сразу написать мне.', 'any'),
+    ('kontakt', 'Как записаться?', ['записат', 'запись', 'записаться'], 'Нажмите «Записаться»: пара коротких шагов, и сообщение будет готово. В WhatsApp оно откроется само, в Telegram запись идёт через мой бот, а для Instagram текст скопируется. Можно и сразу написать мне.', 'any'),
     ('kontakt', 'Где вы находитесь?', ['адрес', 'где', 'находит', 'krucza', 'крушa', 'метро'], 'В центре Варшавы, Krucza 16/22.', 'any'),
-    ('kontakt', 'Как с вами связаться?', ['связат', 'телефон', 'whatsapp', 'ватсап', 'инстаграм', 'instagram'], 'WhatsApp +48 788 214 369, Telegram @anyalashkey, Instagram @anya.key_. Отвечаю лично.', ''),
+    ('kontakt', 'Как с вами связаться?', ['связат', 'телефон', 'whatsapp', 'ватсап', 'инстаграм', 'instagram'], 'WhatsApp +48 788 214 369, Telegram-бот, Instagram @anya.key_. Отвечаю лично.', ''),
 ]
 
 
@@ -459,7 +459,7 @@ def bk(c, label='Записаться'):
 COURSES = {
     'basic': dict(
         path='/basic-lash-course/', name='BASIC', short='Курс BASIC', days=3, models=3, hours='21 час практики',
-        img='basic-oblozhka.jpg', pos='50% 0%', band='uchenica-basic-3.jpg',
+        img='basic-oblozhka.jpg', pos='50% -80px', band='uchenica-basic-3.jpg',
         eyebrow='Курс с нуля · 3 дня', h1='Курс BASIC: <em>наращивание с нуля</em>',
         lead='Для тех, кто хочет не просто научиться наращивать, а понимать, что и почему делает в работе.',
         who=[('Начинаете с нуля', 'Объясню всё с основ: материалы, клей, постановка руки, схемы эффектов.'),
@@ -475,7 +475,7 @@ COURSES = {
         desc='Курс наращивания ресниц с нуля BASIC в Варшаве: 3 дня, 3 живые модели, теория в приложении, сертификат. 3000 zł индивидуально, 2000 zł в мини-группе.'),
     'vip': dict(
         path='/vip-lash-course/', name='VIP «мастер под ключ»', short='Курс VIP', days=6, models=6, hours='36 часов практики',
-        img='vip-oblozhka.jpg', pos='50% 0%', band='sertifikat-3.jpg',
+        img='vip-oblozhka.jpg', pos='50% -84px', band='sertifikat-3.jpg',
         eyebrow='Авторский курс · 6 дней', h1='VIP <em>«мастер под ключ»</em>',
         lead='Моя личная программа: 36 часов практики и индивидуальный подход. Выходите с курса уверенным мастером.',
         who=[('Хотите сразу уверенную технику', 'Вдвое больше практики, чем на BASIC: 6 дней и 6 живых моделей.'),

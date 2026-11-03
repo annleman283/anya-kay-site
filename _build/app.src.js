@@ -4,7 +4,7 @@
 
   /* ---------- настройки ---------- */
   var WA = '48788214369';
-  var TG = 'https://t.me/anyalashkey';
+  var TG = 'https://t.me/AnyaKayClientBot';
   var IGM = 'https://ig.me/m/anya.key_';
   var CPAGE = { basic: 'basic-lash-course/', vip: 'vip-lash-course/' };
   // Ссылка на Google Таблицу с датами (Файл → Поделиться → Опубликовать в интернете → CSV).
@@ -354,9 +354,9 @@
     var wa = 'https://wa.me/' + WA + '?text=' + encodeURIComponent(text);
     app.innerHTML = prog(4, 4) + '<div class="q">Спасибо, ' + esc(d.imya) + '!</div><div class="h">Сообщение готово. Выберите, куда отправить.</div>' +
       '<a class="wa" href="' + wa + '" target="_blank" rel="noopener">' + ICON.wa + '<span>Отправить в WhatsApp<small>текст уже будет в чате</small></span></a>' +
-      '<a class="tg cp" href="' + TG + '" target="_blank" rel="noopener">' + ICON.tg + '<span>Telegram<small>текст скопируется, вставьте его в чат</small></span></a>' +
+      '<a class="tg" href="' + TG + (st.w ? '?start=' + st.w : '') + '" target="_blank" rel="noopener">' + ICON.tg + '<span>Отправить в Telegram<small>запись через мой Telegram-бот</small></span></a>' +
       '<a class="ig cp" href="' + IGM + '" target="_blank" rel="noopener">' + ICON.ig + '<span>Instagram<small>текст скопируется, вставьте его в чат</small></span></a>' +
-      '<div class="sum-all">' + esc(text) + '</div><p class="h" id="f-cp" style="margin-top:12px">В Telegram и Instagram нажмите на поле сообщения и выберите «Вставить».</p>' +
+      '<div class="sum-all">' + esc(text) + '</div><p class="h" id="f-cp" style="margin-top:12px">В Instagram нажмите на поле сообщения и выберите «Вставить».</p>' +
       '<button type="button" class="back" id="f-new">Новая заявка</button>';
     $$('.cp', app).forEach(function (a) {
       a.addEventListener('click', function () {

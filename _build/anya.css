@@ -285,3 +285,4 @@ h1,h2,h3{font-weight:500}
   .pcover.face .ph{position:relative;inset:auto;top:auto;height:108vw;max-height:520px}
   .pcover.face .in{position:relative;margin-top:-70px;padding-bottom:36px}
 }
+@media(min-width:1000px){.pcover.face .ph{background-position-y:0 !important}}
