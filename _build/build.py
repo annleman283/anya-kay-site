@@ -513,7 +513,7 @@ for c, C in COURSES.items():
 <section class="sec soft"><div class="wrap">
   <div class="reveal"><div class="eyebrow l">Для кого</div><h2 class="h2">Этот курс <em>для вас, если</em></h2></div>
   <div class="tlx forwho">{''.join(f'<div class="day reveal"><div class="d">{i + 1}</div><div><h3>{a}</h3><p>{b}</p></div></div>' for i, (a, b) in enumerate(C['who']))}</div>
-</div>{bk(c)}</section>
+</div></section>
 <section class="sec soft" id="cena"><div class="wrap">
   <div class="reveal"><div class="eyebrow l">Цена и форматы</div><h2 class="h2">Сколько <em>стоит</em></h2><p class="lead">Индивидуально: только вы и я. В группе: вас двое, цена ниже.</p></div>
   <div class="courses one"><article class="course gd reveal{' pro' if c == 'vip' else ''}">{'<span class="tag">VIP</span>' if c == 'vip' else ''}<small>{C['days']} {'дня' if C['days'] < 5 else 'дней'} · {C['models']} живых моделей</small><h3>{C['name']}</h3>
@@ -526,26 +526,26 @@ for c, C in COURSES.items():
 <section class="sec soft"><div class="wrap">
   <div class="reveal"><div class="eyebrow l">Что вы получите</div><h2 class="h2">{C['short']}: <em>что внутри</em></h2></div>
   <div class="gets">{''.join(get(i, b, s) for i, b, s in C['gets'])}</div>
-</div>{bk(c)}</section>
+</div></section>
 <section class="sec soft"><div class="wrap">
   <div class="reveal"><div class="eyebrow l">Программа</div><h2 class="h2">Обучение <em>шаг за шагом</em></h2></div>
   <div class="prog-in"><div class="tlx">{''.join(f'<div class="day reveal"><div class="d">{i + 1}</div><div><h3>{a}</h3><p>{b}</p></div></div>' for i, (a, b) in enumerate(steps))}</div></div>
   <details class="lessons-d reveal"><summary>16 уроков теории до практики</summary><ol class="lessons">{''.join(f'<li><b>{i:02d}</b>{e(t)}</li>' for i, t in enumerate(LESSONS))}</ol></details>
   <div class="vids">{vid('praktika-ruka', 'Ставлю руку на практике', 'wide')}{vid('kurs', 'Как проходит курс')}{vid('praktika-1', 'Практика на курсе')}</div>
-</div>{bk(c)}</section>
+</div></section>
 <section class="sec soft"><div class="wrap split">
   <div class="reveal"><div class="eyebrow l">Приложение</div><h2 class="h2">Вся теория <em>в приложении</em></h2>
     <p class="lead">Уроки, тесты и прогресс в одном месте, прямо в телефоне.</p>
     <ul class="pts">{''.join(f'<li>{t}</li>' for t in APP_PTS)}</ul>
     <p class="worth">По отдельности всё это стоило бы 1&nbsp;200&nbsp;zł, а в курсе уже включено.</p></div>
   {phones()}
-</div>{bk(c)}</section>
+</div></section>
 <section class="sec soft"><div class="wrap"><div class="care reveal">
   <div class="eyebrow l">Всегда на связи</div><h2 class="h2">Поддержка <em>после курса</em></h2>
   <p>{e(FAQ_EDU[0][1])}</p>
-</div></div>{bk(c)}</section>
+</div></div></section>
 <section class="sec soft"><div class="wrap"><div class="eyebrow l">Ученицы</div><h2 class="h2">Работы <em>учениц</em></h2></div>
-{slider('uch')}{bk(c)}</section>
+{slider('uch')}</section>
 <section class="sec soft"><div class="wrap"><div class="eyebrow l">Отзывы</div><h2 class="h2">Что говорят <em>ученицы</em></h2>
 <div class="vts">{vt('testimonial_1', 'Настя', 'прилетела на курс из Швеции, 6 дней обучения')}{vt('testimonial_2', 'Арина', 'курс 6 дней')}</div></div>
 {ops(OP_STUD)}{bk(c)}
