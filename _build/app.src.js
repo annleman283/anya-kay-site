@@ -184,7 +184,7 @@
     var fmt = d.g ? 'Индивидуально или в группе до 2 человек' : 'Индивидуально';
     return '<article class="dt gd reveal in-view"><div class="when"><b>' + d.a.getDate() + (+d.a !== +d.b ? '–' + d.b.getDate() : '') + '</b><span>' + MSH[d.b.getMonth()] + ' ' + d.b.getFullYear() + '</span></div>' +
       '<h3>' + esc(CNAME[d.c] || d.c) + (d.n ? ' <span class="tag">' + esc(d.n) + '</span>' : '') + '</h3><div class="meta">' + range(d.a, d.b) + (showPrice ? ' · ' + fmt : '') + '</div>' + price +
-      '<a class="btn glass go" href="' + url('zapis/?w=' + d.c + '&d=' + iso(d.a)) + '">Записаться на эту дату ↗</a></article>';
+      '<a class="btn glass go" href="' + url('zapis/?w=' + d.c + '&d=' + iso(d.a)) + '">Записаться на эту дату</a></article>';
   }
   function renderDates() {
     $$('[data-dates]').forEach(function (box) {
@@ -233,7 +233,7 @@
   var W2K = { lashes: 'lashes', basic: 'obuchenie', vip: 'obuchenie', advanced: 'obuchenie', consultation: 'obuchenie', manual: 'materialy', theory: 'materialy' };
   var st = {};
   function prog(n, of) { var h = '<div class="prog">'; for (var i = 1; i <= of; i++) h += '<span' + (i <= n ? ' class="on"' : '') + '></span>'; return h + '</div>'; }
-  function opt(i, t, sub, p, data) { return '<button type="button" class="opt" data-v="' + esc(data) + '"><span class="n">' + ('0' + i).slice(-2) + '</span><span class="t">' + t + (sub ? '<small>' + sub + '</small>' : '') + '</span>' + (p ? '<span class="p">' + p + '</span>' : '') + '<span class="arr">↗</span></button>'; }
+  function opt(i, t, sub, p, data) { return '<button type="button" class="opt" data-v="' + esc(data) + '"><span class="n">' + ('0' + i).slice(-2) + '</span><span class="t">' + t + (sub ? '<small>' + sub + '</small>' : '') + '</span>' + (p ? '<span class="p">' + p + '</span>' : '') + '<span class="arr"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h17M14 6l6 6-6 6"/></svg></span></button>'; }
   function err(t) { var e = $('#f-err'); if (e) e.textContent = t; }
   function yn(id, key, vals) { return '<div class="yn" id="' + id + '">' + vals.map(function (v) { return '<button type="button" aria-pressed="' + (st.d[key] === v) + '">' + v + '</button>'; }).join('') + '</div>'; }
   function bindYn(id, key) { $$('#' + id + ' button').forEach(function (b, _, all) { b.addEventListener('click', function () { all.forEach(function (o) { o.setAttribute('aria-pressed', 'false'); }); b.setAttribute('aria-pressed', 'true'); st.d[key] = b.textContent; }); }); }

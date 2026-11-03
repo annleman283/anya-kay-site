@@ -253,7 +253,7 @@ def page(path, title, desc, body, ld=None, nav_on='', home=False, noindex=False)
 '''
     foot = f'''</main>
 <footer class="ftr"><div class="wrap">
-  <div class="top"><div class="brand">ANYA<br>KAY<small>lash-мастер и тренер · Варшава</small></div></div>
+  <div class="top"><div class="brand">ANYA KAY<small>lash-мастер и тренер · Варшава</small></div></div>
   <div class="cols">
     <div><h4>Наращивание</h4><a href="/naraschivanie/">Наращивание ресниц</a><a href="/naraschivanie/#prajs">Прайс</a><a href="/zapis/?w=lashes">Запись</a></div>
     <div><h4>Обучение</h4><a href="/basic-lash-course/">Курс с нуля BASIC и VIP</a><a href="/povyshenie-kvalifikacii/">Повышение квалификации</a><a href="/konsultaciya/">Онлайн-консультация</a><a href="/materialy/">Пособие и онлайн-теория</a></div>
@@ -279,7 +279,8 @@ def page(path, title, desc, body, ld=None, nav_on='', home=False, noindex=False)
         d = os.path.join(OUT, path.strip('/')); os.makedirs(d, exist_ok=True); fn = os.path.join(d, 'index.html')
     else:
         fn = os.path.join(OUT, path.strip('/'))
-    open(fn, 'w', encoding='utf-8').write(head + body + foot)
+    html = (head + body + foot).replace(' ↗', '').replace('↗', '')
+    open(fn, 'w', encoding='utf-8').write(html)
 
 
 # ================= ГЛАВНАЯ =================
@@ -293,9 +294,9 @@ home = f'''
 
 <section class="sec dirs"><div class="wrap">
   <div class="rows">
-    <a class="row reveal" href="/naraschivanie/"><span class="n">01</span><span class="t">Наращивание ресниц</span><span class="arr">↗</span></a>
-    <a class="row reveal" href="/obuchenie/"><span class="n">02</span><span class="t">Обучение</span><span class="arr">↗</span></a>
-    <a class="row reveal" href="/materialy/"><span class="n">03</span><span class="t">Онлайн-продукты</span><span class="arr">↗</span></a>
+    <a class="row reveal" href="/naraschivanie/"><span class="n">01</span><span class="t">Наращивание ресниц</span><span class="arr"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h17M14 6l6 6-6 6"/></svg></span></a>
+    <a class="row reveal" href="/obuchenie/"><span class="n">02</span><span class="t">Обучение</span><span class="arr"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h17M14 6l6 6-6 6"/></svg></span></a>
+    <a class="row reveal" href="/materialy/"><span class="n">03</span><span class="t">Онлайн-продукты</span><span class="arr"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h17M14 6l6 6-6 6"/></svg></span></a>
   </div>
 </div></section>
 
@@ -319,7 +320,7 @@ home = f'''
 
 <section class="sec" style="padding-top:20px"><div class="wrap"><div class="eyebrow">Портфолио</div><h2 class="h2">Мои <em>работы</em></h2></div>
 {slider('lash')}
-<div class="wrap" style="margin-top:26px"><a href="/naraschivanie/" class="btn line">Прайс и запись ↗</a></div>
+<div class="wrap cbtn" style="margin-top:26px"><a href="/naraschivanie/" class="btn line">Прайс и запись ↗</a></div>
 </section>
 <section class="sec soft"><div class="wrap"><div class="eyebrow">Отзывы</div><h2 class="h2">Что говорят <em>клиентки и ученицы</em></h2></div>
 {ops([OP_CLIENT[0], OP_CLIENT[1], OP_CLIENT[2], OP_STUD[0], OP_STUD[1], OP_STUD[3]])}
