@@ -7,7 +7,7 @@ import json, os, re, sys, html
 B = os.path.dirname(os.path.abspath(__file__))
 OUT = sys.argv[1]
 SITE = 'https://anyakay.pl'
-V = '53'
+V = '54'
 TG_I, WA_I, IG_I = json.load(open(os.path.join(B, 'svgs.json')))
 TG = 'https://t.me/AnyaKayClientBot'
 IGM = 'https://ig.me/m/anya.key_'
